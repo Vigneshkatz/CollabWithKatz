@@ -33,4 +33,4 @@ build/
 .vscode/
 
 #API keys
-serviceKey.json
+Backend/codewithkatz/src/main/resources/serviceKey.json
