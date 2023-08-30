@@ -3,6 +3,7 @@
 - login page
 - home page
 - video upload page
+- signup page
 # Creater Interface
 # Video Upload
 # Authorize
