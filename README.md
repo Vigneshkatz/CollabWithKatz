@@ -1,5 +1,8 @@
 # EditorCreater
-# User InterFace
+# User Interface
+- login page
+- home page
+- video upload page
 # Creater Interface
 # Video Upload
 # Authorize
