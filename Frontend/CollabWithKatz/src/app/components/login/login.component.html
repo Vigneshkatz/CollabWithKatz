@@ -15,27 +15,42 @@
             </div>
             <nav class="user_menu">
                 <ul class="menu_list">
-                    <li><a href="#">My Works</a></li>
-                    <li><a href="#">My Profile</a></li>
+                    <li><a href="#">Creator</a></li>
+                    <li><a href="#">Editor</a></li>
                 </ul>
             </nav>
-            <div class="user_login_logout">
-                <ul class="login_logout_ul">
-                    <li><a href="#">Login/Logout</a></li>
-                </ul>
-            </div>
         </div>
     </header>
     <main id="main">
-        <div class="container">
-            <div class="box" *ngFor="let videoSource of videoSources">
-                <video class="box_video" #videoElement muted loop (mouseover)="playVideo(videoElement)"
-                    (mouseout)="pauseVideo(videoElement)">
-                    <source [src]="videoSource" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <span>My Work</span>
+        <div class="box-form">
+            <div class="left">
+                <div class="overlay">
+                    <h1>Hello World.</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Curabitur et est sed felis aliquet sollicitudin</p>
+                </div>
             </div>
+            <div class="right">
+                <div class="right_header">
+                    <h5>Login in as Editor</h5>
+                    <a href="#">Create Your Account</a>
+                </div>
+                <div class="inputs">
+                    <input type="text" placeholder="user name">
+                    <br>
+                    <input type="password" placeholder="password">
+                </div>
+
+                <br><br>
+
+                <div class="remember-me--forget-password">
+                    <a href="#">Forget password?</a>
+                </div>
+
+                <br>
+                <button>Login</button>
+            </div>
+
         </div>
     </main>
     <footer id="footer">
