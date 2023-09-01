@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header id="header">
+        <div class="header_container">
+            <div class="header_logo">
+                <img src="../../../assets/collabSample.png" alt="CollabWithKatz" class="header_logo_img">
+            </div>
+            <nav class="user_menu">
+                <ul class="menu_list">
+                    <li><a href="#">My Works</a></li>
+                    <li><a href="#">My Profile</a></li>
+                </ul>
+            </nav>
+            <div class="user_login_logout">
+                <ul class="login_logout_ul">
+                    <li><a href="#">Login/Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main id="main">
+        <div class="container">
+            <div class="box" *ngFor="let videoSource of videoSources">
+                <video class="box_video" #videoElement muted loop (mouseover)="playVideo(videoElement)"
+                    (mouseout)="pauseVideo(videoElement)">
+                    <source [src]="videoSource" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <span>My Work</span>
+            </div>
+        </div>
+    </main>
+    <footer id="footer">
+        <div class="footer">
+            <div class="row">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </a>
+                        <a href="#">Contact us</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </a>
+                        <a href="#">Our Services</a>
+
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </a>
+                        <a href="#">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </a>
+                        <a href="#">Terms & Conditions</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </a>
+                        <a href="#">Career</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
