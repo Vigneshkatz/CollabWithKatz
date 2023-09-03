@@ -15,5 +15,5 @@ public class EditorCertification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String certificationName;
-    private String cetificationLink;
+    private String certificationLink;
 }
