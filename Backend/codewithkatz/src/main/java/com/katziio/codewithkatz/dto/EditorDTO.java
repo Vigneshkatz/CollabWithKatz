@@ -1,25 +1,53 @@
 package com.katziio.codewithkatz.dto;
 
-import jakarta.persistence.Entity;
+import com.katziio.codewithkatz.entity.editor.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class EditorDTO {
-    private Long Id;
+    private Long id;
+    private String name;
     private String email;
     private String password;
-    private String name;
-    private String website;
+    private int age;
+    private String country;
+    private String gender;
+    private int experienceInYears;
+    private String profilePictureUrl;
+    private String phone;
+    private String portfolioLink;
+    private Date profileCreatedAt;
+    private Date ProfileUpdatedAt;
+    private List<EditorCertification> editorCertifications;
+    private List<EditorCommunicationLanguage> editorCommunicationLanguages;
+    private List<EditorPreferences> editorPreferences;
+    private List<EditorProject> editorProjects;
+    private List<EditorSampleVideo> editorSampleVideos;
+    private List<EditorSocialMedia> editorSocialMedia;
 
     public EditorDTO(Editor editor) {
-        this.Id = editor.getId();
+        this.id = editor.getId();
         this.name = editor.getName();
+        this.password=editor.getPassword();
         this.email = editor.getEmail();
-        this.website = editor.getWebsite();
-        this.password = editor.getPassword();
+        this.age=editor.getAge();
+        this.country = editor.getCountry();
+        this.gender = editor.getCountry();
+        this.experienceInYears = editor.getExperienceInYears();
+        this.phone=editor.getPhone();
+        this.profilePictureUrl=editor.getProfilePictureUrl();
+        this.editorCertifications= editor.getEditorCertifications();
+        this.editorCommunicationLanguages= editor.getEditorCommunicationLanguages();
+        this.editorPreferences=editor.getEditorPreferences();
+        this.editorProjects=editor.getEditorProjects();
+        this.editorSampleVideos=editor.getEditorSampleVideos();
+        this.editorSocialMedia=editor.getEditorSocialMedia();
     }
 }
