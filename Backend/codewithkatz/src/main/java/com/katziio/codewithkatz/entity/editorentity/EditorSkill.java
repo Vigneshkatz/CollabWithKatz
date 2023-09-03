@@ -1,4 +1,4 @@
-package com.katziio.codewithkatz.entity.editor;
+package com.katziio.codewithkatz.entity.editorentity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

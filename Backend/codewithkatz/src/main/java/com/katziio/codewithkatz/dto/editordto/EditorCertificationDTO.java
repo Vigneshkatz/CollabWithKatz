@@ -1,8 +1,6 @@
-package com.katziio.codewithkatz.dto;
+package com.katziio.codewithkatz.dto.editordto;
 
-import com.katziio.codewithkatz.entity.editor.Editor;
-import com.katziio.codewithkatz.entity.editor.EditorCertification;
-import jakarta.persistence.Entity;
+import com.katziio.codewithkatz.entity.editorentity.EditorCertification;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

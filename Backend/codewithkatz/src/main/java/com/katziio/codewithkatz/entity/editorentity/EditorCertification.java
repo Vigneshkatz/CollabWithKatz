@@ -1,4 +1,4 @@
-package com.katziio.codewithkatz.entity.editor;
+package com.katziio.codewithkatz.entity.editorentity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "editor_sample_video")
-public class EditorSampleVideo {
+@Table(name = "editor_certifications")
+public class EditorCertification {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String videoName;
-    private String videoLink;
+    private String certificationName;
+    private String certificationLink;
 }

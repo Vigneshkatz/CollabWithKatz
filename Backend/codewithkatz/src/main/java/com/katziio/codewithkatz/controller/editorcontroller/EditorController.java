@@ -1,8 +1,10 @@
-package com.katziio.codewithkatz.controller.editor;
+package com.katziio.codewithkatz.controller.editorcontroller;
 
-import com.katziio.codewithkatz.dto.EditorDTO;
-import com.katziio.codewithkatz.entity.editor.Editor;
-import com.katziio.codewithkatz.service.editor.EditorService;
+import com.katziio.codewithkatz.dto.editordto.EditorDTO;
+import com.katziio.codewithkatz.dto.editordto.EditorPreferenceDTO;
+import com.katziio.codewithkatz.dto.editordto.EditorProjectDTO;
+import com.katziio.codewithkatz.entity.editorentity.Editor;
+import com.katziio.codewithkatz.service.editorservice.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,30 +71,36 @@ public class EditorController {
     }
 //    Get Editor's Projects
     @GetMapping("/{editorId}/projects")
-    public List<EditorDTO> getProjectByEditorId(@PathVariable Long editorId) {
+    public List<EditorProjectDTO> getProjectByEditorId(@PathVariable Long editorId) {
         return this.editorService.getProjectByEditorId(editorId);
     }
-//    Add/Edit/Delete Editor's Certifications
-
-//    Add/Edit/Delete Editor's Sample Videos:
-
-//    Add/Edit/Delete Editor's Social Media Links
 
 //    Retrieve Editor's Preferences
     @GetMapping("/{editorId}/preference")
-    public List<EditorDTO> getPreferenceByEditorId(@PathVariable Long editorId) {
+    public List<EditorPreferenceDTO> getPreferenceByEditorId(@PathVariable Long editorId) {
         return this.editorService.getPreferenceByEditorId(editorId);
     }
-//    Update Editor's Profile Picture URL
 
 //    Retrieve Editors by Gender
-
+    @GetMapping("/filterByGender")
+    public List<EditorDTO> getEditorsByGender(@RequestParam String gender) {
+        return this.editorService.getEditorsByGender(gender);
+    }
 //    Count Total Editors:
-
+    @GetMapping("/editorsCount")
+    public Long countTotalEditors() {
+        return this.editorService.countTotalEditors();
+    }
 //    Retrieve Editors by Email
-
+    @GetMapping("/byEmail")
+    public EditorDTO getEditorByEmail(@RequestParam String email) {
+        return this.editorService.getEditorByEmail(email);
+    }
 //    Retrieve Editors by Experience Range
-
+    @GetMapping("/byExperienceRange")
+    public List<EditorDTO> getEditorByExperienceRange(@RequestParam int minExperience,@RequestParam int maxExperience) {
+        return this.editorService.getEditorByExperienceRange(minExperience,maxExperience);
+    }
 //    Retrieve Editors Created After a Specific Date
 
 //    Retrieve Editors Updated After a Specific Date:
@@ -106,9 +114,18 @@ public class EditorController {
 //    Retrieve Editors by Age and Country
 
 //    Retrieve Editors by Multiple Filters
+
 //    Retrieve Editors with Most Experience
 
 //    Retrieve Editors with Least Experience
 
 //    Retrieve Editors Ordered by Creation Date
+
+//    Add/Edit/Delete Editor's Certifications
+
+//    Add/Edit/Delete Editor's Sample Videos:
+
+//    Add/Edit/Delete Editor's Social Media Links
+
+//    Update Editor's Profile Picture URL
 }

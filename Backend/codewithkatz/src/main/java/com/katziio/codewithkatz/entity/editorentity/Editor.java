@@ -1,17 +1,20 @@
-package com.katziio.codewithkatz.dto;
+package com.katziio.codewithkatz.entity.editorentity;
 
-import com.katziio.codewithkatz.entity.editor.*;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
+@Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class EditorDTO {
+@AllArgsConstructor
+@Table(name = "editors")
+public class Editor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String email;
@@ -24,15 +27,34 @@ public class EditorDTO {
     private String phone;
     private String portfolioLink;
     private Date profileCreatedAt;
-    private Date ProfileUpdatedAt;
+    private Date profileUpdatedAt;
+
+    @OneToMany(targetEntity = EditorCertification.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorCertification> editorCertifications;
+
+    @OneToMany(targetEntity = EditorCommunicationLanguage.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorCommunicationLanguage> editorCommunicationLanguages;
+
+    @OneToMany(targetEntity = EditorPreferences.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorPreferences> editorPreferences;
+
+    @OneToMany(targetEntity = EditorProject.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorProject> editorProjects;
+
+    @OneToMany(targetEntity = EditorSampleVideo.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorSampleVideo> editorSampleVideos;
+
+    @OneToMany(targetEntity = EditorSocialMedia.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorSocialMedia> editorSocialMedia;
 
-    public EditorDTO(Editor editor) {
+    public Editor(Editor editor) {
+        Calendar myCal = Calendar.getInstance();
         this.id = editor.getId();
         this.name = editor.getName();
         this.password=editor.getPassword();
@@ -44,6 +66,9 @@ public class EditorDTO {
         this.phone=editor.getPhone();
         this.profilePictureUrl=editor.getProfilePictureUrl();
         this.editorCertifications= editor.getEditorCertifications();
+        this.portfolioLink=editor.getPortfolioLink();
+        this.profileCreatedAt = editor.getProfileCreatedAt();
+        this.profileUpdatedAt = myCal.getTime();
         this.editorCommunicationLanguages= editor.getEditorCommunicationLanguages();
         this.editorPreferences=editor.getEditorPreferences();
         this.editorProjects=editor.getEditorProjects();
