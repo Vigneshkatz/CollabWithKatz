@@ -1,10 +1,8 @@
 package com.katziio.codewithkatz.controller;
 
 import com.katziio.codewithkatz.dto.EditorDTO;
-import com.katziio.codewithkatz.entity.Editor;
 import com.katziio.codewithkatz.service.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

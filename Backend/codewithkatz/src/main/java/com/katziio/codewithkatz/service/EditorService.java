@@ -1,7 +1,6 @@
 package com.katziio.codewithkatz.service;
 
 import com.katziio.codewithkatz.dto.EditorDTO;
-import com.katziio.codewithkatz.entity.Editor;
 import com.katziio.codewithkatz.repository.EditorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
