@@ -16,5 +16,4 @@ public class EditorSocialMedia {
     private Long id;
     private String platform;
     private String platformLink;
-
 }

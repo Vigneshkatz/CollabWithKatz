@@ -61,4 +61,28 @@ public class EditorService {
         }
         return null;
     }
+
+    public List<EditorDTO> searchEditorByName(String name) {
+        return null
+    }
+
+    public List<EditorDTO> filterEditorByAge(int minAge, int maxAge) {
+        return null;
+    }
+
+    public List<EditorDTO> filterEditorByCountry(String countryName) {
+        return null;
+    }
+
+    public List<EditorDTO> sortEditorsByExperience() {
+        return null;
+    }
+
+    public List<EditorDTO> getProjectByEditorId(Long editorId) {
+        return null;
+    }
+
+    public List<EditorDTO> getPreferenceByEditorId(Long editorId) {
+        return null;
+    }
 }

@@ -46,19 +46,32 @@ public class EditorController {
     }
 
     //    Search Editors by Name:
-    @DeleteMapping("/deleteMapping")
-    public EditorDTO deleteEditor(@RequestParam Long editorId) {
-        return this.editorService.deleteEditor(editorId);
+    @GetMapping("/searchByName")
+    public List<EditorDTO> searchEditorByName(@RequestParam String name) {
+        return this.editorService.searchEditorByName(name);
     }
 
 //    Filter Editors by Age Range:
+    @GetMapping("/filterByAge")
+    public List<EditorDTO> filterEditorByAge(@RequestParam int minAge,@RequestParam int maxAge) {
+        return this.editorService.filterEditorByAge(minAge,maxAge);
+    }
 
 //    Filter Editors by Country
-
+    @GetMapping("/filterByCountry")
+    public List<EditorDTO> filterEditorByCountry(@RequestParam String countryName) {
+        return this.editorService.filterEditorByCountry(countryName);
+    }
 //    Sort Editors by Experience
-
+    @GetMapping("/sortByExperience")
+    public List<EditorDTO> sortEditorsByExperience() {
+        return this.editorService.sortEditorsByExperience();
+    }
 //    Get Editor's Projects
-
+    @GetMapping("/{editorId}/projects")
+    public List<EditorDTO> getProjectByEditorId(@PathVariable Long editorId) {
+        return this.editorService.getProjectByEditorId(editorId);
+    }
 //    Add/Edit/Delete Editor's Certifications
 
 //    Add/Edit/Delete Editor's Sample Videos:
@@ -66,8 +79,11 @@ public class EditorController {
 //    Add/Edit/Delete Editor's Social Media Links
 
 //    Retrieve Editor's Preferences
-
-//     Update Editor's Profile Picture URL
+    @GetMapping("/{editorId}/preference")
+    public List<EditorDTO> getPreferenceByEditorId(@PathVariable Long editorId) {
+        return this.editorService.getPreferenceByEditorId(editorId);
+    }
+//    Update Editor's Profile Picture URL
 
 //    Retrieve Editors by Gender
 

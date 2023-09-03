@@ -15,5 +15,5 @@ public class EditorCommunicationLanguage {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String language;
-    private int launguageProficency;
+    private int languageProficiency;
 }
