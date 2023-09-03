@@ -1,6 +1,5 @@
 package com.katziio.codewithkatz.dto;
 
-import com.katziio.codewithkatz.entity.Editor;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
