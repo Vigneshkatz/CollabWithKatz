@@ -1,7 +1,9 @@
-package com.katziio.codewithkatz.service.editor;
+package com.katziio.codewithkatz.service.editorservice;
 
-import com.katziio.codewithkatz.dto.EditorDTO;
-import com.katziio.codewithkatz.entity.editor.Editor;
+import com.katziio.codewithkatz.dto.editordto.EditorDTO;
+import com.katziio.codewithkatz.dto.editordto.EditorPreferenceDTO;
+import com.katziio.codewithkatz.dto.editordto.EditorProjectDTO;
+import com.katziio.codewithkatz.entity.editorentity.Editor;
 import com.katziio.codewithkatz.repository.editor.EditorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,27 +64,44 @@ public class EditorService {
         return null;
     }
 
+    // TODO: 03/09/23
     public List<EditorDTO> searchEditorByName(String name) {
-        return null
+        return this.editorRepository.findEditorByName(name);
     }
 
     public List<EditorDTO> filterEditorByAge(int minAge, int maxAge) {
-        return null;
+        return this.editorRepository.filterByAge(minAge,maxAge);
     }
 
     public List<EditorDTO> filterEditorByCountry(String countryName) {
-        return null;
+        return this.editorRepository.filterByCountry(countryName);
     }
 
     public List<EditorDTO> sortEditorsByExperience() {
-        return null;
+        return this.editorRepository.sortEditorsByExperience();
     }
 
-    public List<EditorDTO> getProjectByEditorId(Long editorId) {
-        return null;
+    public List<EditorProjectDTO> getProjectByEditorId(Long editorId) {
+        return this.editorRepository.findProjectByEditorId(editorId);
     }
 
-    public List<EditorDTO> getPreferenceByEditorId(Long editorId) {
-        return null;
+    public List<EditorPreferenceDTO> getPreferenceByEditorId(Long editorId) {
+        return this.editorRepository.findPreferenceByEditorId(editorId);
+    }
+
+    public List<EditorDTO> getEditorsByGender(String gender) {
+        return this.editorRepository.filterByGender(gender);
+    }
+
+    public Long countTotalEditors() {
+        return this.editorRepository.countTotalNoOfEditor();
+    }
+
+    public EditorDTO getEditorByEmail(String email) {
+        return this.editorRepository.getEditorByEmail(email);
+    }
+
+    public List<EditorDTO> getEditorByExperienceRange(int minExperience, int maxExperience) {
+       return this.editorRepository.filterByExperience(minExperience,maxExperience);
     }
 }
