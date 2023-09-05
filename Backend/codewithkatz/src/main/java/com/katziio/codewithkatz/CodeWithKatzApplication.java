@@ -17,21 +17,8 @@ import java.util.Objects;
 @SpringBootApplication
 public class CodeWithKatzApplication {
 
-    public static void main(String[] args) throws Exception {
-        String absolutePath = "/home/katziio/Desktop/CollabWithKatz/Backend/codewithkatz/src/main/resources/serviceKey.json";
-        String BASE_DB_URL = "https://console.firebase.google.com/u/0/project/collabwithkatz/firestore/data/~2F";
-        FileInputStream serviceAccount = new FileInputStream(absolutePath);
-        try {
-            FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(serviceAccount)).setDatabaseUrl(BASE_DB_URL).build();
-            if (FirebaseApp.getApps().isEmpty()) { //<--- check with this line
-                FirebaseApp.initializeApp(options);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public static void main(String[] args) throws FileNotFoundException {
         SpringApplication.run(CodeWithKatzApplication.class, args);
     }
-
 }
 
