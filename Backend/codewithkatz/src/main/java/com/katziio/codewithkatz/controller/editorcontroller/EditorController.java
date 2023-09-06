@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/CollabWithkatz/editor")
+@RequestMapping("/v1/editor")
 @CrossOrigin("*")
 public class EditorController {
     @Autowired
     private EditorService editorService;
+
 
     //    get all user
     @GetMapping("/allEditors")
@@ -24,7 +25,7 @@ public class EditorController {
     }
 
     //    get user by id
-    @GetMapping("/editor")
+    @GetMapping("/editors")
     public EditorDTO getEditorsById(@RequestParam Long id) {
         return this.editorService.getEditorById(id);
     }
