@@ -17,7 +17,6 @@ public class EditorController {
     @Autowired
     private EditorService editorService;
 
-
     //    get all user
     @GetMapping("/allEditors")
     public List<EditorDTO> getAllEditors() {
