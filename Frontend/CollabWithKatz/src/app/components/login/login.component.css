@@ -1,12 +1,12 @@
 *,
 *::after,
 *::before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
-    outline: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
 }
 
 body {
@@ -132,7 +132,8 @@ body {
   margin-left: 30px;
 }
 
-.box-form .right {  float: right;
+.box-form .right {
+  float: right;
   padding: 40px;
   overflow: hidden;
   display: flex;
@@ -149,7 +150,7 @@ body {
   flex-direction: column;
   /* border: 2px solid yellow; */
   height: 5rem;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 
 
