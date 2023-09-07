@@ -24,15 +24,14 @@
         <div class="container">
             <div class="card">
                 <h3>Upload Files</h3>
-                <form class="drop_box" (ngSubmit)="uploadVideo()" enctype="multipart/form-data">
+                <form class="drop_box" (submit)="uploadFile($event)" enctype="multipart/form-data">
                     <header>
                         <h4>Select File here</h4>
                     </header>
                     <p>Files Supported: Video Format</p>
-                    <input type="file" name="video" (change)="onFileChange($event)"  accept="video/*" required>
+                    <input type="file" name="video" accept="video/*" required>
                     <button type="submit" class="btn">Upload</button>
                 </form>
-
             </div>
         </div>
     </main>

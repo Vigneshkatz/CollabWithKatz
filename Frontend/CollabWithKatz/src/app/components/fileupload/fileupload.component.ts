@@ -1,3 +1,4 @@
+import { FileuploadService } from './../../service/fileUpload/fileupload.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,15 +9,12 @@ import { Component } from '@angular/core';
 export class FileuploadComponent {
   selectedVideo: File | null = null;
 
-  onFileChange(event: any) {
-    this.selectedVideo = event.target.files[0];
+  constructor(private fileuploadService:FileuploadService){
+
   }
 
-  uploadVideo() {
-    if (this.selectedVideo) {
-      // Implement your file upload logic here
-      // You can use HttpClient to send the file to your backend server
-      console.log('Uploading video:', this.selectedVideo.name);
-    }
+  uploadFile(event: any) {
+    console.log("fileUpload.ts")
+    this.fileuploadService.uploadVideo(event);
   }
 }
