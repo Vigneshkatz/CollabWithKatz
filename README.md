@@ -11,3 +11,7 @@
 - today
 - Change Endpoints as v1
 - Use session tokens for user login and user registration
+## 7 sep
+- Exceptions handling
+- Session tokens
+- With token expiration
