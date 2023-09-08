@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor Signup</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <h1>Editor Signup</h1>
-    <form  (ngSubmit)="onSubmit()" #signupForm="ngForm">
+    <form action="/signup" method="POST" enctype="multipart/form-data">
         <!-- Basic Information -->
         <div class="form-group">
             <label for="name">UserName</label>
-            <input type="text" name="name" [(ngModel)]="formData.name" required >
+            <input type="text" id="name" name="name" required>
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" [(ngModel)]="formData.email"required>
+            <input type="email" id="email" name="email" required>
         </div>
 
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" [(ngModel)]="formData.password" name="password" required>
+            <input type="password" id="password" name="password" required>
         </div>
 
         <div class="form-group">
             <label for="age">Age</label>
-            <input type="number" id="age" name="age" min="13" max="100" [(ngModel)]="formData.age">
+            <input type="number" id="age" name="age" min="18" max="100">
         </div>
 
         <!-- Country Selection -->
         <div class="form-group">
             <label for="country">Country</label>
-            <select class="form-select" id="country" name="country" [(ngModel)]="formData.country">
+            <select class="form-select" id="country" name="country">
                 <option>select country</option>
                 <option value="AF">Afghanistan</option>
                 <option value="AX">Aland Islands</option>
@@ -294,7 +295,7 @@
         <!-- Gender Selection -->
         <div class="form-group">
             <label for="gender">Gender</label>
-            <select id="gender" name="gender" [(ngModel)]="formData.gender" required>
+            <select id="gender" name="gender" required>
                 <option>select gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -304,18 +305,31 @@
 
         <div class="form-group">
             <label for="experience">Experience (Years)</label>
-            <input type="number" id="experience" name="experience" [(ngModel)]="formData.experience" min="0">
+            <input type="number" id="experience" name="experience" min="0">
         </div>
 
         <!-- Contact Information -->
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" [(ngModel)]="formData.phone" pattern="[0-9]{10}">
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
         </div>
+
+        <!-- Profile Picture Upload -->
+        <div class="form-group">
+            <label for="profile-picture">Profile Picture</label>
+            <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
+        </div>
+
+        <!-- Certifications -->
+        <div class="form-group">
+            <label for="certification-file">Certification (PDF)</label>
+            <input type="file" id="certification-file" name="certification-file" accept=".pdf">
+        </div>
+
         <!-- Preferred Language Selection -->
         <div class="form-group">
             <label for="preferred-language">Preferred Language</label>
-            <select id="preferred-language" name="preferred_language" [(ngModel)]="formData.preferred_language" >
+            <select id="preferred-language" name="preferred-language">
                 <option value="english">English</option>
                 <option value="spanish">Spanish</option>
                 <option value="french">French</option>
@@ -327,7 +341,7 @@
         <!-- Preferences -->
         <div class="form-group">
             <label for="preferences">Preferences (comma-separated)</label>
-            <input type="text" id="preferences" name="preferences" [(ngModel)]="formData.preferences" >
+            <input type="text" id="preferences" name="preferences">
         </div>
 
         <!-- Submit Button -->

@@ -7,10 +7,11 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { FileuploadComponent } from './components/fileupload/fileupload.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { FormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage'; // Import AngularFireStorageModule
-import { environment } from 'src/environments/environment';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { LandingpageComponent } from './components/landingpage/landingpage.component'; // Import AngularFireStorageModule
 
 @NgModule({
   declarations: [
@@ -18,11 +19,13 @@ import { environment } from 'src/environments/environment';
     HomeComponent,
     LoginComponent,
     FileuploadComponent,
-    SignupComponent
+    SignupComponent,
+    LandingpageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyBuLKnFnb9ZZJBgZDKG7jv9X4P1qYYPA4A",
       authDomain: "collabwithkatz.firebaseapp.com",

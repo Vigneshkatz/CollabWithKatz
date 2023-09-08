@@ -13,4 +13,12 @@ export class FileuploadService {
     const downloadUrl = this.firebaseService.uploadFileToFireBase(event);
     console.log(downloadUrl);
   }
+
+  uploadFile(event: any):string {
+    console.log("FileuploadService")
+    const downloadUrl = this.firebaseService.uploadFileToFireBase(event);
+    return downloadUrl;
+  }
+
+  
 }
