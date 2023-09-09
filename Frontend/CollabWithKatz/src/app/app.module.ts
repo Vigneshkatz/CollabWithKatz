@@ -11,7 +11,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { LandingpageComponent } from './components/landingpage/landingpage.component'; // Import AngularFireStorageModule
+import { LandingpageComponent } from './components/landingpage/landingpage.component';
+import { ProfilepageComponent } from './components/profilepage/profilepage.component'; // Import AngularFireStorageModule
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LandingpageComponent } from './components/landingpage/landingpage.compo
     LoginComponent,
     FileuploadComponent,
     SignupComponent,
-    LandingpageComponent
+    LandingpageComponent,
+    ProfilepageComponent
   ],
   imports: [
     BrowserModule,

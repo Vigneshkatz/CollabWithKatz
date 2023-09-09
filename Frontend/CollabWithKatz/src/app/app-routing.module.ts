@@ -5,6 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { FileuploadComponent } from './components/fileupload/fileupload.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { ProfilepageComponent } from './components/profilepage/profilepage.component'; // Import AngularFireStorageModule
+
 
 const routes: Routes = [
   { path: '', component: LandingpageComponent },
@@ -12,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'fileupload', component: FileuploadComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'profilePage', component: ProfilepageComponent },
 ];
 
 @NgModule({
