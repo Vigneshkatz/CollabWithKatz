@@ -34,21 +34,20 @@
                     <h5>Login in as Editor</h5>
                     <a [routerLink]="['/signup']" routerLinkActive="router-link-active" >Create Your Account</a>
                 </div>
+            <form (ngSubmit)="fetchFormValue(user_email.value, user_password.value)">
                 <div class="inputs">
-                    <input type="text" placeholder="user name">
+                    <input type="text" placeholder="user name" name="user_email" #user_email>
                     <br>
-                    <input type="password" placeholder="password">
+                    <input type="password" placeholder="password" name="user_password" #user_password>
                 </div>
 
                 <br><br>
-
                 <div class="remember-me--forget-password">
                     <a href="#">Forget password?</a>
                 </div>
-
                 <br>
-                <button [routerLink]="['/profilePage']">Login</button>
-
+                <button  type="submit">Login</button>
+            </form>
             </div>
 
         </div>

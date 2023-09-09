@@ -9,12 +9,14 @@ import { ProfilepageComponent } from './components/profilepage/profilepage.compo
 
 
 const routes: Routes = [
-  { path: '', component: LandingpageComponent },
+  { path: 'welcome', component: LandingpageComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'fileupload', component: FileuploadComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profilePage', component: ProfilepageComponent },
+  { path: '**', component: LandingpageComponent }
+
 ];
 
 @NgModule({

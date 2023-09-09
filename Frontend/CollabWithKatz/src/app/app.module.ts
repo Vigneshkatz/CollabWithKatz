@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,7 +38,8 @@ import { ProfilepageComponent } from './components/profilepage/profilepage.compo
       appId: "1:570440142532:web:39fee0b6507d27f8460391",
       measurementId: "G-DRJPZ22CDS"
     }),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    HttpClientModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
