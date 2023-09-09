@@ -41,8 +41,12 @@
                     allowing creators to easily share their raw files and work together to create amazing content.
                 </p>
                 <div class="main_header_cta">
-                    <button class="black_btn">Learn More</button>
-                    <button class="white_btn">Get Started</button>
+                    <form #signupForm="ngForm">
+                        <button type="submit" class="black_btn">Learn More</button>
+                    </form>
+                    <form #signupForm="ngForm">
+                        <button class="white_btn"  (click)="onLearnMoreClick()" >Get Started</button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -76,8 +80,12 @@
                     </div>
                 </div>
                 <div class="main_footer_cta">
-                    <button class="white_btn black_border">Get Started</button>
-                    <button class="white_btn">Learn More ></button>
+                    <form #signupForm="ngForm">
+                        <button class="white_btn black_border"  (click)="onLearnMoreClick()" >Get Started</button>
+                    </form>
+                    <form #signupForm="ngForm">
+                        <button class="white_btn">Learn More ></button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -102,8 +110,12 @@
                         providing them with raw files d benefiting from their expertise. Experience the seamless
                         workflow and enhanced creativity that come from this unique partnership.</p>
                     <div class="main_header_cta">
-                        <button class="black_btn">Get Started</button>
-                        <button class="white_btn black_border">Learn More</button>
+                        <form #signupForm="ngForm">
+                            <button class="black_btn"  (click)="onLearnMoreClick()" >Get Started</button>
+                        </form>
+                        <form #signupForm="ngForm">
+                            <button class="white_btn black_border">Learn More</button>
+                        </form>
                     </div>
                 </div>
                 <div class="feature_img_container">
@@ -130,7 +142,9 @@
                         <h2 class="insight_title dark_text">Unleashing Your Inner Artist</h2>
                         <p class="insights_excerpt">Learn how to tap into your creative potential and express yourself.
                         </p>
-                        <button>Read more ></button>
+                        <form #signupForm="ngForm">
+                            <button>Read more ></button>
+                        </form>
                     </div>
                 </div>
                 <div class="insights">
@@ -160,7 +174,9 @@
                         <h2 class="insight_title dark_text">Unleashing Your Inner Artist</h2>
                         <p class="insights_excerpt">Learn how to tap into your creative potential and express yourself.
                         </p>
-                        <button>Read more ></button>
+                        <form #signupForm="ngForm">
+                            <button>Read more ></button>
+                        </form>
                     </div>
                 </div>
                 <div class="insights">
@@ -175,7 +191,9 @@
                         <h2 class="insight_title dark_text">Unleashing Your Inner Artist</h2>
                         <p class="insights_excerpt">Learn how to tap into your creative potential and express yourself.
                         </p>
-                        <button>Read more ></button>
+                        <form #signupForm="ngForm">
+                            <button>Read more ></button>
+                        </form>
                     </div>
                 </div>
             </div>

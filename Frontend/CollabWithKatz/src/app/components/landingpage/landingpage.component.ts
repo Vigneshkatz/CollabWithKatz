@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landingpage',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./landingpage.component.css']
 })
 export class LandingpageComponent {
+  constructor(private router: Router) {
+
+  }
+  onLearnMoreClick() {
+    this.router.navigate(['/signup']);
+  }
 
 }

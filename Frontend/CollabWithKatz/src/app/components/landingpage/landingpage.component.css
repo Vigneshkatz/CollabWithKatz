@@ -108,8 +108,11 @@ main section {
 .main_header_heading {
     font-size: 3.45rem;
 }
+.main_header_cta{
+    display: flex;
+}
 
-.main_header_cta button {
+.main_header_cta form {
     margin-right: 2rem;
 }
 
