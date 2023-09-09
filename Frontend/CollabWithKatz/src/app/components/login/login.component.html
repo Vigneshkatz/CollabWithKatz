@@ -32,7 +32,7 @@
             <div class="right">
                 <div class="right_header">
                     <h5>Login in as Editor</h5>
-                    <a href="#">Create Your Account</a>
+                    <a [routerLink]="['/signup']" routerLinkActive="router-link-active" >Create Your Account</a>
                 </div>
                 <div class="inputs">
                     <input type="text" placeholder="user name">
@@ -47,7 +47,8 @@
                 </div>
 
                 <br>
-                <button>Login</button>
+                <button [routerLink]="['/profilePage']">Login</button>
+
             </div>
 
         </div>

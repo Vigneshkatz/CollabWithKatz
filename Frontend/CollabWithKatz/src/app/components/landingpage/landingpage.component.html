@@ -42,7 +42,7 @@
                 </p>
                 <div class="main_header_cta">
                     <form #signupForm="ngForm">
-                        <button type="submit" class="black_btn">Learn More</button>
+                        <button type="submit" class="black_btn" [routerLink]="['/login']"  >Login</button>
                     </form>
                     <form #signupForm="ngForm">
                         <button class="white_btn"  (click)="onLearnMoreClick()" >Get Started</button>
@@ -84,7 +84,7 @@
                         <button class="white_btn black_border"  (click)="onLearnMoreClick()" >Get Started</button>
                     </form>
                     <form #signupForm="ngForm">
-                        <button class="white_btn">Learn More ></button>
+                        <button class="white_btn"[routerLink]="['/login']" >Login ></button>
                     </form>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                             <button class="black_btn"  (click)="onLearnMoreClick()" >Get Started</button>
                         </form>
                         <form #signupForm="ngForm">
-                            <button class="white_btn black_border">Learn More</button>
+                            <button class="white_btn black_border"[routerLink]="['/login']" >Login</button>
                         </form>
                     </div>
                 </div>
