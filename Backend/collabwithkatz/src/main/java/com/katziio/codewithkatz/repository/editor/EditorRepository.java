@@ -40,4 +40,7 @@ public interface EditorRepository extends JpaRepository<Editor,Long> {
 
     @Query("SELECT new com.katziio.codewithkatz.dto.editordto.EditorDTO(e) FROM Editor e WHERE e.experienceInYears BETWEEN :minExperience AND :maxExperience")
     List<EditorDTO> filterByExperience(@Param("minExperience") int minExperience, @Param("maxExperience") int maxExperience);
+
+    @Query("SELECT new com.katziio.codewithkatz.dto.editordto.EditorDTO(e) FROM Editor e WHERE e.email =:userEmail AND e.password =:userPassword")
+    EditorDTO isValidLogin(@Param("userEmail") String userEmail, @Param("userPassword") String userPassword);
 }

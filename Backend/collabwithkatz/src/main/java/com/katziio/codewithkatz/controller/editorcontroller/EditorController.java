@@ -101,6 +101,10 @@ public class EditorController {
     public List<EditorDTO> getEditorByExperienceRange(@RequestParam int minExperience,@RequestParam int maxExperience) {
         return this.editorService.getEditorByExperienceRange(minExperience,maxExperience);
     }
+    @GetMapping("/login")
+    public EditorDTO isValidUser(@RequestParam String email,@RequestParam String password) {
+        return this.editorService.isValidUser(email,password);
+    }
 //    Retrieve Editors Created After a Specific Date
 
 //    Retrieve Editors Updated After a Specific Date:

@@ -104,4 +104,8 @@ public class EditorService {
     public List<EditorDTO> getEditorByExperienceRange(int minExperience, int maxExperience) {
        return this.editorRepository.filterByExperience(minExperience,maxExperience);
     }
+
+    public EditorDTO isValidUser(String userEmail, String userPassword) {
+        return this.editorRepository.isValidLogin(userEmail,userPassword);
+    }
 }
