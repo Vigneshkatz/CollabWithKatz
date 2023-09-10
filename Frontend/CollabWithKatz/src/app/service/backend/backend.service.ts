@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { Editor } from 'src/app/common/editor/editor';
 
 @Injectable({
@@ -51,4 +51,13 @@ export class BackendService {
       })
     );
   }
+  // get editor by email
+  getEditorByEditorId(editor_id: number): Observable<any> {
+    // http://localhost:8000/v1/editor/editorById?id=1
+    console.log("signup editor backend");
+    const GET_EDITOR_DETAIL_BY_ID_URL = `${this.BASEURL}/v1/editor/editorById?id=${editor_id}`;
+    return this.http.get<any>(GET_EDITOR_DETAIL_BY_ID_URL);
+
+  }
+
 }

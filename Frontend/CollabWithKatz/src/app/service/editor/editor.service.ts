@@ -14,23 +14,29 @@ export class EditorService {
     if (!editor_email || !editor_password || editor_email.trim() === '' || editor_password.trim() === '') {
       return of(false); // Invalid input, return Observable of false
     }
-  
+
     // If input is valid, call the login method and return the result as an Observable
-    return this.backend.login(editor_email,editor_password).pipe(
+    return this.backend.login(editor_email, editor_password).pipe(
       map((isValid: boolean) => isValid),
       switchMap((isValid: boolean) => {
         if (isValid) {
-          return of(true); // Valid editor, return Observable of true
+          return of(true);
         } else {
-          return of(false); // Invalid editor, return Observable of false
+          return of(false);
         }
       })
     );
   }
 
-  registerEditor(editor:Editor):void{
+  registerEditor(editor: Editor): void {
     console.log("signup editor editorservice");
 
     this.backend.signUp(editor);
+  }
+
+  // get Editor information\
+
+  getEditorInfo(editor_id: number): Observable<any> {
+    return this.backend.getEditorByEditorId(editor_id);
   }
 }

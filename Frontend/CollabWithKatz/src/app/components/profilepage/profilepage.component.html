@@ -13,10 +13,12 @@
             <div class="header_logo">
                 <img src="../../../assets/collabSample.png" alt="CollabWithKatz" class="header_logo_img">
             </div>
+            <div>
+                <h2 >{{myProfile.name}}</h2>
+            </div>
             <div class="user_login_logout">
                 <ul id="login_logout_ul">
                     <li><a href="#">Edit Profile</a></li>
-                    
                     <li><a [routerLink]="['/login']" >Logout</a></li>
                 </ul>
             </div>
@@ -31,9 +33,7 @@
                     </div>
                     <div class="my_description_content description_container grey">
                         <h1>
-                            I'm a recent grad, trying to figure out my life while I try to use design to empower and
-                            educate
-                            people!
+                            {{myProfile.about}}
                         </h1>
                     </div>
                 </div>

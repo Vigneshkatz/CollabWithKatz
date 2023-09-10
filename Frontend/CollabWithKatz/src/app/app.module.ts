@@ -13,7 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { LandingpageComponent } from './components/landingpage/landingpage.component';
-import { ProfilepageComponent } from './components/profilepage/profilepage.component'; // Import AngularFireStorageModule
+import { ProfilepageComponent } from './components/profilepage/profilepage.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProfilepageComponent } from './components/profilepage/profilepage.compo
     FileuploadComponent,
     SignupComponent,
     LandingpageComponent,
-    ProfilepageComponent
+    ProfilepageComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,

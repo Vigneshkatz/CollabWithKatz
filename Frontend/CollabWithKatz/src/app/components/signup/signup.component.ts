@@ -52,10 +52,10 @@ export class SignupComponent {
       this.setEditor();
       this.editorService.registerEditor(this.editor);
       this.router.navigate(['/home']);
-      return true; // Passwords match
+      return true;
     }
-    this.router.navigate(['/welcome']);
     console.log("Password does not match");
+    this.router.navigate(['/error-page']);
     return false;
   }
 }
