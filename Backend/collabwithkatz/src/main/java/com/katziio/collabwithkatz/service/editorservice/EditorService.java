@@ -1,5 +1,6 @@
 package com.katziio.collabwithkatz.service.editorservice;
 
+import com.katziio.collabwithkatz.config.authentication.PasswordEncoder;
 import com.katziio.collabwithkatz.dto.editordto.EditorDTO;
 import com.katziio.collabwithkatz.dto.editordto.EditorPreferenceDTO;
 import com.katziio.collabwithkatz.dto.editordto.EditorProjectDTO;
@@ -17,6 +18,8 @@ public class EditorService {
 
     @Autowired
     private EditorRepository editorRepository;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
     public EditorDTO deleteEditor(Long editorId) {
         Optional<Editor> editor = this.editorRepository.findById(editorId);
         if(editor.isPresent())
