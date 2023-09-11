@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.config;
+package com.katziio.collabwithkatz.config.authentication;
 
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
