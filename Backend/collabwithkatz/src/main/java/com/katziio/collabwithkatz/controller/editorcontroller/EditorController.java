@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/editor")
-//@CrossOrigin("*")
+//@CrossOrigin("*")a
 public class EditorController {
     @Autowired
     private EditorService editorService;

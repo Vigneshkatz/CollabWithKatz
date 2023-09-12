@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 
 @SpringBootApplication
 public class CollabWithKatzApplication {
-
     public static void main(String[] args)  {
         SpringApplication.run(CollabWithKatzApplication.class, args);
     }

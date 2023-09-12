@@ -1,6 +1,5 @@
 package com.katziio.collabwithkatz.service.editorservice;
 
-import com.katziio.collabwithkatz.config.authentication.PasswordEncoder;
 import com.katziio.collabwithkatz.dto.editordto.EditorDTO;
 import com.katziio.collabwithkatz.dto.editordto.EditorPreferenceDTO;
 import com.katziio.collabwithkatz.dto.editordto.EditorProjectDTO;
