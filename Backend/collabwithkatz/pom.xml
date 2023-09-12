@@ -64,18 +64,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-<!--&lt;!&ndash;        spring security&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--            <version>3.1.0</version>-->
-<!--        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+<!--        spring security-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-            <version>2.7.4</version>
+            <version>3.1.0</version>
         </dependency>
+
 
     </dependencies>
 
