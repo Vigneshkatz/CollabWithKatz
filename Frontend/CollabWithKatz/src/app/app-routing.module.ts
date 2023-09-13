@@ -7,6 +7,8 @@ import { FileuploadComponent } from './components/fileupload/fileupload.componen
 import { SignupComponent } from './components/signup/signup.component';
 import { ProfilepageComponent } from './components/profilepage/profilepage.component'; 
 import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { CreatorHomeComponent } from './components/creator/creator-home/creator-home.component';
+import { CollabComponent } from './components/creator/collab/collab.component';
 
 const routes: Routes = [
   { path: 'welcome', component: LandingpageComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'error-page', component: ErrorPageComponent },
   { path: 'profilePage', component: ProfilepageComponent },
+  { path: 'creator', component: CreatorHomeComponent },
+  { path: 'creator/collab', component: CollabComponent },
   { path: '**', component: LandingpageComponent }
 ];
 
