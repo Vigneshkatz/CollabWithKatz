@@ -34,7 +34,6 @@ export class CreatorHomeComponent {
     const creatorId = 1;
     const editorId = 1;
     console.log('onCollab() function called');
-    // this.router.navigate(['/creator/collab']);
     this.router.navigate(['/creator/collab', creatorId,editorId]);
   }
   
