@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
   { path: 'profilePage', component: ProfilepageComponent },
   { path: 'creator', component: CreatorHomeComponent },
-  { path: 'creator/collab', component: CollabComponent },
+  { path: 'creator/collab/:creatorId/:editorId', component: CollabComponent },
   { path: '**', component: LandingpageComponent }
 ];
 

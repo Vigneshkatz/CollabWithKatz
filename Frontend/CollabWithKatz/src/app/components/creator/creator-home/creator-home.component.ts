@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CreatorService } from 'src/app/service/creator/creator.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CreatorService } from 'src/app/service/creator/creator.service';
 export class CreatorHomeComponent {
   editorList: any[] = [];
 
-  constructor(private creatorService: CreatorService) {
+  constructor(private creatorService: CreatorService,private router:Router) {
 
   }
 
@@ -24,7 +25,17 @@ export class CreatorHomeComponent {
     });
     console.log(this.editorList);
   }
+
   executeAfterHTTP() {
     console.log("Code executed after HTTP request:", this.editorList);
   }
+
+  onCollab() {
+    const creatorId = 1;
+    const editorId = 1;
+    console.log('onCollab() function called');
+    // this.router.navigate(['/creator/collab']);
+    this.router.navigate(['/creator/collab', creatorId,editorId]);
+  }
+  
 }
