@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.entity.editorentity;
+package com.katziio.collabwithkatz.entity.editor;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "editor_certifications")
-public class EditorCertification {
+@Table(name = "editor_communication_language")
+public class EditorCommunicationLanguage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String certificationName;
-    private String certificationLink;
+    private String language;
+    private int languageProficiency;
 }

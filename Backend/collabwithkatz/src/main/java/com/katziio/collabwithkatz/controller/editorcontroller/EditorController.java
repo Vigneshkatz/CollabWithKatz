@@ -3,7 +3,7 @@ package com.katziio.collabwithkatz.controller.editorcontroller;
 import com.katziio.collabwithkatz.dto.editordto.EditorDTO;
 import com.katziio.collabwithkatz.dto.editordto.EditorPreferenceDTO;
 import com.katziio.collabwithkatz.dto.editordto.EditorProjectDTO;
-import com.katziio.collabwithkatz.entity.editorentity.Editor;
+import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.editorservice.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.entity.editorentity;
+package com.katziio.collabwithkatz.entity.creator;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "editor_social_media")
-public class EditorSocialMedia {
+@Table(name = "project")
+public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String platform;
-    private String platformLink;
+    private String projectName;
+    private String rawVideoURl;
+    private String editedVideoURL;
 }

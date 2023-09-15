@@ -1,6 +1,6 @@
 package com.katziio.collabwithkatz.dto.editordto;
 
-import com.katziio.collabwithkatz.entity.editorentity.EditorCommunicationLanguage;
+import com.katziio.collabwithkatz.entity.editor.EditorCommunicationLanguage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

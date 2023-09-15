@@ -3,7 +3,7 @@ package com.katziio.collabwithkatz.repository.editor;
 import com.katziio.collabwithkatz.dto.editordto.EditorDTO;
 import com.katziio.collabwithkatz.dto.editordto.EditorPreferenceDTO;
 import com.katziio.collabwithkatz.dto.editordto.EditorProjectDTO;
-import com.katziio.collabwithkatz.entity.editorentity.Editor;
+import com.katziio.collabwithkatz.entity.editor.Editor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
