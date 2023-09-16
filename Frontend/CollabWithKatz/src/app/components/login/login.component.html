@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header id="header">
+        <div class="header_container">
+            <div class="header_logo">
+                <img src="../../../assets/collabSample.png" alt="CollabWithKatz" class="header_logo_img">
+            </div>
+            <nav class="user_menu">
+                <ul class="menu_list" *ngIf="isCreator; else editorMenu">
+                    <li><a (click)="changeLoginType()" >Login in As Editor</a></li>
+                </ul>
+                <ng-template #editorMenu>
+                    <ul class="menu_list">
+                        <li><a  (click)="changeLoginType()">Login in As Creator</a></li>
+                    </ul>
+                </ng-template>
+            </nav>
+        </div>
+    </header>
+    <main id="main">
+        <div class="box-form">
+            <div class="left">
+                <div class="overlay">
+                    <h1 *ngIf="isCreator; else editorHeading">Hi Creator</h1>
+                    <ng-template #editorHeading>
+                        <h1>Hi Editor</h1>
+                    </ng-template>
+                    <p>Welcome to CollabWithKatz</p>
+                </div>
+            </div>
+            <div class="right">
+                <div class="right_header">
+                    <h5 *ngIf="isCreator; else editorLogin">Login in as Creator</h5>
+                    <ng-template #editorLogin>
+                        <h5>Login in as Editor</h5>
+                    </ng-template>
+                    <a (click)="redirectToSignUp()">Create Your Account</a>
+                </div>
+                <form (ngSubmit)="fetchFormValue(user_email.value, user_password.value)">
+                    <div class="inputs">
+                        <input type="text" placeholder="user name" name="user_email" #user_email>
+                        <br>
+                        <input type="password" placeholder="password" name="user_password" #user_password>
+                    </div>
+
+                    <br><br>
+                    <div class="remember-me--forget-password">
+                        <a href="#">Forget password?</a>
+                    </div>
+                    <br>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+        </div>
+    </main>
+    <footer id="footer">
+        <div class="footer">
+            <div class="row">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </a>
+                        <a href="#">Contact us</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </a>
+                        <a href="#">Our Services</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </a>
+                        <a href="#">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </a>
+                        <a href="#">Terms & Conditions</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </a>
+                        <a href="#">Career</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

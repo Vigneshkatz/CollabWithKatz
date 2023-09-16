@@ -1,0 +1,113 @@
+*,*::after,*::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+}
+body{
+    overflow-x: hidden;
+    height: auto;
+}
+/* Header */
+#header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header_logo_img {
+    height: 40px;
+    width: auto;
+}
+
+/* Login/Logout */
+#login_logout_ul {
+    display: flex;
+    gap: 1rem;
+}
+
+.user_login_logout a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.user_login_logout a:hover {
+    color: #FFA500; /* Change color on hover */
+}
+
+
+/* main section */
+section{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    /* border-bottom: 2px solid red; */
+    height: 100vh;
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+.my_description{
+    height: 50%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.flex_container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    gap: 1.5rem;
+    width: 100%;
+}
+.image_container{
+    width: 50%;
+    height: 80%;
+    /* object-fit: contain; */
+}
+img{
+    height: 100%;
+    width: 100%;
+    border-radius: 1.5rem;
+}
+.description_container{
+    width: 50%;
+}
+.grey{
+    color: grey;
+}
+
+.my_experience_link_list{
+
+    display: flex;
+    gap: 1rem;
+ 
+}
+.my_experience{
+    text-align: center;
+    height: fit-content;
+}
+.my_experience .flex_container{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.my_description *{
+    width: 100%;
+}
