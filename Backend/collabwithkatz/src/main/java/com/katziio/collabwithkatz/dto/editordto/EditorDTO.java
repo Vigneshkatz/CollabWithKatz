@@ -1,5 +1,8 @@
 package com.katziio.collabwithkatz.dto.editordto;
 
+import com.katziio.collabwithkatz.entity.creator.Project;
+import com.katziio.collabwithkatz.entity.creator.Review;
+import com.katziio.collabwithkatz.entity.creator.Upvote;
 import com.katziio.collabwithkatz.entity.editor.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,12 +29,14 @@ public class EditorDTO {
     private String portfolioLink;
     private Date profileCreatedAt;
     private Date ProfileUpdatedAt;
-    private List<EditorCertification> editorCertifications;
-    private List<EditorCommunicationLanguage> editorCommunicationLanguages;
-    private List<EditorPreferences> editorPreferences;
-    private List<EditorProject> editorProjects;
-    private List<EditorSampleVideo> editorSampleVideos;
-    private List<EditorSocialMedia> editorSocialMedia;
+    private List<EditorCertification> certificationsList;
+    private List<EditorCommunicationLanguage> communicationLanguagesList;
+    private List<EditorSampleVideo> sampleVideoList;
+    private List<EditorSocialMedia> socialMediaList;
+    private List<Project> projectList;
+    private List<Upvote> upvoteList;
+    private List<Review> reviewList;
+
 
     public EditorDTO(Editor editor) {
         this.id = editor.getId();
@@ -45,11 +50,11 @@ public class EditorDTO {
         this.experienceInYears = editor.getExperienceInYears();
         this.phone=editor.getPhone();
         this.profilePictureUrl=editor.getProfilePictureUrl();
-        this.editorCertifications= editor.getEditorCertifications();
-        this.editorCommunicationLanguages= editor.getEditorCommunicationLanguages();
-        this.editorPreferences=editor.getEditorPreferences();
-        this.editorProjects=editor.getEditorProjects();
-        this.editorSampleVideos=editor.getEditorSampleVideos();
-        this.editorSocialMedia=editor.getEditorSocialMedia();
+        this.certificationsList= editor.getCertifications();
+        this.communicationLanguagesList= editor.getCommunicationLanguages();
+        this.projectList=editor.getProjectList();
+        this.sampleVideoList=editor.getSampleVideoList();
+        this.socialMediaList=editor.getSocialMediaList();
+        this.reviewList = editor.getReviewList();
     }
 }

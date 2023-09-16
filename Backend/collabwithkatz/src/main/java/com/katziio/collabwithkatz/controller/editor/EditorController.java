@@ -1,7 +1,6 @@
-package com.katziio.collabwithkatz.controller.editorcontroller;
+package com.katziio.collabwithkatz.controller.editor;
 
 import com.katziio.collabwithkatz.dto.editordto.EditorDTO;
-import com.katziio.collabwithkatz.dto.editordto.EditorPreferenceDTO;
 import com.katziio.collabwithkatz.dto.editordto.EditorProjectDTO;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.editorservice.EditorService;
@@ -74,13 +73,6 @@ public class EditorController {
     public List<EditorProjectDTO> getProjectByEditorId(@PathVariable Long editorId) {
         return this.editorService.getProjectByEditorId(editorId);
     }
-
-//    Retrieve Editor's Preferences
-    @GetMapping("/{editorId}/preference")
-    public List<EditorPreferenceDTO> getPreferenceByEditorId(@PathVariable Long editorId) {
-        return this.editorService.getPreferenceByEditorId(editorId);
-    }
-
 //    Retrieve Editors by Gender
     @GetMapping("/filterByGender")
     public List<EditorDTO> getEditorsByGender(@RequestParam String gender) {

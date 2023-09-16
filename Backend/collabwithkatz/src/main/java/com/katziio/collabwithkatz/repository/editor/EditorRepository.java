@@ -23,11 +23,8 @@ public interface EditorRepository extends JpaRepository<Editor,Long> {
     @Query("SELECT new com.katziio.collabwithkatz.dto.editordto.EditorDTO(e) FROM Editor e ORDER BY e.experienceInYears DESC")
     List<EditorDTO> sortEditorsByExperience();
 
-    @Query("SELECT new com.katziio.collabwithkatz.dto.editordto.EditorProjectDTO (e.editorProjects) FROM Editor e WHERE e.id = :editorId")
+    @Query("SELECT new com.katziio.collabwithkatz.dto.editordto.EditorProjectDTO (e.projectList) FROM Editor e WHERE e.id = :editorId")
     List<EditorProjectDTO> findProjectByEditorId(@Param("editorId") Long editorId);
-
-    @Query("SELECT new com.katziio.collabwithkatz.dto.editordto.EditorPreferenceDTO (e.editorPreferences) FROM Editor e WHERE e.id = :editorId")
-    List<EditorPreferenceDTO> findPreferenceByEditorId(Long editorId);
 
     @Query("SELECT new com.katziio.collabwithkatz.dto.editordto.EditorDTO(e) FROM Editor e WHERE e.gender = :gender")
     List<EditorDTO> filterByGender(@Param("gender") String gender);

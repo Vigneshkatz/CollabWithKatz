@@ -87,9 +87,6 @@ public class EditorService {
         return this.editorRepository.findProjectByEditorId(editorId);
     }
 
-    public List<EditorPreferenceDTO> getPreferenceByEditorId(Long editorId) {
-        return this.editorRepository.findPreferenceByEditorId(editorId);
-    }
 
     public List<EditorDTO> getEditorsByGender(String gender) {
         return this.editorRepository.filterByGender(gender);

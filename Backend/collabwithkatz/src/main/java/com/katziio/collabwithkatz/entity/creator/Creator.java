@@ -1,5 +1,6 @@
 package com.katziio.collabwithkatz.entity.creator;
 
+import com.katziio.collabwithkatz.entity.editor.EditorCertification;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "editor")
+@Table(name = "creators")
 public class Creator {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +21,15 @@ public class Creator {
     private String email;
     private String password;
 
+    @OneToMany(targetEntity = Upvote.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
     private List<Upvote> upvoteList;
+
+    @OneToMany(targetEntity = Review.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
     private List<Review> reviewList;
+
+    @OneToMany(targetEntity = Project.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
     private List<Project> projectList;
 }
