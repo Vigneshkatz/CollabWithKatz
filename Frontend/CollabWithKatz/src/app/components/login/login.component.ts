@@ -9,7 +9,10 @@ import { EditorService } from 'src/app/service/editor/editor.service';
 })
 export class LoginComponent {
 
+  isCreator:boolean = true;
+
     constructor(private editoService:EditorService,private router:Router){
+      console.log(this.isCreator);
     }
 
     fetchFormValue(user_email: string,user_password: string):void {
@@ -23,5 +26,20 @@ export class LoginComponent {
           this.router.navigate(['/welcome']);
         }
       });
+    }
+
+    changeLoginType(){
+        this.isCreator = !this.isCreator;
+    }
+    
+    redirectToSignUp(){
+      console.log(this.isCreator);
+      if(this.isCreator)
+      {
+        this.router.navigate(['/creator/signup']);
+      }else{
+        this.router.navigate(['/editor/signup']);
+
+      }
     }
 }

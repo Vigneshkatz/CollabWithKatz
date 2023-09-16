@@ -9,16 +9,18 @@ import { ProfilepageComponent } from './components/profilepage/profilepage.compo
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { CreatorHomeComponent } from './components/creator/creator-home/creator-home.component';
 import { CollabComponent } from './components/creator/collab/collab.component';
+import { SignupCreatorComponent } from './components/creator/signup-creator/signup-creator.component';
 
 const routes: Routes = [
   { path: 'welcome', component: LandingpageComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'fileupload', component: FileuploadComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'editor/signup', component: SignupComponent },
   { path: 'error-page', component: ErrorPageComponent },
   { path: 'profilePage', component: ProfilepageComponent },
-  { path: 'creator', component: CreatorHomeComponent },
+  { path: 'creator/home', component: CreatorHomeComponent },
+  { path: 'creator/signup', component:  SignupCreatorComponent},
   { path: 'creator/collab/:creatorId/:editorId', component: CollabComponent },
   { path: '**', component: LandingpageComponent }
 ];

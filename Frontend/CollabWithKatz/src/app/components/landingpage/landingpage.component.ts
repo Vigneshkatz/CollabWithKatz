@@ -10,8 +10,5 @@ export class LandingpageComponent {
   constructor(private router: Router) {
 
   }
-  onLearnMoreClick() {
-    this.router.navigate(['/signup']);
-  }
 
 }

@@ -36,5 +36,10 @@ export class CreatorHomeComponent {
     console.log('onCollab() function called');
     this.router.navigate(['/creator/collab', creatorId,editorId]);
   }
+
+
+  logout(){
+    this.router.navigate(['/login']);
+  }
   
 }

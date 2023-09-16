@@ -45,7 +45,7 @@
                         <button type="submit" class="black_btn" [routerLink]="['/login']"  >Login</button>
                     </form>
                     <form #signupForm="ngForm">
-                        <button class="white_btn"  (click)="onLearnMoreClick()" >Get Started</button>
+                        <button class="white_btn"   [routerLink]="['/login']">Get Started</button>
                     </form>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="main_footer_cta">
                     <form #signupForm="ngForm">
-                        <button class="white_btn black_border"  (click)="onLearnMoreClick()" >Get Started</button>
+                        <button class="white_btn black_border"  [routerLink]="['/login']" >Get Started</button>
                     </form>
                     <form #signupForm="ngForm">
                         <button class="white_btn"[routerLink]="['/login']" >Login ></button>
@@ -111,7 +111,7 @@
                         workflow and enhanced creativity that come from this unique partnership.</p>
                     <div class="main_header_cta">
                         <form #signupForm="ngForm">
-                            <button class="black_btn"  (click)="onLearnMoreClick()" >Get Started</button>
+                            <button class="black_btn"  [routerLink]="['/login']" >Get Started</button>
                         </form>
                         <form #signupForm="ngForm">
                             <button class="white_btn black_border"[routerLink]="['/login']" >Login</button>

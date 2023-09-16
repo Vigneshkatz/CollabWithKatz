@@ -17,6 +17,7 @@ import { ProfilepageComponent } from './components/profilepage/profilepage.compo
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { CreatorHomeComponent } from './components/creator/creator-home/creator-home.component';
 import { CollabComponent } from './components/creator/collab/collab.component';
+import { SignupCreatorComponent } from './components/creator/signup-creator/signup-creator.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +31,12 @@ import { CollabComponent } from './components/creator/collab/collab.component';
     ErrorPageComponent,
     CreatorHomeComponent,
     CollabComponent,
+    SignupCreatorComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     FormsModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyBuLKnFnb9ZZJBgZDKG7jv9X4P1qYYPA4A",
