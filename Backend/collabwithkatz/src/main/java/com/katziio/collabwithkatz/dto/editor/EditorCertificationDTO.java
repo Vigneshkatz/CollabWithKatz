@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.dto.editordto;
+package com.katziio.collabwithkatz.dto.editor;
 
 import com.katziio.collabwithkatz.entity.editor.EditorCertification;
 import lombok.AllArgsConstructor;

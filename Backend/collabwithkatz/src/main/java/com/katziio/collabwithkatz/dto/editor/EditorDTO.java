@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.dto.editordto;
+package com.katziio.collabwithkatz.dto.editor;
 
 import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.entity.creator.Review;

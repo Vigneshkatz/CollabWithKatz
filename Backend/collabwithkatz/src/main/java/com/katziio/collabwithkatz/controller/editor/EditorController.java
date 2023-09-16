@@ -1,9 +1,9 @@
 package com.katziio.collabwithkatz.controller.editor;
 
-import com.katziio.collabwithkatz.dto.editordto.EditorDTO;
-import com.katziio.collabwithkatz.dto.editordto.EditorProjectDTO;
+import com.katziio.collabwithkatz.dto.editor.EditorDTO;
+import com.katziio.collabwithkatz.dto.editor.EditorProjectDTO;
 import com.katziio.collabwithkatz.entity.editor.Editor;
-import com.katziio.collabwithkatz.service.editorservice.EditorService;
+import com.katziio.collabwithkatz.service.editor.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
