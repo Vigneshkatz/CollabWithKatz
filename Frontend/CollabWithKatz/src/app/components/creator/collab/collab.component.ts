@@ -14,9 +14,9 @@ export class CollabComponent {
   formDetails: {
     email: string;
     name: string;
-    message: string;
+    description: string;
     downloadURL:string
-  } = { email: '', name: '', message: '',downloadURL:'' };
+  } = { email: '', name: '', description: '',downloadURL:'' };
 
 
   constructor(private creatorService:CreatorService, 
@@ -47,7 +47,7 @@ export class CollabComponent {
   onSubmit() {
     this.formDetails.email = this.formDetails.email;
     this.formDetails.name = this.formDetails.name; 
-    this.formDetails.message = this.formDetails.message;
+    this.formDetails.description = this.formDetails.description;
     console.log(this.formDetails);
   }
 

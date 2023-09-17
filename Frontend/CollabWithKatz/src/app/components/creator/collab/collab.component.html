@@ -15,6 +15,7 @@
         <div class="header_welcome">
             <h1 class="creator_name">Welcome Katz!</h1>
         </div>
+        
         <div class="login_logout">
             <button type="submit" class="btn btn-primary">
                 Logout
@@ -32,7 +33,7 @@
                 <input type="email" [(ngModel)]="formDetails.email" name="email" placeholder="Email">
                 <input type="file" (change)="uploadFile($event)" name="video" accept="video/*"
                     placeholder="Upload Video">
-                <textarea [(ngModel)]="formDetails.message" name="message" placeholder="Message..." rows="5"></textarea>
+                <textarea [(ngModel)]="formDetails.description" name="message" placeholder="Message..." rows="5"></textarea>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>

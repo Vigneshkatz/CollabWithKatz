@@ -18,6 +18,7 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 import { CreatorHomeComponent } from './components/creator/creator-home/creator-home.component';
 import { CollabComponent } from './components/creator/collab/collab.component';
 import { SignupCreatorComponent } from './components/creator/signup-creator/signup-creator.component';
+import { MyprojectComponent } from './components/creator/myproject/myproject.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SignupCreatorComponent } from './components/creator/signup-creator/sign
     CreatorHomeComponent,
     CollabComponent,
     SignupCreatorComponent,
+    MyprojectComponent,
   ],
   imports: [
     BrowserModule,

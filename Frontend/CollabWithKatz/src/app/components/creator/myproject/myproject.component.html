@@ -14,9 +14,6 @@
         <div class="header_welcome">
             <h1 class="creator_name">Welcome Katz!</h1>
         </div>
-        <div class="header_welcome">
-            <a routerLink="/creator/myproject">My Projects</a>
-        </div>
         <div class="login_logout">
             <button type="submit" class="btn btn-primary" (click)="logout()">
                 Logout
@@ -27,23 +24,23 @@
         <table class="table editor_list" id="table">
             <thead>
                 <tr class="table_header">
+                    <th>Project Name</th>
                     <th>Editor Name</th>
-                    <th>Profile</th>
-                    <th>Collab</th>
+                    <th>Video Provided</th>
+                    <th>Project Status</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="editor" *ngFor="let editor of editorList">
-                    <td>{{editor.name}}</td>
+                <tr class="editor" *ngFor="let project of projectList">
+                    <td>{{project.name}}</td>
                     <td>
-                        <button type="submit" class="btn btn-primary">
-                            View Profile
-                        </button>
+                        {{project.editor}}
                     </td>
                     <td>
-                        <button type="submit" class="btn btn-primary" (click)="onCollab()">
-                            Ask For Collab
-                        </button>
+                        {{project.status}}
+                    </td>
+                    <td>
+                        {{project.videoURL}}
                     </td>
                 </tr>
             </tbody>
