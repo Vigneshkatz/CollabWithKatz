@@ -29,15 +29,13 @@
             <div class="circle"></div>
             <div class="form-inner">
                 <h1>Collab with Vignesh</h1>
-                <input type="text" [(ngModel)]="formDetails.name" name="name" placeholder="Creator Name">
-                <input type="email" [(ngModel)]="formDetails.email" name="email" placeholder="Email">
+                <input type="text" [(ngModel)]="formDetails.projectName" name="name" placeholder="Project Name">
                 <input type="file" (change)="uploadFile($event)" name="video" accept="video/*"
                     placeholder="Upload Video">
-                <textarea [(ngModel)]="formDetails.description" name="message" placeholder="Message..." rows="5"></textarea>
+                <textarea [(ngModel)]="formDetails.projectDescription" name="message" placeholder="Message..." rows="5"></textarea>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
-
     </main>
 </body>
 

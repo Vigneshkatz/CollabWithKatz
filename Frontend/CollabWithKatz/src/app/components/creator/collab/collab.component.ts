@@ -9,27 +9,31 @@ import { FileuploadService } from 'src/app/service/fileUpload/fileupload.service
   styleUrls: ['./collab.component.css']
 })
 export class CollabComponent {
-  
+
   selectedVideo: File | null = null;
   formDetails: {
-    email: string;
-    name: string;
-    description: string;
-    downloadURL:string
-  } = { email: '', name: '', description: '',downloadURL:'' };
+    projectId:number;
+    projectName: string;
+    projectDescription: string;
+    rawVideoURl: string,
+    editedVideoURL: string,
+    creatorId: number,
+    editorId: number
+  } = { projectId:0, projectName: '', projectDescription: '', rawVideoURl: '', editedVideoURL: '', editorId: 0, creatorId: 0 };
 
+  creatorId: number = 0;
+  editorId: number = 0;
 
-  constructor(private creatorService:CreatorService, 
+  constructor(private creatorService: CreatorService,
     private route: ActivatedRoute,
-    private fileuploadService:FileuploadService) {
-        this.route.params.subscribe(params => {
-          const creatorId = +params['creatorId'];
-          const editorId = +params['editorId'];
-        console.log(creatorId,editorId);
-      });
+    private fileuploadService: FileuploadService) {
+    this.route.params.subscribe(params => {
+      this.creatorId = +params['creatorId'];
+      this.editorId = +params['editorId'];
+    });
   }
 
-  ngOnInit(){
+  ngOnInit() {
 
   }
   async uploadFile(event: any) {
@@ -38,16 +42,17 @@ export class CollabComponent {
     try {
       const downloadURL = await this.fileuploadService.uploadVideo(event);
       console.log(downloadURL);
-      this.formDetails.downloadURL = downloadURL;
+      this.formDetails.rawVideoURl = downloadURL;
     } catch (error) {
       console.error('Error uploading video:', error);
     }
   }
 
   onSubmit() {
-    this.formDetails.email = this.formDetails.email;
-    this.formDetails.name = this.formDetails.name; 
-    this.formDetails.description = this.formDetails.description;
+    this.formDetails.projectName = this.formDetails.projectName;
+    this.formDetails.projectDescription = this.formDetails.projectDescription;
+    this.formDetails.creatorId = this.creatorId;
+    this.formDetails.editorId = this.editorId;
     console.log(this.formDetails);
   }
 
