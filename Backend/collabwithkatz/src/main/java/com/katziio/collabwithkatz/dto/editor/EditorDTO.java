@@ -52,7 +52,6 @@ public class EditorDTO {
         this.profilePictureUrl=editor.getProfilePictureUrl();
         this.certificationsList= editor.getCertifications();
         this.communicationLanguagesList= editor.getCommunicationLanguages();
-        this.projectList=editor.getProjectList();
         this.sampleVideoList=editor.getSampleVideoList();
         this.socialMediaList=editor.getSocialMediaList();
         this.reviewList = editor.getReviewList();

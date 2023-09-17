@@ -1,7 +1,7 @@
 package com.katziio.collabwithkatz.controller.editor;
 
+import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
-import com.katziio.collabwithkatz.dto.editor.EditorProjectDTO;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,11 +68,6 @@ public class EditorController {
     public List<EditorDTO> sortEditorsByExperience() {
         return this.editorService.sortEditorsByExperience();
     }
-//    Get Editor's Projects
-    @GetMapping("/{editorId}/projects")
-    public List<EditorProjectDTO> getProjectByEditorId(@PathVariable Long editorId) {
-        return this.editorService.getProjectByEditorId(editorId);
-    }
 //    Retrieve Editors by Gender
     @GetMapping("/filterByGender")
     public List<EditorDTO> getEditorsByGender(@RequestParam String gender) {
@@ -96,6 +91,12 @@ public class EditorController {
     @GetMapping("/login")
     public EditorDTO isValidUser(@RequestParam String email,@RequestParam String password) {
         return this.editorService.isValidUser(email,password);
+    }
+
+    @GetMapping("{editorId}/getProjects")
+    public List<ProjectDTO> getProjectsByCreatorId(@PathVariable Long editorId)
+    {
+        return this.editorService.getProjectByEditorId(editorId);
     }
 //    Retrieve Editors Created After a Specific Date
 

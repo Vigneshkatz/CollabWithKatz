@@ -1,7 +1,6 @@
 package com.katziio.collabwithkatz.repository.editor;
 
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
-import com.katziio.collabwithkatz.dto.editor.EditorProjectDTO;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,9 +20,6 @@ public interface EditorRepository extends JpaRepository<Editor,Long> {
 
     @Query("SELECT new com.katziio.collabwithkatz.dto.editor.EditorDTO(e) FROM Editor e ORDER BY e.experienceInYears DESC")
     List<EditorDTO> sortEditorsByExperience();
-
-    @Query("SELECT new com.katziio.collabwithkatz.dto.editor.EditorProjectDTO (e.projectList) FROM Editor e WHERE e.id = :editorId")
-    List<EditorProjectDTO> findProjectByEditorId(@Param("editorId") Long editorId);
 
     @Query("SELECT new com.katziio.collabwithkatz.dto.editor.EditorDTO(e) FROM Editor e WHERE e.gender = :gender")
     List<EditorDTO> filterByGender(@Param("gender") String gender);

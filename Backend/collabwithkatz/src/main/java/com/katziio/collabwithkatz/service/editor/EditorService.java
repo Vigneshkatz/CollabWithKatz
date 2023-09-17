@@ -1,8 +1,11 @@
 package com.katziio.collabwithkatz.service.editor;
 
+import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
-import com.katziio.collabwithkatz.dto.editor.EditorProjectDTO;
+
+import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
+import com.katziio.collabwithkatz.repository.creator.ProjectRepository;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,9 @@ public class EditorService {
 
     @Autowired
     private EditorRepository editorRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
     public EditorDTO deleteEditor(Long editorId) {
@@ -47,7 +53,7 @@ public class EditorService {
     public List<EditorDTO> getAllEditors() {
         List<EditorDTO> editorDTOList = new ArrayList<>();
         List<Editor> editorList = this.editorRepository.findAll();
-        if(editorList.size()>1) {
+        if(editorList.size()>0) {
             for (Editor editor : editorList) {
                 editorDTOList.add(new EditorDTO(editor));
             }
@@ -82,11 +88,6 @@ public class EditorService {
         return this.editorRepository.sortEditorsByExperience();
     }
 
-    public List<EditorProjectDTO> getProjectByEditorId(Long editorId) {
-        return this.editorRepository.findProjectByEditorId(editorId);
-    }
-
-
     public List<EditorDTO> getEditorsByGender(String gender) {
         return this.editorRepository.filterByGender(gender);
     }
@@ -105,5 +106,16 @@ public class EditorService {
 
     public EditorDTO isValidUser(String userEmail, String userPassword) {
         return this.editorRepository.isValidLogin(userEmail,userPassword);
+    }
+
+    public List<ProjectDTO> getProjectByEditorId(Long editorId)
+    {
+        List<Project> projectList = this.projectRepository.findByEditorId(editorId);
+        List<ProjectDTO> projectDTOList = new ArrayList<>();
+        for (Project project:projectList)
+        {
+            projectDTOList.add(new ProjectDTO(project));
+        }
+        return projectDTOList;
     }
 }

@@ -1,10 +1,14 @@
 package com.katziio.collabwithkatz.controller.creator;
 
 import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
+import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.entity.creator.Creator;
+import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.service.creator.CreatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/creators")
@@ -36,6 +40,19 @@ public class CreatorController {
     @GetMapping("getCreator/{id}")
     public CreatorDTO getCreatorById(@PathVariable Long id) {
         return this.creatorService.getCreatorById(id);
+    }
+
+//    Post Project
+    @PostMapping("/addProject")
+    public ProjectDTO createPost(@RequestBody Project project)
+    {
+        return this.creatorService.addProject(project);
+    }
+
+    @GetMapping("{creatorId}/getProjects")
+    public List<ProjectDTO> getProjectsByCreatorId(@PathVariable Long creatorId)
+    {
+        return this.creatorService.getProjectByCreatorId(creatorId);
     }
 
 }
