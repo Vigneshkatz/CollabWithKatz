@@ -4,7 +4,7 @@ import { LandingpageComponent } from './components/landingpage/landingpage.compo
 import { HomeComponent } from './components/editor/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { FileuploadComponent } from './components/fileupload/fileupload.component';
-import { SignupComponent } from './components/signup/signup.component';
+import { SignupComponent } from './components/editor/signup/signup.component';
 import { ProfilepageComponent } from './components/editor/profilepage/profilepage.component'; 
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { CreatorHomeComponent } from './components/creator/creator-home/creator-home.component';

@@ -4,10 +4,10 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './components/editor/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { FileuploadComponent } from './components/fileupload/fileupload.component';
-import { SignupComponent } from './components/signup/signup.component';
+import { SignupComponent } from './components/editor/signup/signup.component';
 import { FormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire/compat';
