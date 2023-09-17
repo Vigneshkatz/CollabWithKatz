@@ -59,7 +59,7 @@ export class BackendService {
   // Creator section
 
   getAllEditor(): any {
-    const GET_ALL_EDITOR = `${this.BASEURL}/allEditors`;
+    const GET_ALL_EDITOR = `http://localhost:8000/v1/editors/allEditors`;
     return this.http.get(GET_ALL_EDITOR);
     
   }

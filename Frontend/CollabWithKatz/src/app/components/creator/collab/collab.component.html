@@ -30,7 +30,7 @@
                 <h1>Collab with Vignesh</h1>
                 <input type="text" [(ngModel)]="formDetails.name" name="name" placeholder="Creator Name">
                 <input type="email" [(ngModel)]="formDetails.email" name="email" placeholder="Email">
-                <input type="file" (change)="onFileChange($event)" name="video" accept="video/*"
+                <input type="file" (change)="uploadFile($event)" name="video" accept="video/*"
                     placeholder="Upload Video">
                 <textarea [(ngModel)]="formDetails.message" name="message" placeholder="Message..." rows="5"></textarea>
                 <button type="submit" class="btn btn-primary">Submit</button>

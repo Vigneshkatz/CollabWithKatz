@@ -15,7 +15,10 @@ export class CollabComponent {
     email: string;
     name: string;
     message: string;
-  } = { email: '', name: '', message: '' };
+    downloadURL:string
+  } = { email: '', name: '', message: '',downloadURL:'' };
+
+
   constructor(private creatorService:CreatorService, 
     private route: ActivatedRoute,
     private fileuploadService:FileuploadService) {
@@ -29,16 +32,18 @@ export class CollabComponent {
   ngOnInit(){
 
   }
-  uploadFile(event: any) {
+  async uploadFile(event: any) {
     console.log("fileUpload.ts")
-    this.fileuploadService.uploadVideo(event);
-  }
-
-  onFileChange(event: any) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.selectedVideo = event.target.files[0];
+    console.log(event.target.files);
+    try {
+      const downloadURL = await this.fileuploadService.uploadVideo(event);
+      console.log(downloadURL);
+      this.formDetails.downloadURL = downloadURL;
+    } catch (error) {
+      console.error('Error uploading video:', error);
     }
   }
+
   onSubmit() {
     this.formDetails.email = this.formDetails.email;
     this.formDetails.name = this.formDetails.name; 
