@@ -11,6 +11,7 @@ import { CreatorHomeComponent } from './components/creator/creator-home/creator-
 import { CollabComponent } from './components/creator/collab/collab.component';
 import { SignupCreatorComponent } from './components/creator/signup-creator/signup-creator.component';
 import { MyprojectComponent } from './components/creator/myproject/myproject.component';
+import { MyprojectsComponent } from './components/editor/myprojects/myprojects.component';
 
 const routes: Routes = [
   { path: 'welcome', component: LandingpageComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'creator/home', component: CreatorHomeComponent },
   { path: 'creator/signup', component:  SignupCreatorComponent},
   { path: 'creator/myproject', component: MyprojectComponent },
+  { path: 'editor/myproject', component: MyprojectComponent },
   { path: 'creator/collab/:creatorId/:editorId', component: CollabComponent },
   { path: '**', component: LandingpageComponent }
 ];

@@ -59,9 +59,18 @@ export class BackendService {
   // Creator section
 
   getAllEditor(): any {
-    const GET_ALL_EDITOR = `http://localhost:8000/v1/editors/allEditors`;
+    const GET_ALL_EDITOR = `${this.BASEURL}/allEditors`;
     return this.http.get(GET_ALL_EDITOR);
     
   }
 
+  getProjectByEditorId(editorId: number):any {
+    const GET_ALL_CREATOR_PROJECT = `${this.BASEURL}/allEditors`;
+    return this.http.get(GET_ALL_CREATOR_PROJECT);
+  }
+
+  projectByCreatorId(editorId: any):any {
+    const GET_ALL_EDITOR_PROJECT = `${this.BASEURL}/${editorId}/getProjects`;
+    return this.http.get(GET_ALL_EDITOR_PROJECT);
+  }
 }
