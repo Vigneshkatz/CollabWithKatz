@@ -9,8 +9,9 @@ import java.util.List;
 
 public interface ProjectRepository extends JpaRepository<Project,Long> {
 
-    @Query("SELECT * FROM Project p WHERE p.creatorId = :creatorId")
+    @Query("SELECT p FROM Project p WHERE p.creatorId = :creatorId")
     List<Project> findByCreatorId(@Param("creatorId") Long creatorId);
-    @Query("SELECT * FROM Project p WHERE p.editorId = :editorId")
+
+    @Query("SELECT p FROM Project p WHERE p.editorId = :editorId")
     List<Project> findByEditorId(@Param("editorId") Long editorId);
 }
