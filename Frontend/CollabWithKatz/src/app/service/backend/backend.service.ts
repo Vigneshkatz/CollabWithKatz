@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { Editor } from 'src/app/common/editor/editor';
+import { Project } from 'src/app/common/project/project';
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +73,12 @@ export class BackendService {
   projectByCreatorId(editorId: any):any {
     const GET_ALL_EDITOR_PROJECT = `${this.BASEURL}/${editorId}/getProjects`;
     return this.http.get(GET_ALL_EDITOR_PROJECT);
+  }
+
+  //addProject
+
+  addProject(project:Project): any{
+    const ADD_PROJECT = `${this.BASEURL}/addProject`;
+    return this.http.post(ADD_PROJECT,project);
   }
 }

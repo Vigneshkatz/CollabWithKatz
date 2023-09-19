@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BackendService } from '../backend/backend.service';
 import { Observable } from 'rxjs';
+import { Project } from 'src/app/common/project/project';
 // import { Project } from 'src/app/common/project/project';
 
 @Injectable({
@@ -10,10 +11,8 @@ export class ProjectService {
 
   constructor(private backendService:BackendService) { }
 
-  addProject(project:any):any{
-    console.log(project);
-    // return this.backendService.addProject(project);
-    return null;
+  addProject(project:Project):Observable<any>{
+    return this.backendService.addProject(project);
   }
 
   projectByCreatorId(creatorId:number):Observable<any>{
