@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { CollabComponent } from './components/creator/collab/collab.component';
 import { SignupCreatorComponent } from './components/creator/signup-creator/signup-creator.component';
 import { MyprojectComponent } from './components/creator/myproject/myproject.component';
 import { MyprojectsComponent } from './components/editor/myprojects/myprojects.component';
+import { Project } from './common/project/project'; // Import the Project service
 
 @NgModule({
   declarations: [
@@ -41,7 +42,6 @@ import { MyprojectsComponent } from './components/editor/myprojects/myprojects.c
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FormsModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyBuLKnFnb9ZZJBgZDKG7jv9X4P1qYYPA4A",
       authDomain: "collabwithkatz.firebaseapp.com",
@@ -52,9 +52,11 @@ import { MyprojectsComponent } from './components/editor/myprojects/myprojects.c
       measurementId: "G-DRJPZ22CDS"
     }),
     AngularFireStorageModule,
-    HttpClientModule, 
+    HttpClientModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    Project,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
