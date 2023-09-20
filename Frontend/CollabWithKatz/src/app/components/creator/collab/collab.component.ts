@@ -20,14 +20,14 @@ export class CollabComponent implements OnInit {
     creatorId: number;
     editorId: number;
   } = {
-    projectId: 0,
-    projectName: '',
-    projectDescription: '',
-    rawVideoURl: '',
-    editedVideoURL: '',
-    editorId: 0,
-    creatorId: 0
-  };
+      projectId: 0,
+      projectName: '',
+      projectDescription: '',
+      rawVideoURl: '',
+      editedVideoURL: '',
+      editorId: 0,
+      creatorId: 0
+    };
 
   creatorId: number = 0;
   editorId: number = 0;
@@ -37,8 +37,8 @@ export class CollabComponent implements OnInit {
     private route: ActivatedRoute,
     private fileuploadService: FileuploadService,
     private projectService: ProjectService,
-    private project:Project
-  ) {}
+    private project: Project
+  ) { }
 
   ngOnInit() {
     this.initializeComponent();
@@ -59,7 +59,9 @@ export class CollabComponent implements OnInit {
       this.isDTOCreated = true;
       this.project.rawVideoURl = downloadURL;
       if (this.isDTOCreated) {
-        this.projectService.addProject(this.project);
+        this.projectService.addProject(this.project).subscribe((data: any) => {
+          console.log(data);
+        });;
       }
     } catch (error) {
       console.error('Error uploading video:', error);
@@ -67,6 +69,7 @@ export class CollabComponent implements OnInit {
   }
 
   onSubmit() {
+    this.project.id = 0;
     this.project.projectName = this.formDetails.projectName;
     this.project.projectDescription = this.formDetails.projectDescription;
   }

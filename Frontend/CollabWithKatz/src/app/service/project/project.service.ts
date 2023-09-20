@@ -9,17 +9,20 @@ import { Project } from 'src/app/common/project/project';
 })
 export class ProjectService {
 
-  constructor(private backendService:BackendService) { }
+  constructor(private backendService: BackendService) { }
 
-  addProject(project:Project):Observable<any>{
-    return this.backendService.addProject(project);
+  addProject(project: Project) :Observable<any>{
+    console.log(project);
+    const response  =  this.backendService.addProject(project);
+    console.log(response);
+    return response;
   }
 
-  projectByCreatorId(creatorId:number):Observable<any>{
+  projectByCreatorId(creatorId: number): Observable<any> {
     return this.backendService.projectByCreatorId(creatorId);
   }
 
-  projectByEditorId(editorId:number):Observable<any>{
+  projectByEditorId(editorId: number): Observable<any> {
     return this.backendService.getProjectByEditorId(editorId);
   }
 }

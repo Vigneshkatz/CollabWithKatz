@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'creator/home', component: CreatorHomeComponent },
   { path: 'creator/signup', component:  SignupCreatorComponent},
   { path: 'creator/myproject', component: MyprojectComponent },
-  { path: 'editor/myproject', component: MyprojectComponent },
+  { path: 'editor/myproject', component: MyprojectsComponent },
   { path: 'creator/collab/:creatorId/:editorId', component: CollabComponent },
   { path: '**', component: LandingpageComponent }
 ];
