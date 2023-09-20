@@ -15,7 +15,7 @@ export class MyprojectsComponent implements OnInit {
   ngOnInit() {
     console.log("My project");
     
-    this.projectService.projectByCreatorId(1)
+    this.projectService.projectByEditorId(1)
       .subscribe(
         (data: any) => {
           this.projectList = data;

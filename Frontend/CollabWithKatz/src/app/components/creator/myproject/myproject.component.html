@@ -25,23 +25,15 @@
             <thead>
                 <tr class="table_header">
                     <th>Project Name</th>
-                    <th>Editor Name</th>
-                    <th>Video Provided</th>
-                    <th>Project Status</th>
+                    <th>Project Description</th>
+                    <th>Raw Video URL</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="editor" *ngFor="let project of projectList">
-                    <td>{{project.name}}</td>
-                    <td>
-                        {{project.editor}}
-                    </td>
-                    <td>
-                        {{project.status}}
-                    </td>
-                    <td>
-                        {{project.videoURL}}
-                    </td>
+                    <td>{{ project.projectName }}</td>
+                    <td>{{ project.projectDescription }}</td>
+                    <td>{{ project.rawVideoURl }}</td>
                 </tr>
             </tbody>
         </table>

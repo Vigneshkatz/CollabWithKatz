@@ -20,15 +20,18 @@ export class MyprojectComponent {
   async ngOnInit() {
     console.log("My project");
 
-    try {
-      const data: any[] = await this.projectService.projectByCreatorId(1).toPromise();
-      this.projectList = data;
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-
-    console.log(this.projectList);
+    this.projectService.projectByCreatorId(1)
+    .subscribe(
+      (data: any) => {
+        this.projectList = data;
+        console.log(data);
+        console.log(this.projectList); // Move it here to log the updated data
+      },
+      (error: any) => {
+        console.error(error);
+        // Handle the error, e.g., display an error message to the user
+      }
+    );
   }
 
   logout(){

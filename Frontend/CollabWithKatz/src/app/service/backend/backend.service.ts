@@ -66,7 +66,7 @@ export class BackendService {
   }
 
   getProjectByEditorId(editorId: number):any {
-    const GET_ALL_CREATOR_PROJECT = `${this.EDITOR_BASEURL}/allEditors`;
+    const GET_ALL_CREATOR_PROJECT = `${this.EDITOR_BASEURL}/${editorId}/getProjects`;
     return this.http.get(GET_ALL_CREATOR_PROJECT);
   }
 
