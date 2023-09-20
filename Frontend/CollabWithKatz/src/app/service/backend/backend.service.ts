@@ -10,6 +10,7 @@ import { Project } from 'src/app/common/project/project';
 export class BackendService {
 
   private EDITOR_BASEURL: string = 'http://localhost:8000/v1/editors';
+  private CREATOR_BASEURL:string = 'http://localhost:8000/v1/creators';
 
   constructor(private http: HttpClient) { }
 
@@ -78,7 +79,7 @@ export class BackendService {
   //addProject
 
   addProject(project:Project): any{
-    const ADD_PROJECT = `${this.EDITOR_BASEURL}/addProject`;
+    const ADD_PROJECT = `${this.CREATOR_BASEURL}/addProject`;
     return this.http.post(ADD_PROJECT,project);
   }
 }
