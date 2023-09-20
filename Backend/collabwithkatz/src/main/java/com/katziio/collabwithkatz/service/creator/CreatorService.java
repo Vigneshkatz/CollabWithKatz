@@ -61,6 +61,8 @@ public class CreatorService {
     }
 
     public ProjectDTO addProject(Project project) {
+        project.toString();
+        System.out.println(project.toString());
         this.projectRepository.save(project);
         return new ProjectDTO(project);
     }

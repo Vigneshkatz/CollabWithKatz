@@ -13,7 +13,6 @@ public class ProjectDTO {
     private String projectName;
     private String projectDescription;
     private String rawVideoURl;
-    private String editedVideoURL;
     private Long creatorId;
     private Long editorId;
 
@@ -22,9 +21,8 @@ public class ProjectDTO {
         this.id = project.getId();
         this.projectName = project.getProjectName();
         this.projectDescription = project.getProjectDescription();
-        this.editedVideoURL = project.getEditedVideoURL();
-        this.rawVideoURl = project.getRawVideoURl();
         this.creatorId=project.getCreatorId();
         this.editorId = project.getEditorId();
+        this.rawVideoURl = project.getRawVideoURl();
     }
 }

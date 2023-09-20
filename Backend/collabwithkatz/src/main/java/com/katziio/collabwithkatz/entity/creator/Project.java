@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import java.lang.Long;
 
 
@@ -13,6 +15,7 @@ import java.lang.Long;
 @AllArgsConstructor
 @Entity
 @Table(name = "project")
+@ToString
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,8 +23,8 @@ public class Project {
 
     private Long creatorId;
     private Long editorId;
+
     private String projectName;
     private String projectDescription;
     private String rawVideoURl;
-    private String editedVideoURL;
 }
