@@ -1,12 +1,11 @@
 package com.katziio.collabwithkatz.entity.creator;
 
-        import com.katziio.collabwithkatz.entity.editor.EditorCertification;
-        import jakarta.persistence.*;
-        import lombok.AllArgsConstructor;
-        import lombok.Data;
-        import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-        import java.util.List;
+import java.util.List;
 
 @Data
 @NoArgsConstructor

@@ -118,4 +118,8 @@ public class EditorService {
         }
         return projectDTOList;
     }
+
+    public List<EditorDTO> sortEditorsBy(String sortBy) {
+        return this.editorRepository.sortEditorBy(sortBy);
+    }
 }

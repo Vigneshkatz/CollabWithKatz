@@ -64,9 +64,10 @@ public class EditorController {
         return this.editorService.filterEditorByCountry(countryName);
     }
 //    Sort Editors by Experience
-    @GetMapping("/sortByExperience")
-    public List<EditorDTO> sortEditorsByExperience() {
-        return this.editorService.sortEditorsByExperience();
+    @GetMapping("/sortBy/{sortBy}")
+    public List<EditorDTO> sortEditorsByExperience(@PathVariable String sortBy) {
+        return this.editorService.sortEditorsBy(sortBy);
+//        return this.editorService.sortEditorsByExperience();
     }
 //    Retrieve Editors by Gender
     @GetMapping("/filterByGender")
