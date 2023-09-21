@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { BackendService } from './../backend/backend.service';
 import { Injectable } from '@angular/core';
 
@@ -5,6 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CreatorService {
+
 
   editorList: any = []
 
@@ -24,5 +26,9 @@ export class CreatorService {
           }
         );
     });
+  }
+
+  sortEditorBy(sortValue: string): Promise<any[]> {
+    throw new Error('Method not implemented.');
   }
 }

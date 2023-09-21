@@ -9,7 +9,7 @@ import { CreatorService } from 'src/app/service/creator/creator.service';
 })
 export class CreatorHomeComponent {
   editorList: any[] = [];
-
+  sortValue:string =''
   constructor(private creatorService: CreatorService,private router:Router) {
 
   }
@@ -40,6 +40,18 @@ export class CreatorHomeComponent {
 
   logout(){
     this.router.navigate(['/login']);
+  }
+
+  sortBy() {
+    this.creatorService.sortEditorBy(this.sortValue).then((data: any[]) => {
+      this.editorList = data;
+      this.executeAfterHTTP();
+    })
+    .catch((error: any) => {
+      console.error(error);
+    });
+    console.log(this.editorList);
+   
   }
   
 }

@@ -30,6 +30,14 @@
                     <th>Editor Name</th>
                     <th>Profile</th>
                     <th>Collab</th>
+                    <th>
+                        <select name="sort" id="sort" (change)="sortBy()" [(ngModel)]="sortValue">
+                            <option>Select</option>
+                            <option value="experience">Experience</option>
+                            <option value="name">Name</option>
+                            <option value="CreatedAt">CreatedAt</option>
+                        </select>
+                    </th>
                 </tr>
             </thead>
             <tbody>
