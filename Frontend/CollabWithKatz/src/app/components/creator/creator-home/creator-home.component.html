@@ -44,7 +44,7 @@
                 <tr class="editor" *ngFor="let editor of editorList">
                     <td>{{editor.name}}</td>
                     <td>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" (click)="viewProfile(editor.id)">
                             View Profile
                         </button>
                     </td>

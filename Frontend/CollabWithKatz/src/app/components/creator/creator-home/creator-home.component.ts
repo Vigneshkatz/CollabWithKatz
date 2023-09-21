@@ -54,4 +54,8 @@ export class CreatorHomeComponent {
 
   }
 
+  viewProfile(editorId:number){
+    this.router.navigate(['/profilePage',editorId]);
+  }
+
 }

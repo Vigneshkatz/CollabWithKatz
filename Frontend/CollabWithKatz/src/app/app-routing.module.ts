@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'fileupload', component: FileuploadComponent },
   { path: 'editor/signup', component: SignupComponent },
   { path: 'error-page', component: ErrorPageComponent },
-  { path: 'profilePage', component: ProfilepageComponent },
+  { path: 'profilePage/:editorId', component: ProfilepageComponent },
   { path: 'creator/home', component: CreatorHomeComponent },
   { path: 'creator/signup', component:  SignupCreatorComponent},
   { path: 'creator/myproject', component: MyprojectComponent },
