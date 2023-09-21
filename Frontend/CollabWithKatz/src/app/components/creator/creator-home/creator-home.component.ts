@@ -9,20 +9,20 @@ import { CreatorService } from 'src/app/service/creator/creator.service';
 })
 export class CreatorHomeComponent {
   editorList: any[] = [];
-  sortValue:string =''
-  constructor(private creatorService: CreatorService,private router:Router) {
+  sortValue: string = ''
+  constructor(private creatorService: CreatorService, private router: Router) {
 
   }
 
   ngOnInit() {
     this.creatorService.getAllEditor()
-    .then((data: any[]) => {
-      this.editorList = data;
-      this.executeAfterHTTP();
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+      .then((data: any[]) => {
+        this.editorList = data;
+        this.executeAfterHTTP();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     console.log(this.editorList);
   }
 
@@ -34,11 +34,11 @@ export class CreatorHomeComponent {
     const creatorId = 1;
     const editorId = 1;
     console.log('onCollab() function called');
-    this.router.navigate(['/creator/collab', creatorId,editorId]);
+    this.router.navigate(['/creator/collab', creatorId, editorId]);
   }
 
 
-  logout(){
+  logout() {
     this.router.navigate(['/login']);
   }
 
@@ -47,11 +47,11 @@ export class CreatorHomeComponent {
       this.editorList = data;
       this.executeAfterHTTP();
     })
-    .catch((error: any) => {
-      console.error(error);
-    });
+      .catch((error: any) => {
+        console.error(error);
+      });
     console.log(this.editorList);
-   
+
   }
-  
+
 }

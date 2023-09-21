@@ -71,8 +71,10 @@ export class BackendService {
     return this.http.get(GET_ALL_CREATOR_PROJECT);
   }
 
-  sortEditorsBy(sortBy:string):any{
+  sortEditorsBy(sortBy:string):Observable<any>{
+    console.log(`${sortBy} creator service` );
     const GET_EDITORLIST_BY_SORT=`${this.EDITOR_BASEURL}/sortBy/${sortBy}`;
+    return this.http.get(GET_EDITORLIST_BY_SORT);
   }
 
   projectByCreatorId(creatorId: any):any {
