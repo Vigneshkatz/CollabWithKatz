@@ -20,11 +20,11 @@ export class MyprojectsComponent implements OnInit {
         (data: any) => {
           this.projectList = data;
           console.log(data);
-          console.log(this.projectList); // Move it here to log the updated data
+          console.log(this.projectList);
         },
         (error: any) => {
           console.error(error);
-          // Handle the error, e.g., display an error message to the user
+          this.router.navigate(['/error']);
         }
       );
   }

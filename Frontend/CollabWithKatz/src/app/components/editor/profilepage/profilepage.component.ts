@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EditorService } from 'src/app/service/editor/editor.service';
 @Component({
   selector: 'app-profilepage',
@@ -11,7 +11,9 @@ export class ProfilepageComponent {
   myProfile:any={};
   editorId:number=0;
 
-  constructor(private editorService:EditorService,private route: ActivatedRoute)
+  constructor(private editorService:EditorService,
+    private route: ActivatedRoute,
+    private router:Router)
   {
     this.route.paramMap.subscribe(params => {
       const editorId = params.get('editorId'); 
@@ -19,7 +21,7 @@ export class ProfilepageComponent {
       if (editorId !== null  && editorId !== undefined) {
         this.editorId=+editorId;
       } else {
-        
+        this.router.navigate(['/error']);
       }
     });
 

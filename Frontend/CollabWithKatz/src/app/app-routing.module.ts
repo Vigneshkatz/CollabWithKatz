@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'fileupload', component: FileuploadComponent },
   { path: 'editor/signup', component: SignupComponent },
-  { path: 'error-page', component: ErrorPageComponent },
+  { path: 'error', component: ErrorPageComponent },
   { path: 'profilePage/:editorId', component: ProfilepageComponent },
   { path: 'creator/home', component: CreatorHomeComponent },
   { path: 'creator/signup', component:  SignupCreatorComponent},

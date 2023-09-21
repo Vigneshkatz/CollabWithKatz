@@ -10,7 +10,6 @@ export class HomeComponent {// Replace with actual video path
     '../../../assets/cat_demo.mp4',
     '../../../assets/cat_demo.mp4',
     '../../../assets/cat_demo.mp4'
-    // Add more video sources as needed
   ];
   playVideo(video: HTMLVideoElement) {
     video.play();

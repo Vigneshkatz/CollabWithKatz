@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/common/project/project';
 import { FileuploadService } from 'src/app/service/fileUpload/fileupload.service';
 import { ProjectService } from 'src/app/service/project/project.service';
@@ -37,7 +37,8 @@ export class CollabComponent implements OnInit {
     private route: ActivatedRoute,
     private fileuploadService: FileuploadService,
     private projectService: ProjectService,
-    private project: Project
+    private project: Project,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -65,6 +66,7 @@ export class CollabComponent implements OnInit {
       }
     } catch (error) {
       console.error('Error uploading video:', error);
+      this.router.navigate(['/error']);
     }
   }
 

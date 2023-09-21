@@ -49,6 +49,7 @@ export class CreatorHomeComponent {
     })
       .catch((error: any) => {
         console.error(error);
+        this.router.navigate(['/error']);
       });
     console.log(this.editorList);
 
