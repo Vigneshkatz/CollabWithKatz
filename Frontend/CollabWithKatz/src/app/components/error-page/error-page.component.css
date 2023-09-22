@@ -3,11 +3,11 @@ body {
     /* background-color: #f2f2f2; */
     margin: 0;
     padding: 0;
-   background-color: gray;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   height: 100vh;
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .error-container {
@@ -30,6 +30,7 @@ p {
     color: #33333380;
     margin-bottom: 20px;
 }
-.btn{
+
+.btn {
     height: 3rem;
 }
