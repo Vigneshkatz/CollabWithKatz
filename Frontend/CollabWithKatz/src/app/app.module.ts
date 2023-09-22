@@ -20,7 +20,7 @@ import { CollabComponent } from './components/creator/collab/collab.component';
 import { SignupCreatorComponent } from './components/creator/signup-creator/signup-creator.component';
 import { MyprojectComponent } from './components/creator/myproject/myproject.component';
 import { MyprojectsComponent } from './components/editor/myprojects/myprojects.component';
-import { Project } from './common/project/project'; // Import the Project service
+import { Project } from './common/project/project';
 
 @NgModule({
   declarations: [

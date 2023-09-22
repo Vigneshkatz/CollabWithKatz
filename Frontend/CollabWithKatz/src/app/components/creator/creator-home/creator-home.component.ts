@@ -9,7 +9,8 @@ import { CreatorService } from 'src/app/service/creator/creator.service';
 })
 export class CreatorHomeComponent {
   editorList: any[] = [];
-  sortValue: string = ''
+  sortValue: string = '';
+  isChatVisible: boolean = true;
   constructor(private creatorService: CreatorService, private router: Router) {
 
   }
@@ -57,6 +58,10 @@ export class CreatorHomeComponent {
 
   viewProfile(editorId:number){
     this.router.navigate(['/profilePage',editorId]);
+  }
+
+  toggleChat() {
+    this.isChatVisible = !this.isChatVisible;
   }
 
 }
