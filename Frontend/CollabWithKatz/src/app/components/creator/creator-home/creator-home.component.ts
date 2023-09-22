@@ -10,7 +10,9 @@ import { CreatorService } from 'src/app/service/creator/creator.service';
 export class CreatorHomeComponent {
   editorList: any[] = [];
   sortValue: string = '';
-  isChatVisible: boolean = true;
+  isChatVisible: boolean = false;
+  chatOpenState: { [key: number]: boolean } = {};
+
   constructor(private creatorService: CreatorService, private router: Router) {
 
   }
@@ -60,8 +62,17 @@ export class CreatorHomeComponent {
     this.router.navigate(['/profilePage',editorId]);
   }
 
-  toggleChat() {
-    this.isChatVisible = !this.isChatVisible;
+  toggleChat(editorId:number) {
+  this.isChatVisible = !this.isChatVisible;
+    this.chatOpenState[editorId] = !this.chatOpenState[editorId];
+  }
+
+  getMessageButtonLabel() {
+    return this.isChatVisible ? 'Close Message' : 'Message';
+  }
+
+  isChatOpen(editorId: number): boolean {
+    return !!this.chatOpenState[editorId];
   }
 
 }

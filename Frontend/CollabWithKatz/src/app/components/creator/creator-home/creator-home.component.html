@@ -54,8 +54,8 @@
                         </button>
                     </td>
                     <td>
-                        <button type="submit" class="btn btn-primary" (click)="toggleChat()">
-                            Message
+                        <button type="submit" class="btn btn-primary" (click)="toggleChat(editor.id)">
+                            {{ isChatOpen(editor.id) ? 'Close Message' : 'Message' }}
                         </button>
                     </td>
                 </tr>
