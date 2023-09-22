@@ -36,6 +36,12 @@ public interface EditorRepository extends JpaRepository<Editor,Long> {
     @Query("SELECT new com.katziio.collabwithkatz.dto.editor.EditorDTO(e) FROM Editor e WHERE e.email =:userEmail AND e.password =:userPassword")
     EditorDTO isValidLogin(@Param("userEmail") String userEmail, @Param("userPassword") String userPassword);
 
-    @Query("SELECT new com.katziio.collabwithkatz.dto.editor.EditorDTO(e) FROM Editor e ORDER BY e.name ASC")
+//    @Query("SELECT new com.katziio.collabwithkatz.dto.editor.EditorDTO(e) FROM Editor e ORDER BY e.name ASC")
+//    List<EditorDTO> sortEditorBy(@Param("sortBy") String sortBy);
+    @Query("SELECT new com.katziio.collabwithkatz.dto.editor.EditorDTO(e) FROM Editor e " +
+            "ORDER BY " +
+            "CASE WHEN :sortBy = 'name' THEN e.name END ASC, " +
+            "CASE WHEN :sortBy = 'experience' THEN e.experienceInYears END DESC, " +
+            "CASE WHEN :sortBy = 'createdAt' THEN e.profileCreatedAt END ASC")
     List<EditorDTO> sortEditorBy(@Param("sortBy") String sortBy);
 }
