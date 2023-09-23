@@ -54,7 +54,7 @@
                         </button>
                     </td>
                     <td>
-                        <button type="submit" class="btn btn-primary" (click)="toggleChat(editor.id)">
+                        <button type="submit" class="btn btn-primary" (click)="toggleChat(editor.id, editor.name)">
                             {{ isChatOpen(editor.id) ? 'Close Message' : 'Message' }}
                         </button>
                     </td>
@@ -70,70 +70,15 @@
                         <div class="card-header">Chat</div>
                         <div class="card-body height3">
                             <ul class="chat-list">
-                                <li class="in">
+                                <li *ngFor="let chatMessage of chats">
                                     <div class="chat-img">
-                                        <img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                                      <img [alt]="chatMessage.id" src="https://bootdey.com/img/Content/avatar/">
                                     </div>
                                     <div class="chat-body">
-                                        <div class="chat-message">
-                                            <h5>Jimmy Willams</h5>
-                                            <p>Raw denim heard of them tofu master cleanse</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="out">
-                                    <div class="chat-img">
-                                        <img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar6.png">
-                                    </div>
-                                    <div class="chat-body">
-                                        <div class="chat-message">
-                                            <h5>Serena</h5>
-                                            <p>Next level veard</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="in">
-                                    <div class="chat-img">
-                                        <img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar1.png">
-                                    </div>
-                                    <div class="chat-body">
-                                        <div class="chat-message">
-                                            <h5 class="name">Jimmy Willams</h5>
-                                            <p>Will stumptown scenes coffee viral.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="out">
-                                    <div class="chat-img">
-                                        <img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar6.png">
-                                    </div>
-                                    <div class="chat-body">
-                                        <div class="chat-message">
-                                            <h5>Serena</h5>
-                                            <p>Tofu master best deal</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="in">
-                                    <div class="chat-img">
-                                        <img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar1.png">
-                                    </div>
-                                    <div class="chat-body">
-                                        <div class="chat-message">
-                                            <h5 class="name">Jimmy Willams</h5>
-                                            <p>Will stumptown scenes coffee viral.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="out">
-                                    <div class="chat-img">
-                                        <img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar6.png">
-                                    </div>
-                                    <div class="chat-body">
-                                        <div class="chat-message">
-                                            <h5>Serena</h5>
-                                            <p>Tofu master best deal</p>
-                                        </div>
+                                      <div class="chat-message">
+                                        <h5>{{ chatParticipants.creatorName}}</h5>
+                                        <p>{{ chatMessage.creatorMessage }}</p>
+                                      </div>
                                     </div>
                                 </li>
                             </ul>

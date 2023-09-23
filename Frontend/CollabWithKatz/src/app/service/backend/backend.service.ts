@@ -3,14 +3,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { Editor } from 'src/app/common/editor/editor';
 import { Project } from 'src/app/common/project/project';
+import { Chat } from 'src/app/common/chat/chat';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  private EDITOR_BASEURL: string = 'http://localhost:8000/v1/editors';
-  private CREATOR_BASEURL:string = 'http://localhost:8000/v1/creators';
+  private BASEURL:string = 'http://localhost:8000';
+  private EDITOR_BASEURL: string = `${this.BASEURL}/v1/editors`;
+  private CREATOR_BASEURL:string = `${this.BASEURL}/v1/creators`;
 
   constructor(private http: HttpClient) { }
 
@@ -57,7 +59,7 @@ export class BackendService {
     return this.http.get<any>(GET_EDITOR_DETAIL_BY_ID_URL);
 
   }
-
+  
   // Creator section
 
   getAllEditor(): any {
@@ -87,5 +89,18 @@ export class BackendService {
   addProject(project:Project): any{
     const ADD_PROJECT = `${this.CREATOR_BASEURL}/addProject`;
     return this.http.post(ADD_PROJECT,project);
+  }
+
+  // chat
+
+  getChat(creatorId: number, editorId: number): Observable<Chat[]> {
+    const GET_CHAT = `${this.BASEURL}/chat/getChat/${creatorId}/${editorId}`;
+    return this.http.get<Chat[]>(GET_CHAT);
+  }
+
+  getCreatorDetail(creatorId: number):Observable<any>{
+    const GET_CREATOR_DETAIL = `${this.CREATOR_BASEURL}/getCreator/${creatorId}`;
+    console.log(GET_CREATOR_DETAIL);
+    return this.http.get(GET_CREATOR_DETAIL);
   }
 }

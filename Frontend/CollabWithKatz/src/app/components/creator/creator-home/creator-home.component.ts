@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Chat } from 'src/app/common/chat/chat';
+import { ChatService } from 'src/app/service/chat/chat.service';
 import { CreatorService } from 'src/app/service/creator/creator.service';
 
 @Component({
@@ -12,12 +14,23 @@ export class CreatorHomeComponent {
   sortValue: string = '';
   isChatVisible: boolean = false;
   chatOpenState: { [key: number]: boolean } = {};
+  chats: Chat[] = [];
+  chatParticipants: { creatorName: string, editorName: string } = {
+    creatorName: 'hello',
+    editorName: ''
+  };
 
-  constructor(private creatorService: CreatorService, private router: Router) {
+  constructor(private creatorService: CreatorService, private router: Router, private chatService: ChatService) {
 
   }
 
   ngOnInit() {
+    this.getEditorList();
+    this.getCreator();
+    this.getChat();
+    console.log(this.editorList);
+  }
+  getEditorList() {
     this.creatorService.getAllEditor()
       .then((data: any[]) => {
         this.editorList = data;
@@ -26,7 +39,6 @@ export class CreatorHomeComponent {
       .catch((error) => {
         console.error(error);
       });
-    console.log(this.editorList);
   }
 
   executeAfterHTTP() {
@@ -39,7 +51,6 @@ export class CreatorHomeComponent {
     console.log('onCollab() function called');
     this.router.navigate(['/creator/collab', creatorId, editorId]);
   }
-
 
   logout() {
     this.router.navigate(['/login']);
@@ -58,13 +69,14 @@ export class CreatorHomeComponent {
 
   }
 
-  viewProfile(editorId:number){
-    this.router.navigate(['/profilePage',editorId]);
+  viewProfile(editorId: number) {
+    this.router.navigate(['/profilePage', editorId]);
   }
 
-  toggleChat(editorId:number) {
-  this.isChatVisible = !this.isChatVisible;
+  toggleChat(editorId: number, editorName: string) {
+    this.isChatVisible = !this.isChatVisible;
     this.chatOpenState[editorId] = !this.chatOpenState[editorId];
+    this.chatParticipants.editorName = editorName;
   }
 
   getMessageButtonLabel() {
@@ -75,4 +87,22 @@ export class CreatorHomeComponent {
     return !!this.chatOpenState[editorId];
   }
 
+  getChat() {
+    this.chatService.getChat(1, 1).subscribe(
+      (chats: Chat[]) => {
+        this.chats = chats;
+        console.log(this.chats);
+      },
+      (error: any) => {
+        console.error('Error fetching chat:', error);
+      }
+    );
+  }
+
+  getCreator(){
+    const creatorId =4;
+    const creatorName = this.creatorService.getCreator(creatorId);
+    // this.chatParticipants.creatorName = creatorName;
+    console.log(this.chatParticipants.creatorName);
+  }
 }

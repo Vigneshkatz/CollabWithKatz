@@ -6,8 +6,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CreatorService {
-
-
   editorList: any = []
 
   constructor(private backendService: BackendService) { }
@@ -44,4 +42,24 @@ export class CreatorService {
         );
     });
   }
+
+  getCreator(creatorId: number) :string{
+    let creatorName ='';
+    console.log(creatorId);
+    this.backendService.getCreatorDetail(creatorId).subscribe(
+      (creatorDetails: any) => {
+        console.log(creatorDetails);
+        if (creatorDetails && creatorDetails.name) {
+          creatorName=creatorDetails.name;
+        } else {
+          console.error('Creator details or name is null or undefined.');
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching creator details:', error);
+      }
+    );
+    return creatorName;
+  }
+
 }

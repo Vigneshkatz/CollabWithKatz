@@ -3,5 +3,5 @@ export class Chat {
     creatorId!: number;
     editorId!: number;
     creatorMessage!: string;
-    editorMessae!: string
+    editorMessage!: string;
 }
