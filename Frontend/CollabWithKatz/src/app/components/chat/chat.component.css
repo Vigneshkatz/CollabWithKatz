@@ -1,0 +1,13 @@
+.card-body{
+    height: 50vh;
+    overflow-y: scroll;
+    border: 2px solid red;
+}
+
+.col-md-8{
+    width: 50vw;
+}
+
+.container{
+    width: 50vw;
+}

@@ -103,4 +103,9 @@ export class BackendService {
     console.log(GET_CREATOR_DETAIL);
     return this.http.get(GET_CREATOR_DETAIL);
   }
+
+  addChat(chat: Chat):Observable<Chat> {
+    const ADD_CHAT = `${this.BASEURL}/chat/addChat`;
+    return this.http.post<Chat>(ADD_CHAT,chat);
+  }
 }

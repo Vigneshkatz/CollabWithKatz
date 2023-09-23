@@ -21,6 +21,7 @@ import { SignupCreatorComponent } from './components/creator/signup-creator/sign
 import { MyprojectComponent } from './components/creator/myproject/myproject.component';
 import { MyprojectsComponent } from './components/editor/myprojects/myprojects.component';
 import { Project } from './common/project/project';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { Project } from './common/project/project';
     SignupCreatorComponent,
     MyprojectComponent,
     MyprojectsComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
