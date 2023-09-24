@@ -10,6 +10,8 @@ import { CreatorService } from 'src/app/service/creator/creator.service';
   styleUrls: ['./creator-home.component.css']
 })
 export class CreatorHomeComponent {
+  creatorId:number= 1;
+  editorId!:number;
   editorList: any[] = [];
   sortValue: string = '';
   isChatVisible: boolean = false;
@@ -75,8 +77,10 @@ export class CreatorHomeComponent {
 
   toggleChat(editorId: number, editorName: string) {
     this.isChatVisible = !this.isChatVisible;
+    this.editorId = editorId;
     this.chatOpenState[editorId] = !this.chatOpenState[editorId];
     this.chatParticipants.editorName = editorName;
+    this.chatNavigate();
   }
 
   getMessageButtonLabel() {
@@ -102,7 +106,10 @@ export class CreatorHomeComponent {
   getCreator(){
     const creatorId =4;
     const creatorName = this.creatorService.getCreator(creatorId);
-    // this.chatParticipants.creatorName = creatorName;
     console.log(this.chatParticipants.creatorName);
+  }
+
+  chatNavigate(){
+    this.router.navigate([`/creator/chat/${this.creatorId}/${this.editorId}`]);
   }
 }

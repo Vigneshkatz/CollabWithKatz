@@ -22,6 +22,7 @@ import { MyprojectComponent } from './components/creator/myproject/myproject.com
 import { MyprojectsComponent } from './components/editor/myprojects/myprojects.component';
 import { Project } from './common/project/project';
 import { ChatComponent } from './components/chat/chat.component';
+import { MyMessageComponent } from './components/editor/my-message/my-message.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ChatComponent } from './components/chat/chat.component';
     MyprojectComponent,
     MyprojectsComponent,
     ChatComponent,
+    MyMessageComponent,
   ],
   imports: [
     BrowserModule,

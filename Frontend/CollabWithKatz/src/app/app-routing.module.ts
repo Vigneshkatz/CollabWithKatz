@@ -13,6 +13,7 @@ import { SignupCreatorComponent } from './components/creator/signup-creator/sign
 import { MyprojectComponent } from './components/creator/myproject/myproject.component';
 import { MyprojectsComponent } from './components/editor/myprojects/myprojects.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { MyMessageComponent } from './components/editor/my-message/my-message.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'editor/myproject', component: MyprojectsComponent },
   { path: 'creator/collab/:creatorId/:editorId', component: CollabComponent },
   { path: ':role/chat/:creatorId/:editorId', component: ChatComponent },
+  { path: 'editor/message/:editorId', component: MyMessageComponent },
   { path: '**', component: LandingpageComponent }
 ];
 
