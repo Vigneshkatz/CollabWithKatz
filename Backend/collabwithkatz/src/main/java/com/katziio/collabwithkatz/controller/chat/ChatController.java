@@ -29,12 +29,9 @@ public class ChatController {
         return this.chatService.getMessage(creatorId,editorId);
     }
 
-    @GetMapping("getCreatorList/{editorId}")
+    @GetMapping("/getCreatorList/{editorId}")
     public Set<String> getCreatorNames(@PathVariable Long editorId)
     {
         return this.chatService.getCreatorName(editorId);
     }
-
-
-
 }
