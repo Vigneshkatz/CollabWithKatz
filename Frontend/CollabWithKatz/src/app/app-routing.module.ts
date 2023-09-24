@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'creator/myproject', component: MyprojectComponent },
   { path: 'editor/myproject', component: MyprojectsComponent },
   { path: 'creator/collab/:creatorId/:editorId', component: CollabComponent },
-  { path: 'chat', component: ChatComponent },
+  { path: ':role/chat/:creatorId/:editorId', component: ChatComponent },
   { path: '**', component: LandingpageComponent }
 ];
 
