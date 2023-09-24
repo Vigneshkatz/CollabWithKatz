@@ -16,6 +16,6 @@ export class MyMessageComponent {
   }
 
   chatNavigate(){
-    this.router.navigate([`/creator/chat/${this.creatorId}/${this.editorId}`]);
+    this.router.navigate([`/editor/chat/${this.creatorId}/${this.editorId}`]);
   }
 }

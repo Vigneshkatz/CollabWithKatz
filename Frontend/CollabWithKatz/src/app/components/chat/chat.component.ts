@@ -18,21 +18,36 @@ export class ChatComponent {
     editorName: 'editor'
   };
   inputText: any;
-  editorId!:number;
-  creatorId!:number;
+  private editorId!: number;
+  private creatorId!: number;
+  isEditor: boolean = false;
+  isCreator: boolean = false;
+
 
   constructor(private creatorService: CreatorService, private router: Router,
-             private chatService: ChatService, 
-             private editorService: EditorService,
-             private route:ActivatedRoute) {
+    private chatService: ChatService,
+    private editorService: EditorService,
+    private route: ActivatedRoute) {
+    // this.route.paramMap.subscribe(params => {
+    //   const editorId = params.get('editorId');
+    //   const creatorId = params.get('creatorId');
+
+    //   if (editorId !== null && creatorId !==null && editorId !== undefined && creatorId !==undefined) {
+    //     this.editorId = +editorId;
+    //     this.creatorId = +creatorId;
+    //   } else {
+    //     this.router.navigate(['/error']);
+    //   }
+    // });
+    // console.log(this.editorId + " "+ this.creatorId);
 
   }
 
   ngOnInit() {
+    this.getPageDetail();
     this.getChat();
     this.getEditor();
     this.getCreator();
-    this.getPageDetail();
     this.checkUserType();
   }
 
@@ -47,14 +62,14 @@ export class ChatComponent {
       }
     );
   }
+
   getEditor() {
-    const editorId = 1;
-    const editorName = this.editorService.getEditorInfo(editorId);
+
+    const editorName = this.editorService.getEditorInfo(this.editorId);
     console.log(editorName);
   }
   getCreator() {
-    const creatorId = 1;
-    const creatorName = this.creatorService.getCreator(creatorId);
+    const creatorName = this.creatorService.getCreator(this.creatorId);
     this.chatParticipants.creatorName = creatorName;
     console.log(this.chatParticipants.creatorName);
   }
@@ -64,11 +79,22 @@ export class ChatComponent {
     console.log('Input Text:', inputText);
   }
 
-  addMessage(inputText: string){
+  addMessageAsEditor(inputText: string) {
     console.log('Input Text:', inputText);
-    let chat:Chat = new Chat;
-    chat.creatorId = 1;
-    chat.editorId = 1;
+    let chat: Chat = new Chat;
+    chat.creatorId = this.creatorId;
+    chat.editorId = this.editorId;
+    chat.creatorMessage = "";
+    chat.editorMessage = inputText;
+    this.chatService.addChat(chat);
+    this.refreshPage();
+  }
+
+  addMessageAsCreator(inputText: string) {
+    console.log('Input Text:', inputText);
+    let chat: Chat = new Chat;
+    chat.creatorId = this.creatorId;
+    chat.editorId = this.editorId;
     chat.creatorMessage = inputText;
     chat.editorMessage = "";
     this.chatService.addChat(chat);
@@ -79,28 +105,30 @@ export class ChatComponent {
     window.location.reload();
   }
 
-  getPageDetail(){
+  getPageDetail() {
     this.route.paramMap.subscribe(params => {
-      const editorId = params.get('editorId'); 
+      const editorId = params.get('editorId');
       const creatorId = params.get('creatorId');
-  
-      if (editorId !== null && creatorId!==null && editorId !== undefined && creatorId !==undefined) {
-        this.editorId=+editorId;
+
+      if (editorId !== null && creatorId !== null && editorId !== undefined && creatorId !== undefined) {
+        this.editorId = +editorId;
         this.creatorId = +creatorId;
       } else {
         this.router.navigate(['/error']);
       }
     });
-    console.log(this.editorId +" "+this.creatorId);
+    console.log(this.editorId + " " + this.creatorId);
   }
 
-  checkUserType(){
+  checkUserType() {
     const routeSegment = this.route.snapshot.url[0].path;
-    if (routeSegment === 'creator' ) {
+    if (routeSegment === 'creator') {
       console.log("creator");
-    } else if (routeSegment === 'editor' ) {
+      this.isCreator = true;
+    } else if (routeSegment === 'editor') {
       console.log("editor");
-    }else{
+      this.isEditor = true;
+    } else {
       this.router.navigate(['/error']);
     }
   }

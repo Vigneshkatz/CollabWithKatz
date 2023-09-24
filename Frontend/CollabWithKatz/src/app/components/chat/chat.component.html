@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="form-outline">
-        <form (ngSubmit)="addMessage(userMessage.value)">
+        <form (ngSubmit)="isCreator ? addMessageAsCreator(userMessage.value) : addMessageAsEditor(userMessage.value)">
           <input class="form-control" id="textAreaExample" rows="4" #userMessage>
           <button type="submit">Submit</button>
         </form>
