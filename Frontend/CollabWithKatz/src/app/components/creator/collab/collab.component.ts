@@ -1,49 +1,78 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CreatorService } from 'src/app/service/creator/creator.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Project } from 'src/app/common/project/project';
 import { FileuploadService } from 'src/app/service/fileUpload/fileupload.service';
+import { ProjectService } from 'src/app/service/project/project.service';
 
 @Component({
   selector: 'app-collab',
   templateUrl: './collab.component.html',
   styleUrls: ['./collab.component.css']
 })
-export class CollabComponent {
-  
+export class CollabComponent implements OnInit {
   selectedVideo: File | null = null;
   formDetails: {
-    email: string;
-    name: string;
-    message: string;
-  } = { email: '', name: '', message: '' };
-  constructor(private creatorService:CreatorService, 
+    projectId: number;
+    projectName: string;
+    projectDescription: string;
+    rawVideoURl: string;
+    editedVideoURL: string;
+    creatorId: number;
+    editorId: number;
+  } = {
+      projectId: 0,
+      projectName: '',
+      projectDescription: '',
+      rawVideoURl: '',
+      editedVideoURL: '',
+      editorId: 0,
+      creatorId: 0
+    };
+
+  creatorId: number = 0;
+  editorId: number = 0;
+  isDTOCreated: boolean = false;
+
+  constructor(
     private route: ActivatedRoute,
-    private fileuploadService:FileuploadService) {
-        this.route.params.subscribe(params => {
-          const creatorId = +params['creatorId'];
-          const editorId = +params['editorId'];
-        console.log(creatorId,editorId);
-      });
+    private fileuploadService: FileuploadService,
+    private projectService: ProjectService,
+    private project: Project,
+    private router:Router
+  ) { }
+
+  ngOnInit() {
+    this.initializeComponent();
   }
 
-  ngOnInit(){
-
+  private initializeComponent() {
+    this.route.params.subscribe(params => {
+      this.creatorId = +params['creatorId'];
+      this.editorId = +params['editorId'];
+      this.project.creatorId = this.creatorId;
+      this.project.editorId = this.editorId;
+    });
   }
-  uploadFile(event: any) {
-    console.log("fileUpload.ts")
-    this.fileuploadService.uploadVideo(event);
-  }
 
-  onFileChange(event: any) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.selectedVideo = event.target.files[0];
+  async uploadFile(event: any) {
+    try {
+      const downloadURL = await this.fileuploadService.uploadVideo(event);
+      this.isDTOCreated = true;
+      this.project.rawVideoURl = downloadURL;
+      if (this.isDTOCreated) {
+        this.projectService.addProject(this.project).subscribe((data: any) => {
+          console.log(data);
+        });;
+      }
+    } catch (error) {
+      console.error('Error uploading video:', error);
+      this.router.navigate(['/error']);
     }
   }
-  onSubmit() {
-    this.formDetails.email = this.formDetails.email;
-    this.formDetails.name = this.formDetails.name; 
-    this.formDetails.message = this.formDetails.message;
-    console.log(this.formDetails);
-  }
 
+  onSubmit() {
+    this.project.id = 0;
+    this.project.projectName = this.formDetails.projectName;
+    this.project.projectDescription = this.formDetails.projectDescription;
+  }
 }

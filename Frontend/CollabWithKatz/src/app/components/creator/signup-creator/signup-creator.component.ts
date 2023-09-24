@@ -56,7 +56,7 @@ export class SignupCreatorComponent {
       return true;
     }
     console.log("Password does not match");
-    this.router.navigate(['/error-page']);
+    this.router.navigate(['/error']);
     return false;
   }
 }

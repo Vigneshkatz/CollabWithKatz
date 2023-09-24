@@ -14,6 +14,9 @@
         <div class="header_welcome">
             <h1 class="creator_name">Welcome Katz!</h1>
         </div>
+        <div class="header_welcome">
+            <a routerLink="/creator/myproject">My Projects</a>
+        </div>
         <div class="login_logout">
             <button type="submit" class="btn btn-primary" (click)="logout()">
                 Logout
@@ -27,19 +30,32 @@
                     <th>Editor Name</th>
                     <th>Profile</th>
                     <th>Collab</th>
+                    <th>
+                        <select name="sort" id="sort" (change)="sortBy()" [(ngModel)]="sortValue">
+                            <option>Select</option>
+                            <option value="experience">Experience</option>
+                            <option value="name">Name</option>
+                            <option value="CreatedAt">CreatedAt</option>
+                        </select>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="editor" *ngFor="let editor of editorList">
                     <td>{{editor.name}}</td>
                     <td>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" (click)="viewProfile(editor.id)">
                             View Profile
                         </button>
                     </td>
                     <td>
                         <button type="submit" class="btn btn-primary" (click)="onCollab()">
                             Ask For Collab
+                        </button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary" (click)="toggleChat(editor.id, editor.name)">
+                            {{ isChatOpen(editor.id) ? 'Close Message' : 'Message' }}
                         </button>
                     </td>
                 </tr>

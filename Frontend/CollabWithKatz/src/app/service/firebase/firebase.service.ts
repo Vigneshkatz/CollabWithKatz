@@ -8,15 +8,18 @@ import { finalize } from 'rxjs/operators';
 })
 export class FirebaseService {
   title = 'fileupload';
-  task!: AngularFireUploadTask; 
-  downloadUrl:string="";
+  task!: AngularFireUploadTask;
 
   constructor(private storage: AngularFireStorage) { }
 
-  uploadFileToFireBase(event: any):string {
-    console.log("FirebaseService")
-    const file = event.target.files[0];
-    if (file) {
+  uploadFileToFireBase(event: any): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const file = event.target.files[0];
+      if (!file) {
+        reject('No file selected');
+        return;
+      }
+
       const filePath = `/uploads/${file.name}`;
       const fileRef = this.storage.ref(filePath);
       this.task = this.storage.upload(filePath, file);
@@ -24,13 +27,16 @@ export class FirebaseService {
       this.task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(downloadURL => {
-            this.downloadUrl=downloadURL;
+            if (downloadURL) {
+              resolve(downloadURL);
+            } else {
+              reject('Failed to get download URL');
+            }
+          }, error => {
+            reject(error);
           });
         })
       ).subscribe();
-    }
-    return this.downloadUrl;
+    });
   }
 }
-
-

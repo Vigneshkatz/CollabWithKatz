@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Chat } from 'src/app/common/chat/chat';
+import { ChatService } from 'src/app/service/chat/chat.service';
 import { CreatorService } from 'src/app/service/creator/creator.service';
 
 @Component({
@@ -8,22 +10,37 @@ import { CreatorService } from 'src/app/service/creator/creator.service';
   styleUrls: ['./creator-home.component.css']
 })
 export class CreatorHomeComponent {
+  creatorId:number= 1;
+  editorId!:number;
   editorList: any[] = [];
+  sortValue: string = '';
+  isChatVisible: boolean = false;
+  chatOpenState: { [key: number]: boolean } = {};
+  chats: Chat[] = [];
+  chatParticipants: { creatorName: string, editorName: string } = {
+    creatorName: 'hello',
+    editorName: ''
+  };
 
-  constructor(private creatorService: CreatorService,private router:Router) {
+  constructor(private creatorService: CreatorService, private router: Router, private chatService: ChatService) {
 
   }
 
   ngOnInit() {
-    this.creatorService.getAllEditor()
-    .then((data: any[]) => {
-      this.editorList = data;
-      this.executeAfterHTTP();
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    this.getEditorList();
+    this.getCreator();
+    this.getChat();
     console.log(this.editorList);
+  }
+  getEditorList() {
+    this.creatorService.getAllEditor()
+      .then((data: any[]) => {
+        this.editorList = data;
+        this.executeAfterHTTP();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   executeAfterHTTP() {
@@ -34,12 +51,65 @@ export class CreatorHomeComponent {
     const creatorId = 1;
     const editorId = 1;
     console.log('onCollab() function called');
-    this.router.navigate(['/creator/collab', creatorId,editorId]);
+    this.router.navigate(['/creator/collab', creatorId, editorId]);
   }
 
-
-  logout(){
+  logout() {
     this.router.navigate(['/login']);
   }
-  
+
+  sortBy() {
+    this.creatorService.sortEditorBy(this.sortValue).then((data: any[]) => {
+      this.editorList = data;
+      this.executeAfterHTTP();
+    })
+      .catch((error: any) => {
+        console.error(error);
+        this.router.navigate(['/error']);
+      });
+    console.log(this.editorList);
+
+  }
+
+  viewProfile(editorId: number) {
+    this.router.navigate(['/profilePage', editorId]);
+  }
+
+  toggleChat(editorId: number, editorName: string) {
+    this.isChatVisible = !this.isChatVisible;
+    this.editorId = editorId;
+    this.chatOpenState[editorId] = !this.chatOpenState[editorId];
+    this.chatParticipants.editorName = editorName;
+    this.chatNavigate();
+  }
+
+  getMessageButtonLabel() {
+    return this.isChatVisible ? 'Close Message' : 'Message';
+  }
+
+  isChatOpen(editorId: number): boolean {
+    return !!this.chatOpenState[editorId];
+  }
+
+  getChat() {
+    this.chatService.getChat(1, 1).subscribe(
+      (chats: Chat[]) => {
+        this.chats = chats;
+        console.log(this.chats);
+      },
+      (error: any) => {
+        console.error('Error fetching chat:', error);
+      }
+    );
+  }
+
+  getCreator(){
+    const creatorId =4;
+    const creatorName = this.creatorService.getCreator(creatorId);
+    console.log(this.chatParticipants.creatorName);
+  }
+
+  chatNavigate(){
+    this.router.navigate([`/creator/chat/${this.creatorId}/${this.editorId}`]);
+  }
 }
