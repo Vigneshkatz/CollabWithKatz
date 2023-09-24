@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreatorHome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <header id="header">
+        <div class="header_welcome">
+            <h1 class="creator_name">Welcome Katz!</h1>
+        </div>
+        <div class="header_welcome">
+            <a routerLink="/creator/myproject">My Projects</a>
+        </div>
+        <div class="login_logout">
+            <button type="submit" class="btn btn-primary" (click)="logout()">
+                Logout
+            </button>
+        </div>
+    </header>
+    <main id="main">
+        <table class="table editor_list" id="table">
+            <thead>
+                <tr class="table_header">
+                    <th>Editor Name</th>
+                    <th>Profile</th>
+                    <th>Collab</th>
+                    <th>
+                        <select name="sort" id="sort" (change)="sortBy()" [(ngModel)]="sortValue">
+                            <option>Select</option>
+                            <option value="experience">Experience</option>
+                            <option value="name">Name</option>
+                            <option value="CreatedAt">CreatedAt</option>
+                        </select>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="editor" *ngFor="let editor of editorList">
+                    <td>{{editor.name}}</td>
+                    <td>
+                        <button type="submit" class="btn btn-primary" (click)="viewProfile(editor.id)">
+                            View Profile
+                        </button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary" (click)="onCollab()">
+                            Ask For Collab
+                        </button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary" (click)="toggleChat(editor.id, editor.name)">
+                            {{ isChatOpen(editor.id) ? 'Close Message' : 'Message' }}
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>

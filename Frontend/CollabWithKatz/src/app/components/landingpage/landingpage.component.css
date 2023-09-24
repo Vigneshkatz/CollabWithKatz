@@ -1,0 +1,370 @@
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    text-decoration: none;
+    list-style: none;
+    border: none;
+    box-sizing: border-box;
+    
+}
+
+/* Body Styles */
+body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Button Styles */
+button {
+    height: 2.75rem;
+    width: 7rem;
+    cursor: pointer;
+}
+
+/* Header Section Styles */
+#landing_header {
+    /* background-color: darkslategray; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    font-weight: 520;
+    /* border: 2px solid black); Use the variable for border */
+}
+
+/* Menu List Styles */
+.menu_list {
+    display: flex;
+    gap: 1.5rem;
+    padding-top: 0.7rem;
+    color: #000000;
+    /* Use the variable for text color */
+}
+
+/* Logo Container Styles */
+.page_logo_container {
+    height: 2.5rem;
+    width: 2.5rem;
+    overflow: hidden;
+}
+
+.page_logo_container .page_logo {
+    height: 100%;
+    width: 100%;
+}  
+
+/* Contact Button Styles */
+.header_contact .contact_btn {
+    color: #ffffff;
+    height: 2.75rem;
+    width: 7rem;
+}
+
+/* Main Section Styles */
+main {
+    /* border: 2px solid red; */
+    padding: 0;
+}
+
+main section {
+    height: 100vh;
+}
+
+/* Button Styles */
+.black_btn {
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid black;
+}
+
+.white_btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid white;
+}
+
+/* Section 1 Styles */
+.main_header {
+    background-color: gray;
+
+}
+
+.main_header_container {
+    width: 45%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    justify-content: flex-end;
+    color: #ffffff;
+    /* border: 2px solid black); */
+}
+
+.main_header_heading {
+    font-size: 3.45rem;
+}
+.main_header_cta{
+    display: flex;
+}
+
+.main_header_cta form {
+    margin-right: 2rem;
+}
+
+/* Section 2 Styles */
+.main_how_it_works_container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0 5rem 0;
+}
+
+.section_container_header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+    width: 48%;
+    /* border: 2px solid black);  */
+    text-align: center;
+}
+
+.section_container_header h1 {
+    font-size: 2.5rem;
+    font-weight: 550;
+}
+
+.dark_text {
+    font-weight: 550;
+}
+
+.section_content_container {
+    width: 100%;
+    height: 20rem;
+    /* border: 2px solid black); Use the variable for border */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.section_content_container .section_content_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    width: 27%;
+    height: 80%;
+}
+
+.section_content_container .section_content_item i {
+    font-size: 1.5rem;
+}
+
+.section_content_container .section_content_item h2 {
+    font-size: 1.5rem;
+    font-weight: 550;
+    width: 90%;
+}
+
+/* Main Footer Styles */
+.main_footer_cta button {
+    width: 7rem;
+    margin-left: 2rem;
+}
+
+.main_footer_cta .black_border,
+.main_header_cta .black_border {
+    border: 1px solid #000000;
+}
+
+/* section - 3 */
+.main_feature {
+    /* border: 2px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.main_feature_container {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 70vh;
+}
+
+.feature_details {
+    width: 37%;
+    height: 90%;
+    /* border: 2px solid black); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.feature_details h2 {
+    font-weight: 550;
+}
+
+.feature_img_container {
+    /* border: 2px solid black); */
+    width: 37%;
+    height: 100%;
+}
+
+.feature_img_container img {
+    height: 100%;
+    width: 100%;
+}
+
+.main_editor_feature {
+    height: fit-content;
+}
+
+.main_editor_feature .main_feature_container {
+    height: 50vh;
+}
+
+/* main insights */
+.main_insights {
+    padding: 1.5rem;
+    /* border: 2px solid black); */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+}
+
+.main_insights_header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 30%;
+    /* border: 2px solid black); */
+}
+
+.main_insights_header h2 {
+    font-size: 2.5rem;
+
+}
+
+/* container */
+.insights_container {
+    height: 60vh;
+    /* border: 2px solid black); */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+
+.insights {
+    width: 22%;
+    height: fit-content;
+    max-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    margin: 0 auto;
+    cursor: pointer;
+    /* padding: 0.1rem; */
+}
+
+.insights .insights_img_container {
+    height: 40%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.insights_img_container .insights_img {
+    height: 100%;
+    width: 100%;
+}
+
+.insights_details {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    justify-content: center;
+    gap: 0;
+    /* align-items: center; */
+}
+
+.insights_info {
+    /* border: 2px solid black); */
+    height: fit-content;
+    padding: 0;
+}
+
+.insights_info * {
+    display: inline-block;
+    text-align: left;
+    font-size: 0.7rem;
+    margin-right: 0.7rem;
+    /* font-weight: 550; */
+}
+
+.insights_info .category {
+    background-color: rgb(224, 224, 224);
+    width: fit-content;
+    padding: 0 0.5rem;
+    text-align: center;
+}
+.insights_details h2{
+    font-size: 1.2rem;
+}
+.insights_details{
+    font-size: 0.8rem;
+}
+.insights_details button{
+    margin-top: 1.25rem;
+    background-color: transparent;
+    width: fit-content;
+    height: fit-content;
+}
+
+.main_insights .view_all {
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem;
+}
+
+/* footer section */
+
+#landing_footer
+{
+
+    padding: 4rem;
+}
+.footer_content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+.footer_menu{
+    display: flex;
+    gap: 1rem;
+}
+.footer_social_links{
+    display: flex;
+    gap: 1rem;
+    font-size: 1.2rem;
+}

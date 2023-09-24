@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+</head>
+
+<body>
+    <header id="header">
+        <div class="header_container">
+            <div class="header_logo">
+                <img src="../../../assets/collabSample.png" alt="CollabWithKatz" class="header_logo_img">
+            </div>
+            <div>
+                <h2 >{{myProfile.name}}</h2>
+            </div>
+            <div class="user_login_logout">
+                <ul id="login_logout_ul">
+                    <li><a href="#">Edit Profile</a></li>
+                    <li><a [routerLink]="['/login']" >Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main id="main">
+        <section class="my_profile_view">
+            <div class="flex_container">
+                <div class="my_description">
+                    <div class="my_description_greetings">
+                        <h3>👋 Hello!</h3>
+                    </div>
+                    <div class="my_description_content description_container grey">
+                        <h1>
+                            {{myProfile.about}}
+                        </h1>
+                    </div>
+                </div>
+                <div class="image_container my_profile_photo_container">
+                    <img src="../../../assets/creator.jpg" alt="my_profile" class="my_profile_photo">
+                </div>
+            </div>
+        </section>
+        <section class="my_experience">
+            <div class="flex_container">
+                <div class="my_experience_description description_container v">
+                    <h1>
+                        I've completed 5 internships with these top companies!
+                    </h1>
+                </div>
+                <div class="my_experience_links image_container">
+                    <ul class="my_experience_link_list">
+                        <li >
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </li>
+                        <li >
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </li>
+                        <li >
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </li>
+                        <li >
+                            <img src="../../../assets/collabSample.png" alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="my_works">
+            <h1>
+                Check out some works that I did!
+            </h1>
+            <div class="flex_container">
+                <div class="my_work_description description_container">
+                    <h1>
+                        Clementine Brand Design
+                    </h1>
+                    <p class="grey">
+                        Clementine is a new hair conditioner brand based in California. Natural beauty is important for
+                        West
+                        Coasters, and until now, there hasn’t been a hair conditioner brand to nourish their locks.
+                    </p>
+                </div>
+                <div class="image_container my_work_video_container">
+                    <img src="../../assets/creator.jpg" alt="">
+                </div>
+            </div>
+        </section>
+        <section class="my_reviews">
+            <h1>
+                What others are saying about me!
+            </h1>
+            <div class="flex_container">
+                <div class="image_container my_work_reviewer_container">
+                    <img src="../../assets/editor.jpg" alt="reviewer_profile">
+                </div>
+                <div class="my_work_review description_container">
+                    "The resources and support provided by her have helped us grow both personally and professionally"
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
