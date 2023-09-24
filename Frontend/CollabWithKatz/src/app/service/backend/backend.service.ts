@@ -108,4 +108,10 @@ export class BackendService {
     const ADD_CHAT = `${this.BASEURL}/chat/addChat`;
     return this.http.post<Chat>(ADD_CHAT,chat);
   }
+
+  getCreatorChatList(editorId: number):Observable<any> {
+    const GET_EDITOR_CHAT_LIST = `${this.BASEURL}/chat/getCreatorList/${editorId}`;
+    return this.http.get(GET_EDITOR_CHAT_LIST);
+  }
+
 }

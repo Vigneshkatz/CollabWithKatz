@@ -44,11 +44,11 @@ export class ChatComponent {
   }
 
   ngOnInit() {
+    this.checkUserType();
     this.getPageDetail();
-    this.getChat();
     this.getEditor();
     this.getCreator();
-    this.checkUserType();
+    this.getChat();
   }
 
   getChat() {
