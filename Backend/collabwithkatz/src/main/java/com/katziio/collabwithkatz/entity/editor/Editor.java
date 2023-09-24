@@ -41,9 +41,6 @@ public class Editor {
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorCommunicationLanguage> communicationLanguages;
 
-    @OneToMany(targetEntity = EditorProject.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
-    private List<Project> projectList;
 
     @OneToMany(targetEntity = EditorSampleVideo.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
@@ -78,7 +75,6 @@ public class Editor {
         this.profileCreatedAt = editor.getProfileCreatedAt();
         this.profileUpdatedAt = myCal.getTime();
         this.communicationLanguages= editor.getCommunicationLanguages();
-        this.projectList=editor.getProjectList();
         this.sampleVideoList=editor.getSampleVideoList();
         this.socialMediaList=editor.getSocialMediaList();
     }

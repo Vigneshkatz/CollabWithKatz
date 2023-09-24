@@ -28,8 +28,7 @@ public class CreatorDTO {
         this.name = creator.getName();
         this.email= creator.getEmail();
         this.password = creator.getPassword();
-        this.projectList = creator.getProjectList();
-        this.upvoteList = creator.getUpvoteList();
-        this.reviewList = creator.getReviewList();
+//        this.upvoteList = creator.getUpvoteList();
+//        this.reviewList = creator.getReviewList();
     }
 }

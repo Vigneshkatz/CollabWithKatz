@@ -1,6 +1,5 @@
 package com.katziio.collabwithkatz.entity.creator;
 
-import com.katziio.collabwithkatz.entity.editor.EditorCertification;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,7 +28,4 @@ public class Creator {
     @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
     private List<Review> reviewList;
 
-    @OneToMany(targetEntity = Project.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
-    private List<Project> projectList;
 }
