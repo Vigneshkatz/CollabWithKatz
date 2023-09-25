@@ -18,7 +18,7 @@ import { MyMessageComponent } from './components/editor/my-message/my-message.co
 
 const routes: Routes = [
   { path: 'welcome', component: LandingpageComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'editor/home/:editorId', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'fileupload', component: FileuploadComponent },
   { path: 'editor/signup', component: SignupComponent },

@@ -49,7 +49,12 @@ export class SignupComponent {
     if (password && confirm_password && password == confirm_password) {
       console.log("Password matchs");
       this.setEditor();
-      this.editorService.registerEditor(this.editor);
+      const editorId = this.editorService.registerEditor(this.editor).then((editorId) => {
+        console.log('Editor ID:', editorId);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
       this.router.navigate(['/home']);
       return true;
     }

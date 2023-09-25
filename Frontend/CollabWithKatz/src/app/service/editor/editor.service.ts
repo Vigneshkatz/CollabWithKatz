@@ -28,18 +28,22 @@ export class EditorService {
     );
   }
 
-  registerEditor(editor: Editor): void {
-    console.log("signup editor editorservice");
-
-    this.backend.signUp(editor).subscribe(
-      (editor: Editor) => {
-        console.log(editor);
-      },
-      (error: any) => {
-        console.error('Error fetching Editor details:', error);
-      }
-    );
+  registerEditor(editor: Editor): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      console.log("signup editor editorservice");
+  
+      this.backend.signUp(editor).subscribe(
+        (editor: Editor) => {
+          resolve(editor.id);
+        },
+        (error: any) => {
+          console.error('Error fetching Editor details:', error);
+          reject(error);
+        }
+      );
+    });
   }
+  
 
   // get Editor information\
 
