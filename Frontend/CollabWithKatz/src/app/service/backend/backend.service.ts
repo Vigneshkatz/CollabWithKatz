@@ -35,23 +35,9 @@ export class BackendService {
 
   // register
 
-  signUp(editor: Editor): Observable<boolean> {
-    console.log("signup editor backend");
-    const SIGN_UP_URL = `${this.EDITOR_BASEURL}/addEditor`;
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    console.log(this.http.post(SIGN_UP_URL, editor));
-    return this.http.post(SIGN_UP_URL, editor).pipe(
-      map((response) => {
-        console.log('Response:', response);
-        return true;
-      }),
-      catchError((error) => {
-        console.error('Error:', error);
-        return of(false);
-      })
-    );
+  signUp(editor: Editor): Observable<Editor> {
+    const ADD_EDITOR = `${this.EDITOR_BASEURL}/addEditor`;
+    return this.http.post<Editor>(ADD_EDITOR,editor);
   }
   // get editor by email
   getEditorByEditorId(editor_id: number): Observable<any> {

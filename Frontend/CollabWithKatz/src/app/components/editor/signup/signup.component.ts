@@ -17,7 +17,6 @@ export class SignupComponent {
 
   onSubmit() {
     this.checkPassword();
-    this.editorService.registerEditor(this.editor);
   }
 
   setEditor(): void {
