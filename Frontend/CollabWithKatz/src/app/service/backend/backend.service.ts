@@ -4,6 +4,7 @@ import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { Editor } from 'src/app/common/editor/editor';
 import { Project } from 'src/app/common/project/project';
 import { Chat } from 'src/app/common/chat/chat';
+import { Creator } from 'src/app/common/creator/creator';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,11 @@ export class BackendService {
   }
   
   // Creator section
+
+  addCreator(creator: Creator):Observable<Creator> {
+    const Add_Creator = `${this.CREATOR_BASEURL}/add`;
+    return this.http.post<Creator>(Add_Creator,creator);
+  }
 
   getAllEditor(): any {
     const GET_ALL_EDITOR = `${this.EDITOR_BASEURL}/allEditors`;

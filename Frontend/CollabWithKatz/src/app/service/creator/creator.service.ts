@@ -1,11 +1,13 @@
 import { Observable } from 'rxjs';
 import { BackendService } from './../backend/backend.service';
 import { Injectable } from '@angular/core';
+import { Creator } from 'src/app/common/creator/creator';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreatorService {
+
   editorList: any = []
 
   constructor(private backendService: BackendService) { }
@@ -61,5 +63,14 @@ export class CreatorService {
     );
     return creatorName;
   }
-
+  addCreator(creator: Creator) {
+    this.backendService.addCreator(creator).subscribe(
+      (creatorDetails: Creator) => {
+        console.log(creatorDetails);
+      },
+      (error: any) => {
+        console.error('Error fetching creator details:', error);
+      }
+    );
+  }
 }
