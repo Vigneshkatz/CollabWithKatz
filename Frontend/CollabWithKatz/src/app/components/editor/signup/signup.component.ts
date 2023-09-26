@@ -49,12 +49,8 @@ export class SignupComponent {
     if (password && confirm_password && password == confirm_password) {
       console.log("Password matchs");
       this.setEditor();
-      const editorId = this.editorService.registerEditor(this.editor).then((editorId) => {
-        console.log('Editor ID:', editorId);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+      const editorId =this.editorService.registerEditor(this.editor);
+      console.log(editorId);
       this.router.navigate(['/home']);
       return true;
     }

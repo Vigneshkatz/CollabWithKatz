@@ -22,9 +22,14 @@ export class BackendService {
     const LOGIN_URL = `${this.EDITOR_BASEURL}/byEmail?email=${editor_email}&password=${editor_password}`;
     return this.http.get(LOGIN_URL).pipe(
       map((response) => {
-
-        console.log('Response:', response);
-        return true;
+        // Check the response for login success (you might need to adjust this based on your API response format)
+        if (response ) {
+          console.log('Login successful.');
+          return true;
+        } else {
+          console.log('Login failed.');
+          return false;
+        }
       }),
       catchError((error) => {
         console.error('Error:', error);

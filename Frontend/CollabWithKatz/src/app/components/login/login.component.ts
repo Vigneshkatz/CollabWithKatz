@@ -11,17 +11,17 @@ export class LoginComponent {
 
   isCreator:boolean = true;
 
-    constructor(private editoService:EditorService,private router:Router){
+    constructor(private editorService:EditorService,private router:Router){
       console.log(this.isCreator);
     }
 
     fetchFormValue(user_email: string,user_password: string):void {
       console.log(user_email);
       console.log(user_password);
-      const isValidUser = this.editoService.isValidUserLogin(user_email,user_password);
+      const isValidUser = this.editorService.isValidUserLogin(user_email,user_password);
       isValidUser.subscribe((value: boolean) => {
         if (value === true) {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/editor/home/1']);
         } else {
           this.router.navigate(['/welcome']);
         }
