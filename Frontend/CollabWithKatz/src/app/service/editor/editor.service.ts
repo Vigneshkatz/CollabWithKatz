@@ -28,21 +28,22 @@ export class EditorService {
     );
   }
 
-  registerEditor(editor: Editor): number {
-    let editorId:number = 0;
-    this.backend.signUp(editor)
-    .subscribe(
-      (editorDetails: Editor) => {
-        console.log(editorDetails);
-        editorId = editorDetails.id;
-        // return editorId;
-      },
-      (error: any) => {
-        console.error('Error fetching editor details:', error);
-      }
-    );
-    return editorId;
+  registerEditor(editor: Editor): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      this.backend.signUp(editor)
+        .subscribe(
+          (editorDetails: Editor) => {
+            console.log(editorDetails.id);
+            resolve(editorDetails.id);
+          },
+          (error: any) => {
+            console.error('Error fetching editor details:', error);
+            reject(error);
+          }
+        );
+    });
   }
+  
   
   // get Editor information\
 
