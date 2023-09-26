@@ -11,6 +11,7 @@ import { Creator } from 'src/app/common/creator/creator';
 })
 export class BackendService {
 
+
   private BASEURL:string = 'http://localhost:8000';
   private EDITOR_BASEURL: string = `${this.BASEURL}/v1/editors`;
   private CREATOR_BASEURL:string = `${this.BASEURL}/v1/creators`;
@@ -53,6 +54,26 @@ export class BackendService {
   }
   
   // Creator section
+
+  creatorLogin(user_email: string, user_password: string) :Observable<boolean>{
+    const CREATOR_LOGIN_URL = `${this.CREATOR_BASEURL}/login?email=${user_email}&password=${user_password}`
+    return this.http.get(CREATOR_LOGIN_URL).pipe(
+      map((response) => {
+        // Check the response for login success (you might need to adjust this based on your API response format)
+        if (response ) {
+          console.log('Login successful.');
+          return true;
+        } else {
+          console.log('Login failed.');
+          return false;
+        }
+      }),
+      catchError((error) => {
+        console.error('Error:', error);
+        return of(false);
+      })
+    );
+  }
 
   addCreator(creator: Creator):Observable<Creator> {
     const Add_Creator = `${this.CREATOR_BASEURL}/add`;

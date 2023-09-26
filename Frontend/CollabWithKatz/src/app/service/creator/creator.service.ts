@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, map, of, switchMap } from 'rxjs';
 import { BackendService } from './../backend/backend.service';
 import { Injectable } from '@angular/core';
 import { Creator } from 'src/app/common/creator/creator';
@@ -7,7 +7,6 @@ import { Creator } from 'src/app/common/creator/creator';
   providedIn: 'root'
 })
 export class CreatorService {
-
   editorList: any = []
 
   constructor(private backendService: BackendService) { }
@@ -73,4 +72,23 @@ export class CreatorService {
       }
     );
   }
+
+  loginCreator(user_email: string, user_password: string):Observable<boolean> {
+    if (!user_email || !user_password || user_email.trim() === '' || user_password.trim() === '') {
+      return of(false); 
+    }
+
+
+    return this.backendService.creatorLogin(user_email, user_password).pipe(
+      map((isValid: boolean) => isValid),
+      switchMap((isValid: boolean) => {
+        if (isValid) {
+          return of(true);
+        } else {
+          return of(false);
+        }
+      })
+    );
+  }
+
 }
