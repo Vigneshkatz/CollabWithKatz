@@ -28,18 +28,18 @@ export class ChatComponent {
     private chatService: ChatService,
     private editorService: EditorService,
     private route: ActivatedRoute) {
-    // this.route.paramMap.subscribe(params => {
-    //   const editorId = params.get('editorId');
-    //   const creatorId = params.get('creatorId');
+    this.route.paramMap.subscribe(params => {
+      const editorId = params.get('editorId');
+      const creatorId = params.get('creatorId');
 
-    //   if (editorId !== null && creatorId !==null && editorId !== undefined && creatorId !==undefined) {
-    //     this.editorId = +editorId;
-    //     this.creatorId = +creatorId;
-    //   } else {
-    //     this.router.navigate(['/error']);
-    //   }
-    // });
-    // console.log(this.editorId + " "+ this.creatorId);
+      if (editorId !== null && creatorId !==null && editorId !== undefined && creatorId !==undefined) {
+        this.editorId = +editorId;
+        this.creatorId = +creatorId;
+      } else {
+        this.router.navigate(['/error']);
+      }
+    });
+    console.log(this.editorId + " "+ this.creatorId);
 
   }
 
@@ -52,7 +52,7 @@ export class ChatComponent {
   }
 
   getChat() {
-    this.chatService.getChat(1, 1).subscribe(
+    this.chatService.getChat(this.creatorId, this.editorId).subscribe(
       (chats: Chat[]) => {
         this.chats = chats;
         console.log(this.chats);
