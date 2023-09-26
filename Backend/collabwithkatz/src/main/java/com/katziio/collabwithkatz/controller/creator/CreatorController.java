@@ -2,6 +2,7 @@ package com.katziio.collabwithkatz.controller.creator;
 
 import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
+import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.service.creator.CreatorService;
@@ -53,6 +54,11 @@ public class CreatorController {
     public List<ProjectDTO> getProjectsByCreatorId(@PathVariable Long creatorId)
     {
         return this.creatorService.getProjectByCreatorId(creatorId);
+    }
+
+    @GetMapping("/login")
+    public CreatorDTO isValidUser(@RequestParam String email, @RequestParam String password) {
+        return this.creatorService.isValidUser(email,password);
     }
 
 }

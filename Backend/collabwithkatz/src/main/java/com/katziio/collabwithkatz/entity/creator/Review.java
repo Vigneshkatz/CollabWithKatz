@@ -15,5 +15,4 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String reviewDescription;
-
 }
