@@ -46,14 +46,14 @@ public class EditorService {
     }
 
     public EditorDTO saveEditor(Editor editor) {
-        this.editorRepository.save(editor);
-        return new EditorDTO(editor);
+//        this.editorRepository.save(editor);
+        return new EditorDTO(this.editorRepository.save(editor));
     }
 
     public List<EditorDTO> getAllEditors() {
         List<EditorDTO> editorDTOList = new ArrayList<>();
         List<Editor> editorList = this.editorRepository.findAll();
-        if(editorList.size()>0) {
+        if(!editorList.isEmpty()) {
             for (Editor editor : editorList) {
                 editorDTOList.add(new EditorDTO(editor));
             }
@@ -66,7 +66,8 @@ public class EditorService {
         Optional<Editor> editor = this.editorRepository.findById(editorId);
         if(editor.isPresent())
         {
-            return  new EditorDTO(editor.get());
+            System.out.println(editor.get().toString());
+            return new EditorDTO(editor.get());
         }
         return null;
     }

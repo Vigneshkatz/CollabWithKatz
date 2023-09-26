@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @RequestMapping("/chat")
@@ -30,7 +31,7 @@ public class ChatController {
     }
 
     @GetMapping("/getCreatorList/{editorId}")
-    public Set<String> getCreatorNames(@PathVariable Long editorId)
+    public Map<Long, String> getCreatorNames(@PathVariable Long editorId)
     {
         return this.chatService.getCreatorName(editorId);
     }
