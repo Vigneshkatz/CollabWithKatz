@@ -14,7 +14,10 @@ import { MyprojectComponent } from './components/creator/myproject/myproject.com
 import { MyprojectsComponent } from './components/editor/myprojects/myprojects.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { MyMessageComponent } from './components/editor/my-message/my-message.component';
-
+import { AboutusComponent } from './components/pages/aboutus/aboutus.component';
+import { ServiceComponent } from './components/pages/service/service.component';
+import { FaqsComponent } from './components/pages/faqs/faqs.component';
+import { SupportComponent } from './components/support/support.component';
 
 const routes: Routes = [
   { path: 'welcome', component: LandingpageComponent },
@@ -31,6 +34,10 @@ const routes: Routes = [
   { path: 'creator/collab/:creatorId/:editorId', component: CollabComponent },
   { path: ':role/chat/:creatorId/:editorId', component: ChatComponent },
   { path: 'editor/message/:editorId', component: MyMessageComponent },
+  { path: 'aboutus', component: AboutusComponent },
+  { path: 'service', component: ServiceComponent },
+  { path: 'faqs', component: FaqsComponent },
+  { path: 'support', component: SupportComponent },
   { path: '**', component: LandingpageComponent }
 ];
 
