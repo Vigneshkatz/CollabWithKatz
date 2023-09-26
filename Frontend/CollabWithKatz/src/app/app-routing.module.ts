@@ -34,6 +34,7 @@ const routes: Routes = [
   { path: 'creator/collab/:creatorId/:editorId', component: CollabComponent },
   { path: ':role/chat/:creatorId/:editorId', component: ChatComponent },
   { path: 'editor/message/:editorId', component: MyMessageComponent },
+  { path: 'editor/notification/:editorId', component: MyMessageComponent },
   { path: 'aboutus', component: AboutusComponent },
   { path: 'service', component: ServiceComponent },
   { path: 'faqs', component: FaqsComponent },

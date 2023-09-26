@@ -33,15 +33,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="editor">
-                    <td>creator</td>
+                <tr class="editor" *ngFor="let creator of creatorList">
+                    <td>{{creator.name}}</td>
                     <td>
                         <button type="submit" class="btn btn-primary" >
                             View Project
                         </button>
                     </td>
                     <td>
-                        <button type="submit" class="btn btn-primary" (click)="chatNavigate()">
+                        <button type="submit" class="btn btn-primary" (click)="chatNavigate(creator.id)">
                           View  Message
                         </button>
                     </td>
