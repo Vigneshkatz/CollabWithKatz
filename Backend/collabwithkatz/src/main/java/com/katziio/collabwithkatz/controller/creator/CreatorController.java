@@ -1,11 +1,14 @@
 package com.katziio.collabwithkatz.controller.creator;
 
+import com.katziio.collabwithkatz.controller.chat.ChatController;
 import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.service.creator.CreatorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,9 @@ import java.util.List;
 @RequestMapping("/v1/creators")
 @CrossOrigin("*")
 public class CreatorController {
+
+    Logger logger = LoggerFactory.getLogger(CreatorController.class);
+
 
     @Autowired
     private CreatorService creatorService;

@@ -3,6 +3,8 @@ package com.katziio.collabwithkatz.controller.chat;
 import com.katziio.collabwithkatz.dto.common.ChatDTO;
 import com.katziio.collabwithkatz.entity.common.Chat;
 import com.katziio.collabwithkatz.service.chat.ChatService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +17,16 @@ import java.util.Set;
 @CrossOrigin("*")
 public class ChatController {
 
+    Logger logger = LoggerFactory.getLogger(ChatController.class);
+
     @Autowired
     private ChatService chatService;
 
+    @RequestMapping("/test")
+    public String test() {
+        this.logger.warn("This is working message");
+        return "Testing message";
+    }
     @PostMapping("/addChat")
     public ChatDTO addMessage(@RequestBody Chat chat)
     {

@@ -13,8 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
-public class SecurityConfig {
-
+class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails userDetails = User.builder().

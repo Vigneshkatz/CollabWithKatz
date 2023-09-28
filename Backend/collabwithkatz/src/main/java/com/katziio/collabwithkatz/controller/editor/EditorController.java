@@ -1,9 +1,12 @@
 package com.katziio.collabwithkatz.controller.editor;
 
+import com.katziio.collabwithkatz.controller.creator.CreatorController;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.editor.EditorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +16,8 @@ import java.util.List;
 @RequestMapping("/v1/editors")
 @CrossOrigin("*")
 public class EditorController {
+    Logger logger = LoggerFactory.getLogger(EditorController.class);
+
     @Autowired
     private EditorService editorService;
 
