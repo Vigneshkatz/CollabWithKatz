@@ -23,8 +23,11 @@ public class MySecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable())
-                .authorizeRequests().
-                requestMatchers("/test").authenticated().requestMatchers("/auth/login").permitAll()
+                .authorizeRequests()
+                .requestMatchers("/v1/editors/login").permitAll()
+                .requestMatchers("/v1/editors/addEditor").permitAll()
+                .requestMatchers("/v1/creators/add").permitAll()
+                .requestMatchers("/v1/creators/login").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and().exceptionHandling(ex -> ex.authenticationEntryPoint(point))
@@ -32,6 +35,5 @@ public class MySecurityConfig {
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
 
 }

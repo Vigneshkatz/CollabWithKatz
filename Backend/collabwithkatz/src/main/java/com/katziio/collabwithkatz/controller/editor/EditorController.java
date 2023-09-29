@@ -1,13 +1,21 @@
 package com.katziio.collabwithkatz.controller.editor;
 
+import com.katziio.collabwithkatz.config.jwt.JwtHelper;
+import com.katziio.collabwithkatz.controller.AuthController;
 import com.katziio.collabwithkatz.controller.creator.CreatorController;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
+import com.katziio.collabwithkatz.dto.jwt.JwtResponse;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +24,18 @@ import java.util.List;
 @RequestMapping("/v1/editors")
 @CrossOrigin("*")
 public class EditorController {
-    Logger logger = LoggerFactory.getLogger(EditorController.class);
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private AuthenticationManager manager;
+
+    @Autowired
+    private JwtHelper helper;
+
+    private Logger logger = LoggerFactory.getLogger(AuthController.class);
+
 
     @Autowired
     private EditorService editorService;
@@ -46,7 +65,7 @@ public class EditorController {
     }
 
     //    delete editor
-    @DeleteMapping("/deleteMapping")
+    @DeleteMapping("/delete")
     public EditorDTO deleteEditor(@RequestParam Long editorId) {
         return this.editorService.deleteEditor(editorId);
     }
@@ -96,13 +115,39 @@ public class EditorController {
     }
     @GetMapping("/login")
     public EditorDTO isValidUser(@RequestParam String email,@RequestParam String password) {
+        this.doAuthenticate("admin", password);
+        UserDetails userDetails = userDetailsService.loadUserByUsername("admin");
+        String token = this.helper.generateToken(userDetails);
+        JwtResponse response = JwtResponse.builder()
+                .jwtToken(token)
+                .username(userDetails.getUsername()).build();
+        System.out.println(response.getJwtToken());
         return this.editorService.isValidUser(email,password);
+
     }
 
     @GetMapping("{editorId}/getProjects")
     public List<ProjectDTO> getProjectsByCreatorId(@PathVariable Long editorId)
     {
         return this.editorService.getProjectByEditorId(editorId);
+    }
+
+    private void doAuthenticate(String email, String password) {
+
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
+        try {
+            manager.authenticate(authentication);
+
+
+        } catch (BadCredentialsException e) {
+            throw new BadCredentialsException(" Invalid Username or Password  !!");
+        }
+
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public String exceptionHandler() {
+        return "Credentials Invalid !!";
     }
 //    Retrieve Editors Created After a Specific Date
 
