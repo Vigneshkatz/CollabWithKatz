@@ -30,12 +30,13 @@ public class AuthController {
     private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
 
+
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
-//        System.out.println(request.getEmail()+" "+request.getPassword());
+        System.out.println(request.getEmail()+" "+request.getPassword());
 
         this.doAuthenticate(request.getEmail(), request.getPassword());
-//        System.out.println("sdvbskbvsliv");
+        System.out.println("sdvbskbvsliv");
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         String token = this.helper.generateToken(userDetails);

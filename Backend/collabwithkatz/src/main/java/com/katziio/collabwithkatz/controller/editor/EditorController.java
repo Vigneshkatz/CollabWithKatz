@@ -34,7 +34,7 @@ public class EditorController {
     @Autowired
     private JwtHelper helper;
 
-    private Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private Logger logger = LoggerFactory.getLogger(EditorController.class);
 
 
     @Autowired
@@ -115,6 +115,7 @@ public class EditorController {
     }
     @GetMapping("/login")
     public EditorDTO isValidUser(@RequestParam String email,@RequestParam String password) {
+        System.out.println(email+" "+password);
         this.doAuthenticate("admin", password);
         UserDetails userDetails = userDetailsService.loadUserByUsername("admin");
         String token = this.helper.generateToken(userDetails);
