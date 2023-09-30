@@ -27,7 +27,7 @@ public class CreatorService {
     private ProjectRepository projectRepository;
     public CreatorDTO addCreator(Creator creator) {
         creatorRepository.save(creator);
-        return new CreatorDTO(creator);
+        return this.creatorRepository.findLatestCreator();
     }
 
     public CreatorDTO updateCreator(Creator creator,Long id) {
@@ -76,5 +76,9 @@ public class CreatorService {
             projectDTOList.add(new ProjectDTO(project));
         }
         return projectDTOList;
+    }
+
+    public CreatorDTO isValidUser(String email, String password) {
+        return this.creatorRepository.isValidLogin(email,password);
     }
 }

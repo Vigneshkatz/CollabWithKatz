@@ -9,9 +9,7 @@ import com.katziio.collabwithkatz.service.creator.CreatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ChatService {
@@ -29,15 +27,24 @@ public class ChatService {
        return this.chatRepository.findByCreatorIdAndEditorId(creatorId,editorId);
     }
 
-    public Set<String> getCreatorName(Long editorId) {
+    public Map<Long,String> getCreatorName(Long editorId) {
         Set<String> creatorNameList = new HashSet<>();
-        List<ChatDTO> chatList = this.chatRepository.findByEditorId(editorId);
-        for(ChatDTO chat : chatList)
-        {
-            Long creatorId = chat.getCreatorId();
-            CreatorDTO creator = this.creatorService.getCreatorById(creatorId);
-            creatorNameList.add(creator.getName());
-        }
-        return creatorNameList;
+        creatorNameList.add("vignesh");
+        creatorNameList.add("katziio");
+        creatorNameList.add("teebikaa");
+        Map<Long,String> creatorIdName = new HashMap<>();
+        creatorIdName.put(1L,"Vignesh");
+        creatorIdName.put(2L,"Vignesh");
+        creatorIdName.put(3L,"Vignesh");
+        return  creatorIdName;
+
+//        List<ChatDTO> chatList = this.chatRepository.findByEditorId(editorId);
+//        for(ChatDTO chat : chatList)
+//        {
+//            Long creatorId = chat.getCreatorId();
+//            CreatorDTO creator = this.creatorService.getCreatorById(creatorId);
+//            creatorNameList.add(creator.getName());
+//        }
+//        return creatorNameList;
     }
 }
