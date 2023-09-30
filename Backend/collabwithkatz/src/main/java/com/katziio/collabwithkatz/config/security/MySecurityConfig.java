@@ -33,7 +33,7 @@ public class MySecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
                 .authorizeRequests()
-                .requestMatchers("/v1/editors/login").permitAll()
+                .requestMatchers("/**").permitAll()
                 .requestMatchers("/v1/editors/addEditor").permitAll()
                 .requestMatchers("/v1/creators/add").permitAll()
                 .requestMatchers("/v1/creators/login").permitAll()
