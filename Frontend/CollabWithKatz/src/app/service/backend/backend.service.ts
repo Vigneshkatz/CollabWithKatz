@@ -4,11 +4,13 @@ import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { Editor } from 'src/app/common/editor/editor';
 import { Project } from 'src/app/common/project/project';
 import { Chat } from 'src/app/common/chat/chat';
+import { Creator } from 'src/app/common/creator/creator';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
+
 
   private BASEURL:string = 'http://localhost:8000';
   private EDITOR_BASEURL: string = `${this.BASEURL}/v1/editors`;
@@ -21,9 +23,14 @@ export class BackendService {
     const LOGIN_URL = `${this.EDITOR_BASEURL}/byEmail?email=${editor_email}&password=${editor_password}`;
     return this.http.get(LOGIN_URL).pipe(
       map((response) => {
-
-        console.log('Response:', response);
-        return true;
+        // Check the response for login success (you might need to adjust this based on your API response format)
+        if (response ) {
+          console.log('Login successful.');
+          return true;
+        } else {
+          console.log('Login failed.');
+          return false;
+        }
       }),
       catchError((error) => {
         console.error('Error:', error);
@@ -34,23 +41,9 @@ export class BackendService {
 
   // register
 
-  signUp(editor: Editor): Observable<boolean> {
-    console.log("signup editor backend");
-    const SIGN_UP_URL = `${this.EDITOR_BASEURL}/addEditor`;
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    console.log(this.http.post(SIGN_UP_URL, editor));
-    return this.http.post(SIGN_UP_URL, editor).pipe(
-      map((response) => {
-        console.log('Response:', response);
-        return true;
-      }),
-      catchError((error) => {
-        console.error('Error:', error);
-        return of(false);
-      })
-    );
+  signUp(editor: Editor): Observable<Editor> {
+    const ADD_EDITOR = `${this.EDITOR_BASEURL}/addEditor`;
+    return this.http.post<Editor>(ADD_EDITOR,editor);
   }
   // get editor by email
   getEditorByEditorId(editor_id: number): Observable<any> {
@@ -61,6 +54,31 @@ export class BackendService {
   }
   
   // Creator section
+
+  creatorLogin(user_email: string, user_password: string) :Observable<boolean>{
+    const CREATOR_LOGIN_URL = `${this.CREATOR_BASEURL}/login?email=${user_email}&password=${user_password}`
+    return this.http.get(CREATOR_LOGIN_URL).pipe(
+      map((response) => {
+        // Check the response for login success (you might need to adjust this based on your API response format)
+        if (response ) {
+          console.log('Login successful.');
+          return true;
+        } else {
+          console.log('Login failed.');
+          return false;
+        }
+      }),
+      catchError((error) => {
+        console.error('Error:', error);
+        return of(false);
+      })
+    );
+  }
+
+  addCreator(creator: Creator):Observable<Creator> {
+    const Add_Creator = `${this.CREATOR_BASEURL}/add`;
+    return this.http.post<Creator>(Add_Creator,creator);
+  }
 
   getAllEditor(): any {
     const GET_ALL_EDITOR = `${this.EDITOR_BASEURL}/allEditors`;

@@ -1,6 +1,7 @@
-import { Observable } from 'rxjs';
+import { Observable, map, of, switchMap } from 'rxjs';
 import { BackendService } from './../backend/backend.service';
 import { Injectable } from '@angular/core';
+import { Creator } from 'src/app/common/creator/creator';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,34 @@ export class CreatorService {
       }
     );
     return creatorName;
+  }
+  addCreator(creator: Creator) {
+    this.backendService.addCreator(creator).subscribe(
+      (creatorDetails: Creator) => {
+        console.log(creatorDetails);
+      },
+      (error: any) => {
+        console.error('Error fetching creator details:', error);
+      }
+    );
+  }
+
+  loginCreator(user_email: string, user_password: string):Observable<boolean> {
+    if (!user_email || !user_password || user_email.trim() === '' || user_password.trim() === '') {
+      return of(false); 
+    }
+
+
+    return this.backendService.creatorLogin(user_email, user_password).pipe(
+      map((isValid: boolean) => isValid),
+      switchMap((isValid: boolean) => {
+        if (isValid) {
+          return of(true);
+        } else {
+          return of(false);
+        }
+      })
+    );
   }
 
 }

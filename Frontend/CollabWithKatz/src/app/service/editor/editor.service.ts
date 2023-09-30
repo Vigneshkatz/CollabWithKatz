@@ -12,10 +12,10 @@ export class EditorService {
 
   isValidUserLogin(editor_email: string, editor_password: string): Observable<boolean> {
     if (!editor_email || !editor_password || editor_email.trim() === '' || editor_password.trim() === '') {
-      return of(false); // Invalid input, return Observable of false
+      return of(false); 
     }
 
-    // If input is valid, call the login method and return the result as an Observable
+
     return this.backend.login(editor_email, editor_password).pipe(
       map((isValid: boolean) => isValid),
       switchMap((isValid: boolean) => {
@@ -28,12 +28,23 @@ export class EditorService {
     );
   }
 
-  registerEditor(editor: Editor): void {
-    console.log("signup editor editorservice");
-
-    this.backend.signUp(editor);
+  registerEditor(editor: Editor): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      this.backend.signUp(editor)
+        .subscribe(
+          (editorDetails: Editor) => {
+            console.log(editorDetails.id);
+            resolve(editorDetails.id);
+          },
+          (error: any) => {
+            console.error('Error fetching editor details:', error);
+            reject(error);
+          }
+        );
+    });
   }
-
+  
+  
   // get Editor information\
 
   getEditorInfo(editor_id: number): Observable<any> {

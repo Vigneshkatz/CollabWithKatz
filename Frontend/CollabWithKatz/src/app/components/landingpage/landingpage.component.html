@@ -17,11 +17,10 @@
 <body>
     <header id="landing_header">
         <div class="header_menu">
-            <ul class="menu_list">
-                <li>About Us</li>
-                <li>Service</li>
-                <li>DropDown</li>
-            </ul>
+            <ul>
+                <li><a [routerLink]="['/aboutus']">About Us</a></li>
+                <li><a [routerLink]="['/service']">Service</a></li>
+              </ul>
         </div>
         <div class="page_logo_container">
             <img src="../../../assets/CollabWithKatz-logos.jpeg" alt="pageLogo" class="page_logo">
@@ -207,10 +206,12 @@
             </div>
             <div class="footer_menu_container">
                 <ul class="footer_menu">
-                    <li class="menu_list">About Us</li>
+                        <li><a [routerLink]="['/aboutus']">About Us</a></li>
+                        <li><a [routerLink]="['/service']">Service</a></li>
                     <li class="menu_list">Contact Us</li>
-                    <li class="menu_list">FAQs</li>
-                    <li class="menu_list">Support</li>
+                    <li><a [routerLink]="['/faqs']">FAQs</a></li>
+                    <li><a [routerLink]="['/support']">Support</a></li>
+
                     <li class="menu_list">Blog</li>
                 </ul>
             </div>

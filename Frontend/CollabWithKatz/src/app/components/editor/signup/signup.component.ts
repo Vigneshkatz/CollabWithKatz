@@ -17,7 +17,6 @@ export class SignupComponent {
 
   onSubmit() {
     this.checkPassword();
-    this.editorService.registerEditor(this.editor);
   }
 
   setEditor(): void {
@@ -50,8 +49,13 @@ export class SignupComponent {
     if (password && confirm_password && password == confirm_password) {
       console.log("Password matchs");
       this.setEditor();
-      this.editorService.registerEditor(this.editor);
-      this.router.navigate(['/home']);
+      this.editorService.registerEditor(this.editor).then(editorId => {
+        console.log(editorId);
+        this.router.navigate([`/editor/home/${editorId}`]);
+      })
+        .catch(error => {
+         console.log(error)
+        });;
       return true;
     }
     console.log("Password does not match");

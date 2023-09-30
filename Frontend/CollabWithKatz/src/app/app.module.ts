@@ -23,6 +23,10 @@ import { MyprojectsComponent } from './components/editor/myprojects/myprojects.c
 import { Project } from './common/project/project';
 import { ChatComponent } from './components/chat/chat.component';
 import { MyMessageComponent } from './components/editor/my-message/my-message.component';
+import { AboutusComponent } from './components/pages/aboutus/aboutus.component';
+import { ServiceComponent } from './components/pages/service/service.component';
+import { FaqsComponent } from './components/pages/faqs/faqs.component';
+import { SupportComponent } from './components/support/support.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,10 @@ import { MyMessageComponent } from './components/editor/my-message/my-message.co
     MyprojectsComponent,
     ChatComponent,
     MyMessageComponent,
+    AboutusComponent,
+    ServiceComponent,
+    FaqsComponent,
+    SupportComponent,
   ],
   imports: [
     BrowserModule,
