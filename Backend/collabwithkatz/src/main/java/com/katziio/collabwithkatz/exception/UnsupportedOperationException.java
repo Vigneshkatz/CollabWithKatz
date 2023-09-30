@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.dto.error;
+package com.katziio.collabwithkatz.exception;
 
 public class UnsupportedOperationException extends RuntimeException {
     public UnsupportedOperationException(String operation) {

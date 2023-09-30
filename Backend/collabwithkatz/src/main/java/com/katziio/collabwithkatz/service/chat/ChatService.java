@@ -3,6 +3,7 @@ package com.katziio.collabwithkatz.service.chat;
 import com.katziio.collabwithkatz.dto.common.ChatDTO;
 import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.entity.common.Chat;
+import com.katziio.collabwithkatz.exception.NoChatFoundException;
 import com.katziio.collabwithkatz.repository.chat.ChatRepository;
 import com.katziio.collabwithkatz.repository.creator.CreatorRepository;
 import com.katziio.collabwithkatz.service.creator.CreatorService;
@@ -24,7 +25,11 @@ public class ChatService {
     }
 
     public List<ChatDTO> getMessage(Long creatorId,Long editorId) {
-       return this.chatRepository.findByCreatorIdAndEditorId(creatorId,editorId);
+        List<ChatDTO> chatList = this.chatRepository.findByCreatorIdAndEditorId(creatorId,editorId);
+        if(!chatList.isEmpty()) {
+            return this.chatRepository.findByCreatorIdAndEditorId(creatorId, editorId);
+        }
+        throw new NoChatFoundException();
     }
 
     public Map<Long,String> getCreatorName(Long editorId) {

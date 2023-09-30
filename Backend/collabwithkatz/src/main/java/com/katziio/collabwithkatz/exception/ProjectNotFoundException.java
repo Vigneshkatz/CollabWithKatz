@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.dto.error;
+package com.katziio.collabwithkatz.exception;
 
 public class ProjectNotFoundException extends RuntimeException {
 

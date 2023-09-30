@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.dto.error;
+package com.katziio.collabwithkatz.exception;
 
 public class FileUploadException extends RuntimeException {
     public FileUploadException(String message) {
