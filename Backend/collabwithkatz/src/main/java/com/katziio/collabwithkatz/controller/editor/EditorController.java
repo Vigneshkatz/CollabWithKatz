@@ -1,15 +1,11 @@
 package com.katziio.collabwithkatz.controller.editor;
 
 import com.katziio.collabwithkatz.config.jwt.JwtHelper;
-import com.katziio.collabwithkatz.controller.AuthController;
-import com.katziio.collabwithkatz.controller.creator.CreatorController;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.dto.jwt.JwtResponse;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.editor.EditorService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -33,8 +29,6 @@ public class EditorController {
 
     @Autowired
     private JwtHelper helper;
-
-    private Logger logger = LoggerFactory.getLogger(EditorController.class);
 
 
     @Autowired
