@@ -18,7 +18,7 @@ import java.lang.Long;
 @ToString
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long creatorId;

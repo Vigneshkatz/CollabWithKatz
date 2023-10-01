@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "creators")
 public class Creator {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
