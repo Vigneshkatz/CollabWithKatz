@@ -50,10 +50,10 @@ public class CreatorController {
     }
 
 //    Post Project
-    @PostMapping("/addProject")
-    public ProjectDTO createPost(@RequestBody Project project)
+    @PostMapping("/addProject/{creatorId}/{editorId}")
+    public ProjectDTO createPost(@RequestBody Project project,@PathVariable Long creatorId,@PathVariable Long editorId)
     {
-        return this.creatorService.addProject(project);
+        return this.creatorService.addProject(project,creatorId,editorId);
     }
 
     @GetMapping("{creatorId}/getProjects")

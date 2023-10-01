@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "editor_social_media")
 public class EditorSocialMedia {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String platform;
     private String platformLink;

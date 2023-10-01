@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "editor_preferences")
 public class EditorPreferences {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String projectPreferences;
 }

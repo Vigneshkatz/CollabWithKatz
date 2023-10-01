@@ -4,10 +4,12 @@ import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.creator.Project;
+import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
 import com.katziio.collabwithkatz.repository.creator.CreatorRepository;
 import com.katziio.collabwithkatz.repository.project.ProjectRepository;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
+import com.katziio.collabwithkatz.service.editor.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class CreatorService {
     @Autowired
     private EditorRepository editorRepository;
 
+    @Autowired
+    private EditorService editorService;
     @Autowired
     private ProjectRepository projectRepository;
     public CreatorDTO addCreator(Creator creator) {
@@ -69,9 +73,12 @@ public class CreatorService {
         throw new NoSuchUserException(id);
     }
 
-    public ProjectDTO addProject(Project project) {
-        project.toString();
-        System.out.println(project.toString());
+    public ProjectDTO addProject(Project project, Long creatorId, Long editorId) {
+        Editor editor = this.editorService.getEditorByIdForMapping(editorId);
+        Creator creator = this.getCreatorByIdForMapping(editorId);
+        project.setCreator(creator);
+        project.setEditor(editor);
+//        System.out.println(project.toString());
         this.projectRepository.save(project);
         return new ProjectDTO(project);
     }

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "upvote")
 public class Upvote {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Boolean isVoted;
 }
