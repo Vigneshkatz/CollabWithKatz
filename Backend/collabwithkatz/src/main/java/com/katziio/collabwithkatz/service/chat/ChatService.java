@@ -1,12 +1,13 @@
 package com.katziio.collabwithkatz.service.chat;
 
 import com.katziio.collabwithkatz.dto.common.ChatDTO;
-import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.entity.common.Chat;
+import com.katziio.collabwithkatz.entity.creator.Creator;
+import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.exception.NoChatFoundException;
 import com.katziio.collabwithkatz.repository.chat.ChatRepository;
-import com.katziio.collabwithkatz.repository.creator.CreatorRepository;
 import com.katziio.collabwithkatz.service.creator.CreatorService;
+import com.katziio.collabwithkatz.service.editor.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,16 @@ import java.util.*;
 public class ChatService {
     @Autowired
     private ChatRepository chatRepository;
-
+    @Autowired
+    private EditorService editorService;
     @Autowired
     private CreatorService creatorService;
-    public ChatDTO addMessage(Chat chat) {
+    public ChatDTO addMessage(Chat chat, Long creatorId, Long editorId) {
+        Creator creator = this.creatorService.getCreatorByIdForMapping(creatorId);
+        Editor editor = this.editorService.getEditorByIdForMapping(editorId);
+        chat.setCreator(creator);
+        chat.setEditor(editor);
+
         this.chatRepository.save(chat);
         return new ChatDTO(chat);
     }

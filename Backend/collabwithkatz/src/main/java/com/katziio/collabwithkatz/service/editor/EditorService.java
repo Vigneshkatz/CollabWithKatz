@@ -68,8 +68,18 @@ public class EditorService {
         Optional<Editor> editor = this.editorRepository.findById(editorId);
         if(editor.isPresent())
         {
-            System.out.println(editor.get().toString());
+//            System.out.println(editor.get().toString());
             return new EditorDTO(editor.get());
+        }
+        throw new NoSuchUserException(editorId);
+    }
+
+    public Editor getEditorByIdForMapping(Long editorId) {
+        Optional<Editor> editor = this.editorRepository.findById(editorId);
+        if(editor.isPresent())
+        {
+//            System.out.println(editor.get().toString());
+            return editor.get();
         }
         throw new NoSuchUserException(editorId);
     }

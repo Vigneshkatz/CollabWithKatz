@@ -28,9 +28,9 @@ public class ChatController {
         return "Testing message";
     }
     @PostMapping("/addChat")
-    public ChatDTO addMessage(@RequestBody Chat chat)
+    public ChatDTO addMessage(@RequestBody Chat chat,@RequestParam Long creatorId,@RequestParam Long editorId)
     {
-        return this.chatService.addMessage(chat);
+        return this.chatService.addMessage(chat,creatorId,editorId);
     }
 
     @GetMapping("/getChat/{creatorId}/{editorId}")

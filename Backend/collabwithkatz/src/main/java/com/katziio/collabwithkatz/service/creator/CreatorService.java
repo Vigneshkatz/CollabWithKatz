@@ -53,8 +53,18 @@ public class CreatorService {
         Optional<Creator> optionalCreator = this.creatorRepository.findById(id);
         if(optionalCreator.isPresent())
         {
-            this.creatorRepository.deleteById(id);
+            this.creatorRepository.findById(id);
             return new CreatorDTO(optionalCreator.get());
+        }
+        throw new NoSuchUserException(id);
+    }
+
+    public Creator getCreatorByIdForMapping(Long id) {
+        Optional<Creator> optionalCreator = this.creatorRepository.findById(id);
+        if(optionalCreator.isPresent())
+        {
+            return optionalCreator.get();
+
         }
         throw new NoSuchUserException(id);
     }
