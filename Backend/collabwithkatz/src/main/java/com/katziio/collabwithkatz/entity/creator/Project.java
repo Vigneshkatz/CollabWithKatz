@@ -21,8 +21,13 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long creatorId;
-    private Long editorId;
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
+    private Creator creator;
+
+    @ManyToOne
+    @JoinColumn(name = "editor_id")
+    private Editor editor;
 
     private String projectName;
     private String projectDescription;

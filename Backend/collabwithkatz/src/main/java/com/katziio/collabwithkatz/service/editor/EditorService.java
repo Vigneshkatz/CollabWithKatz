@@ -6,7 +6,7 @@ import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
-import com.katziio.collabwithkatz.repository.creator.ProjectRepository;
+import com.katziio.collabwithkatz.repository.project.ProjectRepository;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
