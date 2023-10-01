@@ -26,10 +26,6 @@ public class CreatorController {
     private CreatorService creatorService;
 
     //   create creator
-    @PostMapping("/add")
-    public CreatorDTO addCreator(@RequestBody Creator creator) {
-        return this.creatorService.addCreator(creator);
-    }
 
     //    update creartor
     @PutMapping("/update/{id}")

@@ -22,11 +22,11 @@ public class ChatController {
     @Autowired
     private ChatService chatService;
 
-    @RequestMapping("/test")
-    public String test() {
-        this.logger.warn("This is working message");
-        return "Testing message";
-    }
+//    @RequestMapping("/test")
+//    public String test() {
+//        this.logger.warn("This is working message");
+//        return "Testing message";
+//    }
     @PostMapping("/addChat")
     public ChatDTO addMessage(@RequestBody Chat chat,@RequestParam Long creatorId,@RequestParam Long editorId)
     {

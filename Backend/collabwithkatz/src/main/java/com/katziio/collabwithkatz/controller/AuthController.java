@@ -1,11 +1,15 @@
-package com.katziio.collabwithkatz.controller.editor;
+package com.katziio.collabwithkatz.controller;
+
 import com.katziio.collabwithkatz.config.jwt.JwtHelper;
+import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.dto.jwt.*;
 
 
+import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.CustomUserService;
+import com.katziio.collabwithkatz.service.creator.CreatorService;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,23 +40,26 @@ public class AuthController {
     private EditorService editorService;
 
     @Autowired
+    private CreatorService creatorService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     private CustomUserService customUserService;
 
-    private Logger logger = LoggerFactory.getLogger(AuthController.class);
+//    private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-
+// editor section
 
     @PostMapping("/editor/login")
     public ResponseEntity<JwtResponse> editorLogin(@RequestBody JwtRequest request) {
-        System.out.println(request.getEmail()+" "+request.getPassword());
+        System.out.println(request.getEmail() + " " + request.getPassword());
 
         this.doAuthenticate(request.getEmail(), request.getPassword());
         System.out.println("sdvbskbvsliv");
 
-        UserDetails userDetails =customUserService.loadUserByUsername(request.getEmail());
+        UserDetails userDetails = customUserService.loadUserByUsername(request.getEmail());
         String token = this.helper.generateToken(userDetails);
         System.out.println("sdvbskbvsliv");
         JwtResponse response = JwtResponse.builder()
@@ -61,21 +68,6 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/creator/login")
-    public ResponseEntity<JwtResponse> creatorLogin(@RequestBody JwtRequest request) {
-        System.out.println(request.getEmail()+" "+request.getPassword());
-
-        this.doAuthenticate(request.getEmail(), request.getPassword());
-        System.out.println("sdvbskbvsliv");
-
-        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
-        String token = this.helper.generateToken(userDetails);
-        System.out.println("sdvbskbvsliv");
-        JwtResponse response = JwtResponse.builder()
-                .jwtToken(token)
-                .username(userDetails.getUsername()).build();
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
 
     @PostMapping("/addEditor")
     public EditorDTO saveEditor(@RequestBody Editor editor) {
@@ -90,7 +82,28 @@ public class AuthController {
         return this.editorService.saveEditor(editor);
     }
 
+    //    creator section
 
+    @PostMapping("/add")
+    public CreatorDTO addCreator(@RequestBody Creator creator) {
+        return this.creatorService.addCreator(creator);
+    }
+
+    @PostMapping("/creator/login")
+    public ResponseEntity<JwtResponse> creatorLogin(@RequestBody JwtRequest request) {
+        System.out.println(request.getEmail() + " " + request.getPassword());
+
+        this.doAuthenticate(request.getEmail(), request.getPassword());
+        System.out.println("sdvbskbvsliv");
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+        String token = this.helper.generateToken(userDetails);
+        System.out.println("sdvbskbvsliv");
+        JwtResponse response = JwtResponse.builder()
+                .jwtToken(token)
+                .username(userDetails.getUsername()).build();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     private void doAuthenticate(String email, String password) {
 
