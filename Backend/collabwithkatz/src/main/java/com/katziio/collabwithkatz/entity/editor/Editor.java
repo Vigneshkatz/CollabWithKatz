@@ -78,4 +78,24 @@ public class Editor {
         this.sampleVideoList=editor.getSampleVideoList();
         this.socialMediaList=editor.getSocialMediaList();
     }
+
+    @Override
+    public String toString() {
+        return "UserProfile{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", about='" + about + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                ", country='" + country + '\'' +
+                ", gender='" + gender + '\'' +
+                ", experienceInYears=" + experienceInYears +
+                ", profilePictureUrl='" + profilePictureUrl + '\'' +
+                ", phone='" + phone + '\'' +
+                ", portfolioLink='" + portfolioLink + '\'' +
+                ", profileCreatedAt=" + profileCreatedAt +
+                ", profileUpdatedAt=" + profileUpdatedAt +
+                '}';
+    }
 }

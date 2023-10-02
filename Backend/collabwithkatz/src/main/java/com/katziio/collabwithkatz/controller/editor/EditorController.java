@@ -1,6 +1,6 @@
 package com.katziio.collabwithkatz.controller.editor;
 
-import com.katziio.collabwithkatz.config.jwt.JwtHelper;
+//import com.katziio.collabwithkatz.config.jwt.JwtHelper;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.dto.jwt.JwtResponse;
@@ -21,14 +21,12 @@ import java.util.List;
 @CrossOrigin("*")
 public class EditorController {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     @Autowired
     private AuthenticationManager manager;
 
-    @Autowired
-    private JwtHelper helper;
+//    @Autowired
+//    private JwtHelper helper;
 
 
     @Autowired
@@ -111,12 +109,12 @@ public class EditorController {
     public EditorDTO isValidUser(@RequestParam String email,@RequestParam String password) {
         System.out.println(email+" "+password);
         this.doAuthenticate("admin", password);
-        UserDetails userDetails = userDetailsService.loadUserByUsername("admin");
-        String token = this.helper.generateToken(userDetails);
-        JwtResponse response = JwtResponse.builder()
-                .jwtToken(token)
-                .username(userDetails.getUsername()).build();
-        System.out.println(response.getJwtToken());
+//        UserDetails userDetails = userDetailsService.loadUserByUsername("admin");
+//        String token = this.helper.generateToken(userDetails);
+//        JwtResponse response = JwtResponse.builder()
+//                .jwtToken(token)
+//                .username(userDetails.getUsername()).build();
+//        System.out.println(response.getJwtToken());
         return this.editorService.isValidUser(email,password);
 
     }
