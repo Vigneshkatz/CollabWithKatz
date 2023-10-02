@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
+
+
     @Autowired
     private AuthenticationManager manager;
 
@@ -40,7 +42,7 @@ public class AuthController {
     public ResponseEntity<JwtResponse> editorLogin(@RequestBody JwtRequest request) {
         System.out.println(request.getEmail() + " " + request.getPassword());
         String inputPassword = request.getPassword();
-        String dbPassword = this.editorService.getEditorById(4L).getPassword();
+        String dbPassword = this.editorService.getEditorByEmail(request.getEmail()).getPassword();
         System.out.println(inputPassword + " "+ dbPassword);
         if (passwordEncoder.matches(inputPassword, dbPassword)) {
             System.out.println("Password matched");
@@ -56,9 +58,7 @@ public class AuthController {
     public EditorDTO saveEditor(@RequestBody Editor editor) {
         String password = this.passwordEncoder.encode(editor.getPassword());
         editor.setPassword(password);
-        EditorDTO addedEditor = this.editorService.saveEditor(editor);
-
-        return addedEditor;
+        return this.editorService.saveEditor(editor);
     }
 
     //    creator section
@@ -80,12 +80,9 @@ public class AuthController {
             System.out.println("Password matched");
             return new ResponseEntity<>(null, HttpStatus.OK);
         } else {
-            // Passwords do not match
             return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
         }
     }
-
-
 
     @ExceptionHandler(BadCredentialsException.class)
     public String exceptionHandler() {

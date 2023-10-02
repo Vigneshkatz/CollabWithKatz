@@ -98,7 +98,7 @@ public class CreatorService {
         CreatorDTO creatorDTO = this.creatorRepository.isValidLogin(email,password);
         if(creatorDTO!=null)
         {
-            return creatorDTO;
+            return this.creatorRepository.isValidLogin(email,password);
 
         }
         throw new NoSuchUserException(email,password);
@@ -111,7 +111,6 @@ public class CreatorService {
         if(creatorDTO!=null)
         {
             return creatorDTO;
-
         }
         throw new NoSuchUserException(email);
     }
