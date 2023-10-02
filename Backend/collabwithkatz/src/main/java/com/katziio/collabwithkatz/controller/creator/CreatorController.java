@@ -26,10 +26,6 @@ public class CreatorController {
     private CreatorService creatorService;
 
     //   create creator
-    @PostMapping("/add")
-    public CreatorDTO addCreator(@RequestBody Creator creator) {
-        return this.creatorService.addCreator(creator);
-    }
 
     //    update creartor
     @PutMapping("/update/{id}")
@@ -50,10 +46,10 @@ public class CreatorController {
     }
 
 //    Post Project
-    @PostMapping("/addProject")
-    public ProjectDTO createPost(@RequestBody Project project)
+    @PostMapping("/addProject/{creatorId}/{editorId}")
+    public ProjectDTO createPost(@RequestBody Project project,@PathVariable Long creatorId,@PathVariable Long editorId)
     {
-        return this.creatorService.addProject(project);
+        return this.creatorService.addProject(project,creatorId,editorId);
     }
 
     @GetMapping("{creatorId}/getProjects")

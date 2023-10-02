@@ -5,7 +5,8 @@ import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 
 import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
-import com.katziio.collabwithkatz.repository.creator.ProjectRepository;
+import com.katziio.collabwithkatz.exception.NoSuchUserException;
+import com.katziio.collabwithkatz.repository.project.ProjectRepository;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,8 @@ public class EditorService {
             this.editorRepository.deleteById(editorId);
             return new EditorDTO(editor.get());
         }
-        return null;
+
+        throw new NoSuchUserException(editorId);
 
     }
 
@@ -42,7 +44,7 @@ public class EditorService {
             Editor editor1 =  new Editor(toUpdateEditor);
             this.editorRepository.save(editor1);
         }
-        return null;
+        throw new NoSuchUserException(editorId);
     }
 
     public EditorDTO saveEditor(Editor editor) {
@@ -66,15 +68,30 @@ public class EditorService {
         Optional<Editor> editor = this.editorRepository.findById(editorId);
         if(editor.isPresent())
         {
-            System.out.println(editor.get().toString());
+//            System.out.println(editor.get().toString());
             return new EditorDTO(editor.get());
         }
-        return null;
+        throw new NoSuchUserException(editorId);
     }
 
-    // TODO: 03/09/23
+    public Editor getEditorByIdForMapping(Long editorId) {
+        Optional<Editor> editor = this.editorRepository.findById(editorId);
+        if(editor.isPresent())
+        {
+//            System.out.println(editor.get().toString());
+            return editor.get();
+        }
+        throw new NoSuchUserException(editorId);
+    }
+
     public List<EditorDTO> searchEditorByName(String name) {
-        return this.editorRepository.findEditorByName(name);
+        List<EditorDTO> editorList = this.editorRepository.findEditorByName(name);
+        if(!editorList.isEmpty())
+        {
+            return editorList;
+        }
+        throw new NoSuchUserException();
+
     }
 
     public List<EditorDTO> filterEditorByAge(int minAge, int maxAge) {
@@ -98,7 +115,13 @@ public class EditorService {
     }
 
     public EditorDTO getEditorByEmail(String email) {
-        return this.editorRepository.getEditorByEmail(email);
+        EditorDTO editor = this.editorRepository.getEditorByEmail(email);
+        if(editor!=null)
+        {
+            return editor;
+        }
+        throw new NoSuchUserException(email);
+
     }
 
     public List<EditorDTO> getEditorByExperienceRange(int minExperience, int maxExperience) {
@@ -112,12 +135,15 @@ public class EditorService {
     public List<ProjectDTO> getProjectByEditorId(Long editorId)
     {
         List<Project> projectList = this.projectRepository.findByEditorId(editorId);
-        List<ProjectDTO> projectDTOList = new ArrayList<>();
-        for (Project project:projectList)
-        {
-            projectDTOList.add(new ProjectDTO(project));
+        if(!projectList.isEmpty()) {
+            List<ProjectDTO> projectDTOList = new ArrayList<>();
+            for (Project project : projectList) {
+                projectDTOList.add(new ProjectDTO(project));
+            }
+
+            return projectDTOList;
         }
-        return projectDTOList;
+        throw new NoSuchUserException(editorId);
     }
 
     public List<EditorDTO> sortEditorsBy(String sortBy) {

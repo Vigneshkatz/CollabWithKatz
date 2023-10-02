@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "editor_certifications")
 public class EditorCertification {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String certificationName;
     private String certificationLink;

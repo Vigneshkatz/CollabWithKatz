@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "editor_project")
 public class EditorProject {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String projectName;
     private boolean projectStatus;

@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface ChatRepository extends JpaRepository<Chat,Long> {
 
-    @Query("SELECT new com.katziio.collabwithkatz.dto.common.ChatDTO(c) FROM Chat c WHERE c.creatorId = :creatorId and c.editorId = :editorId")
+    @Query("SELECT new com.katziio.collabwithkatz.dto.common.ChatDTO(c) FROM Chat c WHERE c.creator.id = :creatorId and c.editor.id = :editorId")
     List<ChatDTO>findByCreatorIdAndEditorId(@Param("creatorId") Long creatorId, @Param("editorId") Long editorId);
 
-    @Query("SELECT new com.katziio.collabwithkatz.dto.common.ChatDTO(c) FROM Chat c WHERE c.editorId = :editorId")
+    @Query("SELECT new com.katziio.collabwithkatz.dto.common.ChatDTO(c) FROM Chat c WHERE c.editor.id = :editorId")
     List<ChatDTO>findByEditorId( @Param("editorId") Long editorId);
 }

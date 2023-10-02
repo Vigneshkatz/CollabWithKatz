@@ -5,8 +5,9 @@ import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
+import com.katziio.collabwithkatz.exception.NoSuchUserException;
 import com.katziio.collabwithkatz.repository.creator.CreatorRepository;
-import com.katziio.collabwithkatz.repository.creator.ProjectRepository;
+import com.katziio.collabwithkatz.repository.project.ProjectRepository;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class CreatorService {
     private EditorRepository editorRepository;
 
     @Autowired
+    private EditorService editorService;
+    @Autowired
     private ProjectRepository projectRepository;
     public CreatorDTO addCreator(Creator creator) {
         creatorRepository.save(creator);
@@ -37,7 +40,7 @@ public class CreatorService {
             this.creatorRepository.save(creator);
             return new CreatorDTO(creator);
         }
-        return null;
+        throw new NoSuchUserException(id);
     }
 
     public CreatorDTO deleteCreator(Long id) {
@@ -47,22 +50,35 @@ public class CreatorService {
            this.creatorRepository.deleteById(id);
            return new CreatorDTO(optionalCreator.get());
         }
-        return null;
+        throw new NoSuchUserException(id);
     }
 
     public CreatorDTO getCreatorById(Long id) {
         Optional<Creator> optionalCreator = this.creatorRepository.findById(id);
         if(optionalCreator.isPresent())
         {
-            this.creatorRepository.deleteById(id);
+            this.creatorRepository.findById(id);
             return new CreatorDTO(optionalCreator.get());
         }
-        return null;
+        throw new NoSuchUserException(id);
     }
 
-    public ProjectDTO addProject(Project project) {
-        project.toString();
-        System.out.println(project.toString());
+    public Creator getCreatorByIdForMapping(Long id) {
+        Optional<Creator> optionalCreator = this.creatorRepository.findById(id);
+        if(optionalCreator.isPresent())
+        {
+            return optionalCreator.get();
+
+        }
+        throw new NoSuchUserException(id);
+    }
+
+    public ProjectDTO addProject(Project project, Long creatorId, Long editorId) {
+        Editor editor = this.editorService.getEditorByIdForMapping(editorId);
+        Creator creator = this.getCreatorByIdForMapping(editorId);
+        project.setCreator(creator);
+        project.setEditor(editor);
+//        System.out.println(project.toString());
         this.projectRepository.save(project);
         return new ProjectDTO(project);
     }
@@ -79,6 +95,13 @@ public class CreatorService {
     }
 
     public CreatorDTO isValidUser(String email, String password) {
-        return this.creatorRepository.isValidLogin(email,password);
+        CreatorDTO creatorDTO = this.creatorRepository.isValidLogin(email,password);
+        if(creatorDTO!=null)
+        {
+            return this.creatorRepository.isValidLogin(email,password);
+
+        }
+        throw new NoSuchUserException(email,password);
+
     }
 }
