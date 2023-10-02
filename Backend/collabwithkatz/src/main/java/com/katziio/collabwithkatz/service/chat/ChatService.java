@@ -21,6 +21,7 @@ public class ChatService {
     private EditorService editorService;
     @Autowired
     private CreatorService creatorService;
+
     public ChatDTO addMessage(Chat chat, Long creatorId, Long editorId) {
         Creator creator = this.creatorService.getCreatorByIdForMapping(creatorId);
         Editor editor = this.editorService.getEditorByIdForMapping(editorId);
@@ -31,32 +32,20 @@ public class ChatService {
         return new ChatDTO(chat);
     }
 
-    public List<ChatDTO> getMessage(Long creatorId,Long editorId) {
-        List<ChatDTO> chatList = this.chatRepository.findByCreatorIdAndEditorId(creatorId,editorId);
-        if(!chatList.isEmpty()) {
+    public List<ChatDTO> getMessages(Long creatorId, Long editorId) {
+        List<ChatDTO> chatList = this.chatRepository.findByCreatorIdAndEditorId(creatorId, editorId);
+        if (!chatList.isEmpty()) {
             return this.chatRepository.findByCreatorIdAndEditorId(creatorId, editorId);
         }
         throw new NoChatFoundException();
     }
 
-    public Map<Long,String> getCreatorName(Long editorId) {
-        Set<String> creatorNameList = new HashSet<>();
-        creatorNameList.add("vignesh");
-        creatorNameList.add("katziio");
-        creatorNameList.add("teebikaa");
-        Map<Long,String> creatorIdName = new HashMap<>();
-        creatorIdName.put(1L,"Vignesh");
-        creatorIdName.put(2L,"Vignesh");
-        creatorIdName.put(3L,"Vignesh");
-        return  creatorIdName;
-
-//        List<ChatDTO> chatList = this.chatRepository.findByEditorId(editorId);
-//        for(ChatDTO chat : chatList)
-//        {
-//            Long creatorId = chat.getCreatorId();
-//            CreatorDTO creator = this.creatorService.getCreatorById(creatorId);
-//            creatorNameList.add(creator.getName());
-//        }
-//        return creatorNameList;
+    public Map<Long, String> getCreatorNames(Long editorId) {
+        // Replace this with actual logic to get creator names based on the editor
+        Map<Long, String> creatorIdName = new HashMap<>();
+        creatorIdName.put(1L, "Vignesh");
+        creatorIdName.put(2L, "Katziio");
+        creatorIdName.put(3L, "Teebikaa");
+        return creatorIdName;
     }
 }

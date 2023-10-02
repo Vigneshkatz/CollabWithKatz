@@ -20,12 +20,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
-
-
-    @Autowired
-    private AuthenticationManager manager;
-
-
     @Autowired
     private EditorService editorService;
 
@@ -35,58 +29,48 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-// editor section
-
     @PostMapping("/editor/login")
-    public ResponseEntity<JwtResponse> editorLogin(@RequestBody JwtRequest request) {
-        System.out.println(request.getEmail() + " " + request.getPassword());
+    public ResponseEntity<EditorDTO> editorLogin(@RequestBody JwtRequest request) {
+        String inputEmail = request.getEmail();
         String inputPassword = request.getPassword();
-        String dbPassword = this.editorService.getEditorByEmail(request.getEmail()).getPassword();
-        System.out.println(inputPassword + " "+ dbPassword);
+
+        EditorDTO editor = editorService.getEditorByEmail(inputEmail);
+        String dbPassword = editor.getPassword();
+
         if (passwordEncoder.matches(inputPassword, dbPassword)) {
-            System.out.println("Password matched");
-            return new ResponseEntity<>(null, HttpStatus.OK);
+            return new ResponseEntity<>(editor, HttpStatus.OK);
         } else {
-            // Passwords do not match
-            return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
-
-    @PostMapping("/editor/addEditor")
+    @PostMapping("/editor/add")
     public EditorDTO saveEditor(@RequestBody Editor editor) {
-        String password = this.passwordEncoder.encode(editor.getPassword());
+        String password = passwordEncoder.encode(editor.getPassword());
         editor.setPassword(password);
-        return this.editorService.saveEditor(editor);
+        return editorService.saveEditor(editor);
     }
-
-    //    creator section
 
     @PostMapping("/creator/add")
     public CreatorDTO addCreator(@RequestBody Creator creator) {
-        String password = this.passwordEncoder.encode(creator.getPassword());
+        String password = passwordEncoder.encode(creator.getPassword());
         creator.setPassword(password);
-        return this.creatorService.addCreator(creator);
+        return creatorService.addCreator(creator);
     }
 
     @PostMapping("/creator/login")
-    public ResponseEntity<JwtResponse> creatorLogin(@RequestBody JwtRequest request) {
-        System.out.println(request.getEmail() + " " + request.getPassword());
+    public ResponseEntity<CreatorDTO> creatorLogin(@RequestBody JwtRequest request) {
+        String inputEmail = request.getEmail();
         String inputPassword = request.getPassword();
-        String dbPassword = this.creatorService.getCreatorByEmail(request.getEmail()).getPassword();
-        System.out.println(inputPassword + " "+ dbPassword);
-        if (passwordEncoder.matches(inputPassword, dbPassword)) {
-            System.out.println("Password matched");
-            return new ResponseEntity<>(null, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public String exceptionHandler() {
-        return "Credentials Invalid !!";
+        CreatorDTO creator = creatorService.getCreatorByEmail(inputEmail);
+        String dbPassword = creator.getPassword();
+
+        if (passwordEncoder.matches(inputPassword, dbPassword)) {
+            return new ResponseEntity<>(creator, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
 }
