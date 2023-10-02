@@ -44,12 +44,6 @@ public class EditorController {
         return this.editorService.getEditorById(id);
     }
 
-    //    add editor
-    @PostMapping("/addEditor")
-    public EditorDTO saveEditor(@RequestBody Editor editor) {
-        return this.editorService.saveEditor(editor);
-    }
-
     //    update editor
     @PutMapping("/updateEditor")
     public EditorDTO updateEditor(@RequestBody Editor editor, @RequestParam Long editorId) {
@@ -104,19 +98,6 @@ public class EditorController {
     @GetMapping("/byExperienceRange")
     public List<EditorDTO> getEditorByExperienceRange(@RequestParam int minExperience,@RequestParam int maxExperience) {
         return this.editorService.getEditorByExperienceRange(minExperience,maxExperience);
-    }
-    @GetMapping("/login")
-    public EditorDTO isValidUser(@RequestParam String email,@RequestParam String password) {
-        System.out.println(email+" "+password);
-        this.doAuthenticate("admin", password);
-//        UserDetails userDetails = userDetailsService.loadUserByUsername("admin");
-//        String token = this.helper.generateToken(userDetails);
-//        JwtResponse response = JwtResponse.builder()
-//                .jwtToken(token)
-//                .username(userDetails.getUsername()).build();
-//        System.out.println(response.getJwtToken());
-        return this.editorService.isValidUser(email,password);
-
     }
 
     @GetMapping("{editorId}/getProjects")

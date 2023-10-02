@@ -25,8 +25,6 @@ public class CreatorController {
     @Autowired
     private CreatorService creatorService;
 
-    //   create creator
-
     //    update creartor
     @PutMapping("/update/{id}")
     public CreatorDTO updateCreator(@RequestBody Creator creator,@PathVariable Long id) {
@@ -56,11 +54,6 @@ public class CreatorController {
     public List<ProjectDTO> getProjectsByCreatorId(@PathVariable Long creatorId)
     {
         return this.creatorService.getProjectByCreatorId(creatorId);
-    }
-
-    @GetMapping("/login")
-    public CreatorDTO isValidUser(@RequestParam String email, @RequestParam String password) {
-        return this.creatorService.isValidUser(email,password);
     }
 
 }

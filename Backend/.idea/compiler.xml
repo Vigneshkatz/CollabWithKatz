@@ -14,7 +14,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="codewithkatz" options="-parameters" />
+      <module name="codewithkatz" options="" />
       <module name="collabwithkatz" options="-parameters" />
     </option>
   </component>

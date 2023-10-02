@@ -98,10 +98,21 @@ public class CreatorService {
         CreatorDTO creatorDTO = this.creatorRepository.isValidLogin(email,password);
         if(creatorDTO!=null)
         {
-            return this.creatorRepository.isValidLogin(email,password);
+            return creatorDTO;
 
         }
         throw new NoSuchUserException(email,password);
 
+    }
+
+    public CreatorDTO getCreatorByEmail(String email)
+    {
+        CreatorDTO creatorDTO = this.creatorRepository.findByEmail(email);
+        if(creatorDTO!=null)
+        {
+            return creatorDTO;
+
+        }
+        throw new NoSuchUserException(email);
     }
 }

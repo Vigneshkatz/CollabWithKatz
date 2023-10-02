@@ -16,4 +16,7 @@ public interface CreatorRepository extends JpaRepository<Creator,Long> {
     @Query("SELECT new com.katziio.collabwithkatz.dto.creator.CreatorDTO(c) FROM Creator c WHERE c.email =:userEmail AND c.password =:userPassword")
     CreatorDTO isValidLogin(@Param("userEmail") String userEmail, @Param("userPassword") String userPassword);
 
+    @Query("SELECT new com.katziio.collabwithkatz.dto.creator.CreatorDTO(c) FROM Creator c WHERE c.email =:userEmail")
+    CreatorDTO findByEmail(@Param("userEmail") String userEmail);
+
 }

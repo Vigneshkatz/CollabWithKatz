@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
-
-
     @Autowired
     private AuthenticationManager manager;
 
@@ -75,8 +73,16 @@ public class AuthController {
     @PostMapping("/creator/login")
     public ResponseEntity<JwtResponse> creatorLogin(@RequestBody JwtRequest request) {
         System.out.println(request.getEmail() + " " + request.getPassword());
-
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        String inputPassword = request.getPassword();
+        String dbPassword = this.creatorService.getCreatorByEmail(request.getEmail()).getPassword();
+        System.out.println(inputPassword + " "+ dbPassword);
+        if (passwordEncoder.matches(inputPassword, dbPassword)) {
+            System.out.println("Password matched");
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        } else {
+            // Passwords do not match
+            return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
 
