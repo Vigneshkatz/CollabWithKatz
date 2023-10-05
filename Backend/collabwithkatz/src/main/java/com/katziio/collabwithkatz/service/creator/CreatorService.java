@@ -6,16 +6,19 @@ import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
+import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
 import com.katziio.collabwithkatz.repository.creator.CreatorRepository;
-import com.katziio.collabwithkatz.repository.project.ProjectRepository;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
+import com.katziio.collabwithkatz.repository.project.ProjectRepository;
 import com.katziio.collabwithkatz.service.editor.EditorService;
+import com.katziio.collabwithkatz.service.email.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CreatorService {
@@ -28,9 +31,18 @@ public class CreatorService {
     @Autowired
     private ProjectRepository projectRepository;
 
+    @Autowired
+    private EmailSenderService emailSenderService;
+
     public CreatorDTO addCreator(Creator creator) {
-        creatorRepository.save(creator);
-        return creatorRepository.findLatestCreator();
+        Creator creatorCheck = this.creatorRepository.findByEmailVerify(creator.getEmail());
+        if (creatorCheck== null) {
+            creator.setConfirmationToken(UUID.randomUUID().toString());
+            this.emailSenderService.initiateEmail(creator.getConfirmationToken(),creator.getEmail(),true);
+            System.out.println("Creator successful Registration");
+            return new CreatorDTO(creatorRepository.save(creator));
+        }
+        throw new UserAlreadyExistsException(creator.getEmail());
     }
 
     public CreatorDTO updateCreator(Creator creator, Long id) {
@@ -100,5 +112,18 @@ public class CreatorService {
             return creatorDTO;
         }
         throw new NoSuchUserException(email);
+    }
+    public Creator verifyAccount(String confirmationToken)
+    {
+        Creator creator = this.creatorRepository.findByConfirmationToken(confirmationToken);
+        if (creator != null) {
+            creator.setVerified(true);
+            creator.setConfirmationToken(null);
+            this.creatorRepository.save(creator);
+            System.out.println("heibfdsvbisuhv");
+            return creator;
+        } else {
+            throw new NoSuchUserException();
+        }
     }
 }

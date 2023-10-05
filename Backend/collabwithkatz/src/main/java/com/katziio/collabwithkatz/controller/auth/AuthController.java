@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.controller;
+package com.katziio.collabwithkatz.controller.auth;
 
 import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/v1/auth")
 public class AuthController {
 
     @Autowired
@@ -48,6 +48,7 @@ public class AuthController {
     public ResponseEntity<EditorDTO> saveEditor(@RequestBody Editor editor) {
         String password = passwordEncoder.encode(editor.getPassword());
         editor.setPassword(password);
+        editor.setVerified(false);
         return new ResponseEntity<>(editorService.saveEditor(editor),HttpStatus.CREATED);
     }
 
@@ -55,6 +56,7 @@ public class AuthController {
     public ResponseEntity<CreatorDTO> addCreator(@RequestBody Creator creator) {
         String password = passwordEncoder.encode(creator.getPassword());
         creator.setPassword(password);
+        creator.setVerified(false);
         return new ResponseEntity<>(creatorService.addCreator(creator),HttpStatus.CREATED);
     }
 
@@ -71,6 +73,18 @@ public class AuthController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
+    }
+
+    @PostMapping("/editor/verifyEditor/{token}")
+    public Editor confirmEditorAccount(@PathVariable("token") String confirmationToken) {
+        System.out.println("confirmEditor");
+        return this.editorService.verifyAccount(confirmationToken);
+    }
+
+    @PostMapping("/creator/verifyCreator/{token}")
+    public Creator confirmCreatorAccount(@PathVariable("token") String confirmationToken) {
+        System.out.println("confirmEditor");
+        return this.creatorService.verifyAccount(confirmationToken);
     }
 
 }
