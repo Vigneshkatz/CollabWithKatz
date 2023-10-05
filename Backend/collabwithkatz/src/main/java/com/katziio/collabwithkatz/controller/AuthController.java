@@ -45,17 +45,17 @@ public class AuthController {
     }
 
     @PostMapping("/editor/add")
-    public EditorDTO saveEditor(@RequestBody Editor editor) {
+    public ResponseEntity<EditorDTO> saveEditor(@RequestBody Editor editor) {
         String password = passwordEncoder.encode(editor.getPassword());
         editor.setPassword(password);
-        return editorService.saveEditor(editor);
+        return new ResponseEntity<>(editorService.saveEditor(editor),HttpStatus.CREATED);
     }
 
     @PostMapping("/creator/add")
-    public CreatorDTO addCreator(@RequestBody Creator creator) {
+    public ResponseEntity<CreatorDTO> addCreator(@RequestBody Creator creator) {
         String password = passwordEncoder.encode(creator.getPassword());
         creator.setPassword(password);
-        return creatorService.addCreator(creator);
+        return new ResponseEntity<>(creatorService.addCreator(creator),HttpStatus.CREATED);
     }
 
     @PostMapping("/creator/login")
