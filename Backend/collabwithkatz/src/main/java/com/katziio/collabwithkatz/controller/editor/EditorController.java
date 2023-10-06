@@ -1,17 +1,13 @@
 package com.katziio.collabwithkatz.controller.editor;
 
-//import com.katziio.collabwithkatz.config.jwt.JwtHelper;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
-import com.katziio.collabwithkatz.dto.jwt.JwtResponse;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,154 +17,85 @@ import java.util.List;
 @CrossOrigin("*")
 public class EditorController {
 
-
-    @Autowired
-    private AuthenticationManager manager;
-
-//    @Autowired
-//    private JwtHelper helper;
-
-
     @Autowired
     private EditorService editorService;
 
-    //    get all user
-    @GetMapping("/allEditors")
-    public List<EditorDTO> getAllEditors() {
-        return this.editorService.getAllEditors();
+    @GetMapping("/all")
+    public ResponseEntity<List<EditorDTO>> getAllEditors() {
+        List<EditorDTO> editors = editorService.getAllEditors();
+        return new ResponseEntity<>(editors, HttpStatus.OK);
     }
 
-    //    get user by id
-    @GetMapping("/editorById")
-    public EditorDTO getEditorsById(@RequestParam Long id) {
-        return this.editorService.getEditorById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<EditorDTO> getEditorById(@RequestParam Long id) {
+        EditorDTO editor = editorService.getEditorById(id);
+        return new ResponseEntity<>(editor, HttpStatus.OK);
     }
 
-    //    add editor
-    @PostMapping("/addEditor")
-    public EditorDTO saveEditor(@RequestBody Editor editor) {
-        return this.editorService.saveEditor(editor);
+    @PutMapping("/update")
+    public ResponseEntity<EditorDTO> updateEditor(@RequestBody Editor editor, @RequestParam Long editorId) {
+        EditorDTO updatedEditor = editorService.updateEditor(editor, editorId);
+        return new ResponseEntity<>(updatedEditor, HttpStatus.OK);
     }
 
-    //    update editor
-    @PutMapping("/updateEditor")
-    public EditorDTO updateEditor(@RequestBody Editor editor, @RequestParam Long editorId) {
-        return this.editorService.updateEditor(editor, editorId);
-    }
-
-    //    delete editor
     @DeleteMapping("/delete")
-    public EditorDTO deleteEditor(@RequestParam Long editorId) {
-        return this.editorService.deleteEditor(editorId);
+    public ResponseEntity<EditorDTO> deleteEditor(@RequestParam Long editorId) {
+        EditorDTO deletedEditor = editorService.deleteEditor(editorId);
+        return new ResponseEntity<>(deletedEditor, HttpStatus.OK);
     }
 
-    //    Search Editors by Name:
     @GetMapping("/searchByName")
-    public List<EditorDTO> searchEditorByName(@RequestParam String name) {
-        return this.editorService.searchEditorByName(name);
+    public ResponseEntity<List<EditorDTO>> searchEditorsByName(@RequestParam String name) {
+        List<EditorDTO> editors = editorService.searchEditorByName(name);
+        return new ResponseEntity<>(editors, HttpStatus.OK);
     }
 
-//    Filter Editors by Age Range:
     @GetMapping("/filterByAge")
-    public List<EditorDTO> filterEditorByAge(@RequestParam int minAge,@RequestParam int maxAge) {
-        return this.editorService.filterEditorByAge(minAge,maxAge);
+    public ResponseEntity<List<EditorDTO>> filterEditorsByAge(@RequestParam int minAge, @RequestParam int maxAge) {
+        List<EditorDTO> editors = editorService.filterEditorByAge(minAge, maxAge);
+        return new ResponseEntity<>(editors, HttpStatus.OK);
     }
 
-//    Filter Editors by Country
     @GetMapping("/filterByCountry")
-    public List<EditorDTO> filterEditorByCountry(@RequestParam String countryName) {
-        return this.editorService.filterEditorByCountry(countryName);
+    public ResponseEntity<List<EditorDTO>> filterEditorsByCountry(@RequestParam String countryName) {
+        List<EditorDTO> editors = editorService.filterEditorByCountry(countryName);
+        return new ResponseEntity<>(editors, HttpStatus.OK);
     }
-//    Sort Editors by Experience
-    @GetMapping("/sortBy/{sortBy}")
-    public List<EditorDTO> sortEditorsByExperience(@PathVariable String sortBy) {
-        return this.editorService.sortEditorsBy(sortBy);
-//        return this.editorService.sortEditorsByExperience();
-    }
-//    Retrieve Editors by Gender
-    @GetMapping("/filterByGender")
-    public List<EditorDTO> getEditorsByGender(@RequestParam String gender) {
-        return this.editorService.getEditorsByGender(gender);
-    }
-//    Count Total Editors:
-    @GetMapping("/editorsCount")
-    public Long countTotalEditors() {
-        return this.editorService.countTotalEditors();
-    }
-//    Retrieve Editors by Email
-    @GetMapping("/byEmail")
-    public EditorDTO getEditorByEmail(@RequestParam String email) {
-        return this.editorService.getEditorByEmail(email);
-    }
-//    Retrieve Editors by Experience Range
-    @GetMapping("/byExperienceRange")
-    public List<EditorDTO> getEditorByExperienceRange(@RequestParam int minExperience,@RequestParam int maxExperience) {
-        return this.editorService.getEditorByExperienceRange(minExperience,maxExperience);
-    }
-    @GetMapping("/login")
-    public EditorDTO isValidUser(@RequestParam String email,@RequestParam String password) {
-        System.out.println(email+" "+password);
-        this.doAuthenticate("admin", password);
-//        UserDetails userDetails = userDetailsService.loadUserByUsername("admin");
-//        String token = this.helper.generateToken(userDetails);
-//        JwtResponse response = JwtResponse.builder()
-//                .jwtToken(token)
-//                .username(userDetails.getUsername()).build();
-//        System.out.println(response.getJwtToken());
-        return this.editorService.isValidUser(email,password);
 
+    @GetMapping("/sortBy/{sortBy}")
+    public ResponseEntity<List<EditorDTO>> sortEditorsByExperience(@PathVariable String sortBy) {
+        List<EditorDTO> editors = editorService.sortEditorsBy(sortBy);
+        return new ResponseEntity<>(editors, HttpStatus.OK);
+    }
+
+    @GetMapping("/filterByGender")
+    public ResponseEntity<List<EditorDTO>> getEditorsByGender(@RequestParam String gender) {
+        List<EditorDTO> editors = editorService.getEditorsByGender(gender);
+        return new ResponseEntity<>(editors, HttpStatus.OK);
+    }
+
+    @GetMapping("/editorsCount")
+    public ResponseEntity<Long> countTotalEditors() {
+        Long count = editorService.countTotalEditors();
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
+    @GetMapping("/byEmail")
+    public ResponseEntity<EditorDTO> getEditorByEmail(@RequestParam String email) {
+        EditorDTO editor = editorService.getEditorByEmail(email);
+        return new ResponseEntity<>(editor, HttpStatus.OK);
+    }
+
+    @GetMapping("/byExperienceRange")
+    public ResponseEntity<List<EditorDTO>> getEditorByExperienceRange(@RequestParam int minExperience, @RequestParam int maxExperience) {
+        List<EditorDTO> editors = editorService.getEditorByExperienceRange(minExperience, maxExperience);
+        return new ResponseEntity<>(editors, HttpStatus.OK);
     }
 
     @GetMapping("{editorId}/getProjects")
-    public List<ProjectDTO> getProjectsByCreatorId(@PathVariable Long editorId)
-    {
-        return this.editorService.getProjectByEditorId(editorId);
+    public ResponseEntity<List<ProjectDTO>> getProjectsByEditorId(@PathVariable Long editorId) {
+        List<ProjectDTO> projects = editorService.getProjectByEditorId(editorId);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
-
-    private void doAuthenticate(String email, String password) {
-
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
-        try {
-            manager.authenticate(authentication);
-
-
-        } catch (BadCredentialsException e) {
-            throw new BadCredentialsException(" Invalid Username or Password  !!");
-        }
-
-    }
-
-    @ExceptionHandler(BadCredentialsException.class)
-    public String exceptionHandler() {
-        return "Credentials Invalid !!";
-    }
-//    Retrieve Editors Created After a Specific Date
-
-//    Retrieve Editors Updated After a Specific Date:
-
-//    Retrieve Editors by Portfolio Link
-
-//    Retrieve Editors with Certifications
-
-//    Retrieve Editors Speaking a Specific Language
-
-//    Retrieve Editors by Age and Country
-
-//    Retrieve Editors by Multiple Filters
-
-//    Retrieve Editors with Most Experience
-
-//    Retrieve Editors with Least Experience
-
-//    Retrieve Editors Ordered by Creation Date
-
-//    Add/Edit/Delete Editor's Certifications
-
-//    Add/Edit/Delete Editor's Sample Videos:
-
-//    Add/Edit/Delete Editor's Social Media Links
-
-//    Update Editor's Profile Picture URL
-
 
 }

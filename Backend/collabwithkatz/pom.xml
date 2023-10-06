@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.katziio</groupId>
-    <artifactId>codewithkatz</artifactId>
+    <artifactId>CollabWithKatz</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>CollabWithKatz</name>
     <description>Loading</description>
@@ -78,6 +78,11 @@
 <!--            <artifactId>spring-boot-starter-security</artifactId>-->
 <!--            <version>3.1.0</version>-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>

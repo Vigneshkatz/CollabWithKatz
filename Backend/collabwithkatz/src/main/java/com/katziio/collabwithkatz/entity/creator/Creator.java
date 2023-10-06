@@ -16,10 +16,14 @@ public class Creator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String name;
+    @Column(unique = true)
     private String email;
     private String password;
-
+    private boolean isVerified;
+    @Column(name = "confirmation_token")
+    private String confirmationToken;
     @OneToMany(targetEntity = Upvote.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
     private List<Upvote> upvoteList;

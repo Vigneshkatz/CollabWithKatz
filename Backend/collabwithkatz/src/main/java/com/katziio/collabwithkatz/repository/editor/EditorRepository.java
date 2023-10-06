@@ -44,4 +44,11 @@ public interface EditorRepository extends JpaRepository<Editor,Long> {
             "CASE WHEN :sortBy = 'experience' THEN e.experienceInYears END DESC, " +
             "CASE WHEN :sortBy = 'createdAt' THEN e.profileCreatedAt END ASC")
     List<EditorDTO> sortEditorBy(@Param("sortBy") String sortBy);
+
+    @Query("SELECT e FROM Editor e WHERE e.email = :email")
+    Editor findByEmail(@Param("email") String email);
+
+    @Query("SELECT e FROM Editor e WHERE e.confirmationToken = :token")
+    Editor findByConfirmationToken(@Param("token") String token);
+
 }

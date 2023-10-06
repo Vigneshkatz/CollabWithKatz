@@ -42,7 +42,6 @@ public class EditorDTO {
         this.id = editor.getId();
         this.name = editor.getName();
         this.about = editor.getAbout();
-        this.password=editor.getPassword();
         this.email = editor.getEmail();
         this.age=editor.getAge();
         this.country = editor.getCountry();

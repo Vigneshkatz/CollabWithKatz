@@ -19,8 +19,10 @@ public class Editor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String name;
     private String about;
+    @Column(unique = true)
     private String email;
     private String password;
     private int age;
@@ -32,6 +34,9 @@ public class Editor {
     private String portfolioLink;
     private Date profileCreatedAt;
     private Date profileUpdatedAt;
+    private boolean isVerified;
+    @Column(name = "confirmation_token")
+    private String confirmationToken;
 
     @OneToMany(targetEntity = EditorCertification.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
@@ -77,6 +82,7 @@ public class Editor {
         this.communicationLanguages= editor.getCommunicationLanguages();
         this.sampleVideoList=editor.getSampleVideoList();
         this.socialMediaList=editor.getSocialMediaList();
+        this.isVerified = editor.isVerified();
     }
 
     @Override
