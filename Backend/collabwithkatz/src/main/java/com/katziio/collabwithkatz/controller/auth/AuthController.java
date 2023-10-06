@@ -45,7 +45,7 @@ public class AuthController {
     }
 
     @PostMapping("/editor/add")
-    public ResponseEntity<EditorDTO> saveEditor(@RequestBody Editor editor) {
+    public ResponseEntity<EditorDTO> saveEditor(@RequestBody Editor editor) throws Exception {
         String password = passwordEncoder.encode(editor.getPassword());
         editor.setPassword(password);
         editor.setVerified(false);
@@ -53,7 +53,7 @@ public class AuthController {
     }
 
     @PostMapping("/creator/add")
-    public ResponseEntity<CreatorDTO> addCreator(@RequestBody Creator creator) {
+    public ResponseEntity<CreatorDTO> addCreator(@RequestBody Creator creator) throws Exception {
         String password = passwordEncoder.encode(creator.getPassword());
         creator.setPassword(password);
         creator.setVerified(false);

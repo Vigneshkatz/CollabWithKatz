@@ -5,14 +5,17 @@ import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
-import com.katziio.collabwithkatz.repository.project.ProjectRepository;
+import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
+import com.katziio.collabwithkatz.repository.project.ProjectRepository;
+import com.katziio.collabwithkatz.service.email.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class EditorService {
@@ -21,6 +24,9 @@ public class EditorService {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     public EditorDTO deleteEditor(Long editorId) {
         Optional<Editor> editor = editorRepository.findById(editorId);
@@ -38,12 +44,21 @@ public class EditorService {
             Editor editorToUpdate = new Editor(toUpdateEditor);
             editorRepository.save(editorToUpdate);
         }
-
         throw new NoSuchUserException(editorId);
     }
 
-    public EditorDTO saveEditor(Editor editor) {
-        return new EditorDTO(editorRepository.save(editor));
+    public EditorDTO saveEditor(Editor editor) throws Exception {
+       Editor editorCheck = this.editorRepository.findByEmail(editor.getEmail());
+        if (editorCheck == null) {
+            editor.setConfirmationToken(UUID.randomUUID().toString());
+            System.out.println(editor.getEmail());
+            EditorDTO editorDTO = new EditorDTO(editorRepository.save(editor));
+            this.emailSenderService.initiateEmail(editor.getConfirmationToken(),editor.getEmail(),false);
+            System.out.println("Editor successful Registration");
+            return editorDTO;
+        }
+       throw new UserAlreadyExistsException(editor.getEmail());
+
     }
 
     public List<EditorDTO> getAllEditors() {
@@ -138,5 +153,19 @@ public class EditorService {
 
     public List<EditorDTO> sortEditorsBy(String sortBy) {
         return editorRepository.sortEditorBy(sortBy);
+    }
+
+    public Editor verifyAccount(String confirmationToken)
+    {
+        Editor editor = this.editorRepository.findByConfirmationToken(confirmationToken);
+        if (editor != null) {
+            editor.setVerified(true);
+            editor.setConfirmationToken(null);
+            this.editorRepository.save(editor);
+            System.out.println("heibfdsvbisuhv");
+            return editor;
+        } else {
+           throw new NoSuchUserException();
+        }
     }
 }
