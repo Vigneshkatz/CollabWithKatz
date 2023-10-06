@@ -45,7 +45,7 @@ public class AuthController {
     }
 
     @PostMapping("/editor/add")
-    public ResponseEntity<EditorDTO> saveEditor(@RequestBody Editor editor) throws Exception {
+    public ResponseEntity<EditorDTO> saveEditor(@RequestBody Editor editor) {
         String password = passwordEncoder.encode(editor.getPassword());
         editor.setPassword(password);
         editor.setVerified(false);

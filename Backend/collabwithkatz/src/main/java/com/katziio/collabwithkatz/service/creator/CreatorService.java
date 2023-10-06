@@ -34,7 +34,7 @@ public class CreatorService {
     @Autowired
     private EmailSenderService emailSenderService;
 
-    public CreatorDTO addCreator(Creator creator) throws Exception {
+    public CreatorDTO addCreator(Creator creator) {
         Creator creatorCheck = this.creatorRepository.findByEmailVerify(creator.getEmail());
         if (creatorCheck== null) {
             creator.setConfirmationToken(UUID.randomUUID().toString());

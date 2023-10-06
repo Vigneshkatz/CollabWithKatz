@@ -18,12 +18,12 @@ public class EmailSenderService {
     }
 
     @Async
-    public void sendEmail(SimpleMailMessage email) throws Exception {
+    public void sendEmail(SimpleMailMessage email) {
         javaMailSender.send(email);
 
     }
 
-    public void initiateEmail(String confirmationToken,String toEmail,boolean isCreator) throws Exception {
+    public void initiateEmail(String confirmationToken,String toEmail,boolean isCreator) {
         if (isCreator)
         {
             System.out.println("creator verify");

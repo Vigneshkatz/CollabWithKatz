@@ -47,7 +47,7 @@ public class EditorService {
         throw new NoSuchUserException(editorId);
     }
 
-    public EditorDTO saveEditor(Editor editor) throws Exception {
+    public EditorDTO saveEditor(Editor editor)  {
        Editor editorCheck = this.editorRepository.findByEmail(editor.getEmail());
         if (editorCheck == null) {
             editor.setConfirmationToken(UUID.randomUUID().toString());
