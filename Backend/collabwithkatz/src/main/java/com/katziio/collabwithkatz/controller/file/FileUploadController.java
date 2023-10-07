@@ -1,6 +1,7 @@
 package com.katziio.collabwithkatz.controller.file;
 
 import com.katziio.collabwithkatz.service.firebase.FireBaseService;
+import com.katziio.collabwithkatz.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ public class FileUploadController {
     public String uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             System.out.println(file.getName());
-            return fireBaseService.uploadFile(file, "filename");
+            return fireBaseService.uploadFile(file, Util.generateUniqueFileName());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

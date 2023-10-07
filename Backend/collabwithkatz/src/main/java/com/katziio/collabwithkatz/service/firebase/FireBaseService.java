@@ -31,6 +31,7 @@ public class FireBaseService {
         this.storage = FirebaseConfig.initializeFirebaseApp();
     }
     public String uploadFile(MultipartFile file, String fileName) throws IOException {
+        System.out.println(fileName);
         BlobId blobId = BlobId.of(BUCKET, fileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
         byte[] fileBytes = file.getBytes();
