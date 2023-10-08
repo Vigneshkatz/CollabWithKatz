@@ -6,6 +6,7 @@ import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import com.katziio.collabwithkatz.config.firebase.FirebaseConfig;
+import com.katziio.collabwithkatz.service.util.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
@@ -30,13 +31,13 @@ public class FireBaseService {
     public FireBaseService(){
         this.storage = FirebaseConfig.initializeFirebaseApp();
     }
-    public String uploadFile(MultipartFile file, String fileName) throws IOException {
-        System.out.println(fileName);
-        BlobId blobId = BlobId.of(BUCKET, fileName);
+    public String uploadFile(MultipartFile file) throws IOException {
+        String randomFileName = UtilService.generateUniqueString();
+        BlobId blobId = BlobId.of(BUCKET, randomFileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
         byte[] fileBytes = file.getBytes();
         storage.create(blobInfo, fileBytes);
-        String encodedFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
+        String encodedFileName = URLEncoder.encode(randomFileName, StandardCharsets.UTF_8);
         String downloadUrl = String.format(DOWNLOAD_URL, encodedFileName);
         return downloadUrl;
     }
