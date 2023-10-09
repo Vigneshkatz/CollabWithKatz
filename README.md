@@ -46,5 +46,5 @@ ng serve`
 
 ## Contact
 - **Email** [vignesh000129@gmail.com]
-- [Contact](https://www.linkedin.com/in/vignesh-m-145002254)
+- [LinkedIn](https://www.linkedin.com/in/vignesh-m-145002254)
 
