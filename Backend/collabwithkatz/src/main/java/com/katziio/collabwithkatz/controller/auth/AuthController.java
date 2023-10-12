@@ -75,13 +75,13 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/editor/verifyEditor/{token}")
+    @PutMapping("/editor/verifyEditor/{token}")
     public Editor confirmEditorAccount(@PathVariable("token") String confirmationToken) {
         System.out.println("confirmEditor");
         return this.editorService.verifyAccount(confirmationToken);
     }
 
-    @PostMapping("/creator/verifyCreator/{token}")
+    @PutMapping("/creator/verifyCreator/{token}")
     public Creator confirmCreatorAccount(@PathVariable("token") String confirmationToken) {
         System.out.println("confirmEditor");
         return this.creatorService.verifyAccount(confirmationToken);

@@ -9,13 +9,13 @@ import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
 import com.katziio.collabwithkatz.repository.project.ProjectRepository;
 import com.katziio.collabwithkatz.service.email.EmailSenderService;
+import com.katziio.collabwithkatz.service.firebase.FireBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.io.IOException;
+import java.util.*;
 
 @Service
 public class EditorService {
@@ -41,10 +41,50 @@ public class EditorService {
     public EditorDTO updateEditor(Editor toUpdateEditor, Long editorId) {
         Optional<Editor> editor = editorRepository.findById(editorId);
         if (editor.isPresent()) {
-            Editor editorToUpdate = new Editor(toUpdateEditor);
-            editorRepository.save(editorToUpdate);
+            Editor dbEditor = editor.get();
+            if(toUpdateEditor.getName()!=null)
+            {
+                dbEditor.setName(toUpdateEditor.getName());
+            }
+            if(toUpdateEditor.getAge()!=0)
+            {
+                dbEditor.setAge(toUpdateEditor.getAge());
+            }
+            if(toUpdateEditor.getExperienceInYears()!=0)
+            {
+                dbEditor.setExperienceInYears(toUpdateEditor.getExperienceInYears());
+            }
+            if(!toUpdateEditor.getAbout().isEmpty())
+            {
+                dbEditor.setAbout(toUpdateEditor.getAbout());
+            }
+            if(!toUpdateEditor.getCountry().isEmpty())
+            {
+                dbEditor.setCountry(toUpdateEditor.getCountry());
+            }
+            if(!toUpdateEditor.getPhone().isEmpty())
+            {
+                dbEditor.setPhone(toUpdateEditor.getPhone());
+            }
+            if(!toUpdateEditor.getPhone().isEmpty())
+            {
+                dbEditor.setPhone(toUpdateEditor.getPhone());
+            }
+            if(!toUpdateEditor.getProfilePictureUrl().isEmpty())
+            {
+                dbEditor.setProfilePictureUrl(toUpdateEditor.getProfilePictureUrl());
+            }
+            if(!toUpdateEditor.getProfilePictureUrl().isEmpty())
+            {
+                dbEditor.setProfilePictureUrl(toUpdateEditor.getProfilePictureUrl());
+            }
+            Date updatedDate = Calendar.getInstance().getTime();
+            dbEditor.setProfileUpdatedAt(updatedDate);
+            Editor editorToUpdate = new Editor(dbEditor);
+            return new EditorDTO(editorRepository.save(editorToUpdate));
+        }else {
+            throw new NoSuchUserException(editorId);
         }
-        throw new NoSuchUserException(editorId);
     }
 
     public EditorDTO saveEditor(Editor editor)  {

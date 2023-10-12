@@ -4,6 +4,7 @@ import com.katziio.collabwithkatz.entity.creator.Project;
 import com.katziio.collabwithkatz.entity.creator.Review;
 import com.katziio.collabwithkatz.entity.creator.Upvote;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Editor {
     private Long id;
     @Column(unique = true)
     private String name;
+    @Size(max = 500)
     private String about;
     @Column(unique = true)
     private String email;
@@ -83,6 +85,7 @@ public class Editor {
         this.sampleVideoList=editor.getSampleVideoList();
         this.socialMediaList=editor.getSocialMediaList();
         this.isVerified = editor.isVerified();
+        this.about = editor.getAbout();
     }
 
     @Override
