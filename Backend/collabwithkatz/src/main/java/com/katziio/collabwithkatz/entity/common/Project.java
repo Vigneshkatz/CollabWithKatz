@@ -2,6 +2,7 @@ package com.katziio.collabwithkatz.entity.common;
 
 import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.editor.Editor;
+import com.katziio.collabwithkatz.entity.enums.ProjectStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.lang.Long;
-
 
 @Data
 @NoArgsConstructor
@@ -30,6 +30,7 @@ public class Project {
     @JoinColumn(name = "editor_id")
     private Editor editor;
 
+    private ProjectStatus status;
     private String projectName;
     private String projectDescription;
     private String rawVideoURl;

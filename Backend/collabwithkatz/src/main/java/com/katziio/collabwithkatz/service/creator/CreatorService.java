@@ -5,7 +5,9 @@ import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
+import com.katziio.collabwithkatz.entity.enums.ProjectStatus;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
+import com.katziio.collabwithkatz.exception.ProjectNotFoundException;
 import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
 import com.katziio.collabwithkatz.repository.creator.CreatorRepository;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
@@ -38,7 +40,7 @@ public class CreatorService {
         Creator creatorCheck = this.creatorRepository.findByEmailVerify(creator.getEmail());
         if (creatorCheck== null) {
             creator.setConfirmationToken(UUID.randomUUID().toString());
-            this.emailSenderService.initiateEmail(creator.getConfirmationToken(),creator.getEmail(),true);
+//            this.emailSenderService.initiateEmail(creator.getConfirmationToken(),creator.getEmail(),true);
             System.out.println("Creator successful Registration");
             return new CreatorDTO(creatorRepository.save(creator));
         }
@@ -82,7 +84,15 @@ public class CreatorService {
 
     public ProjectDTO addProject(Project project, Long creatorId, Long editorId) {
         Editor editor = editorService.getEditorByIdForMapping(editorId);
-        Creator creator = getCreatorByIdForMapping(editorId);
+        Creator creator = getCreatorByIdForMapping(creatorId);
+        project.setCreator(creator);
+        project.setEditor(editor);
+        projectRepository.save(project);
+        return new ProjectDTO(project);
+    }
+    public ProjectDTO listProject(Project project, Long creatorId) {
+        Editor editor = null;
+        Creator creator = getCreatorByIdForMapping(creatorId);
         project.setCreator(creator);
         project.setEditor(editor);
         projectRepository.save(project);
@@ -105,6 +115,19 @@ public class CreatorService {
             projectDTOList.add(new ProjectDTO(project));
         }
         return projectDTOList;
+    }
+
+    public ProjectDTO changeProjectStatus(String status,Project project)
+    {
+        ProjectStatus updatedStatus = switch (status.toLowerCase()) {
+            case "started" -> ProjectStatus.STARTED;
+            case "progress" -> ProjectStatus.PROGRESS;
+            case "review" -> ProjectStatus.REVIEW;
+            case "completed" -> ProjectStatus.COMPLETED;
+            default -> throw new ProjectNotFoundException();
+        };
+        project.setStatus(updatedStatus);
+        return new ProjectDTO(this.projectRepository.save(project));
     }
 
     public CreatorDTO isValidUser(String email, String password) {

@@ -44,6 +44,12 @@ public class CreatorController {
         return new ResponseEntity<>(addedProject, HttpStatus.CREATED);
     }
 
+    @PostMapping("/addProject/{creatorId}")
+    public ResponseEntity<ProjectDTO> listProject(@RequestBody Project project, @PathVariable Long creatorId) {
+        ProjectDTO addedProject = creatorService.listProject(project, creatorId);
+        return new ResponseEntity<>(addedProject, HttpStatus.CREATED);
+    }
+
     @GetMapping("/{creatorId}/projects")
     public ResponseEntity<List<ProjectDTO>> getProjectsByCreatorId(@PathVariable Long creatorId) {
         List<ProjectDTO> projects = creatorService.getProjectsByCreatorId(creatorId);
@@ -54,5 +60,11 @@ public class CreatorController {
     public ResponseEntity<List<ProjectDTO>> getNotAssignedProjects() {
         List<ProjectDTO> projects = creatorService.getNotAssignedProjects();
         return new ResponseEntity<>(projects, HttpStatus.OK);
+    }
+
+    @PutMapping("/project/changeStatus/{status}")
+    public ResponseEntity<ProjectDTO> changeProjectStatus(@PathVariable String status,@RequestParam Project project) {
+        ProjectDTO projectUpdated = creatorService.changeProjectStatus(status,project);
+        return new ResponseEntity<>(projectUpdated, HttpStatus.OK);
     }
 }
