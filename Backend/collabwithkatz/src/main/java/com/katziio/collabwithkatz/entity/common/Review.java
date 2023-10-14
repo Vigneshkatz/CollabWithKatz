@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.entity.creator;
+package com.katziio.collabwithkatz.entity.common;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

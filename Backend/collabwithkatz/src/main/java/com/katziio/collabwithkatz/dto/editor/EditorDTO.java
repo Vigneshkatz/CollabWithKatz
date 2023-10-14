@@ -1,8 +1,8 @@
 package com.katziio.collabwithkatz.dto.editor;
 
-import com.katziio.collabwithkatz.entity.creator.Project;
-import com.katziio.collabwithkatz.entity.creator.Review;
-import com.katziio.collabwithkatz.entity.creator.Upvote;
+import com.katziio.collabwithkatz.entity.common.Project;
+import com.katziio.collabwithkatz.entity.common.Review;
+import com.katziio.collabwithkatz.entity.common.Upvote;
 import com.katziio.collabwithkatz.entity.editor.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,5 +1,6 @@
-package com.katziio.collabwithkatz.entity.creator;
+package com.katziio.collabwithkatz.entity.common;
 
+import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,11 +22,11 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "creator_id")
     private Creator creator;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     @JoinColumn(name = "editor_id")
     private Editor editor;
 

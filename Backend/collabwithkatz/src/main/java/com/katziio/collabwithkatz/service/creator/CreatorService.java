@@ -3,7 +3,7 @@ package com.katziio.collabwithkatz.service.creator;
 import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.entity.creator.Creator;
-import com.katziio.collabwithkatz.entity.creator.Project;
+import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
 import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
@@ -98,6 +98,15 @@ public class CreatorService {
         return projectDTOList;
     }
 
+    public List<ProjectDTO>  getNotAssignedProjects() {
+        List<Project> projectList = projectRepository.findProjectsWithNoEditor();
+        List<ProjectDTO> projectDTOList = new ArrayList<>();
+        for (Project project : projectList) {
+            projectDTOList.add(new ProjectDTO(project));
+        }
+        return projectDTOList;
+    }
+
     public CreatorDTO isValidUser(String email, String password) {
         CreatorDTO creatorDTO = creatorRepository.isValidLogin(email, password);
         if (creatorDTO != null) {
@@ -120,7 +129,7 @@ public class CreatorService {
             creator.setVerified(true);
             creator.setConfirmationToken(null);
             this.creatorRepository.save(creator);
-            System.out.println("heibfdsvbisuhv");
+//            System.out.println("heibfdsvbisuhv");
             return creator;
         } else {
             throw new NoSuchUserException();

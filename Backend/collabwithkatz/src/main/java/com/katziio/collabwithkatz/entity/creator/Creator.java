@@ -1,5 +1,7 @@
 package com.katziio.collabwithkatz.entity.creator;
 
+import com.katziio.collabwithkatz.entity.common.Review;
+import com.katziio.collabwithkatz.entity.common.Upvote;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

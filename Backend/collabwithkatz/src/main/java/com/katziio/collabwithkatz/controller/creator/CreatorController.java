@@ -3,7 +3,7 @@ package com.katziio.collabwithkatz.controller.creator;
 import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.entity.creator.Creator;
-import com.katziio.collabwithkatz.entity.creator.Project;
+import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.service.creator.CreatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,6 +47,12 @@ public class CreatorController {
     @GetMapping("/{creatorId}/projects")
     public ResponseEntity<List<ProjectDTO>> getProjectsByCreatorId(@PathVariable Long creatorId) {
         List<ProjectDTO> projects = creatorService.getProjectsByCreatorId(creatorId);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
+    }
+
+    @GetMapping("/projects")
+    public ResponseEntity<List<ProjectDTO>> getNotAssignedProjects() {
+        List<ProjectDTO> projects = creatorService.getNotAssignedProjects();
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 }

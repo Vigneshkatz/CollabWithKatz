@@ -1,7 +1,7 @@
 package com.katziio.collabwithkatz.dto.creator;
 
 import com.katziio.collabwithkatz.entity.creator.Creator;
-import com.katziio.collabwithkatz.entity.creator.Project;
+import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
