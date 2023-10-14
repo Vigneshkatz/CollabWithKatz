@@ -87,14 +87,15 @@ public class CreatorService {
         Creator creator = getCreatorByIdForMapping(creatorId);
         project.setCreator(creator);
         project.setEditor(editor);
+        project.setStatus(ProjectStatus.STARTED);
         projectRepository.save(project);
         return new ProjectDTO(project);
     }
     public ProjectDTO listProject(Project project, Long creatorId) {
-        Editor editor = null;
+        project.setStatus(ProjectStatus.NOTSTARTED);
         Creator creator = getCreatorByIdForMapping(creatorId);
         project.setCreator(creator);
-        project.setEditor(editor);
+        project.setEditor(null);
         projectRepository.save(project);
         return new ProjectDTO(project);
     }
