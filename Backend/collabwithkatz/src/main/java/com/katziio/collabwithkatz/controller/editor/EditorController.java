@@ -5,6 +5,7 @@ import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import com.katziio.collabwithkatz.service.firebase.FireBaseService;
+import com.katziio.collabwithkatz.service.upvote.UpvoteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,9 @@ public class EditorController {
 
     @Autowired
     private EditorService editorService;
+
+    @Autowired
+    private UpvoteService upvoteService;
 
     @GetMapping("/all")
     public ResponseEntity<List<EditorDTO>> getAllEditors() {
@@ -104,6 +108,13 @@ public class EditorController {
     public ResponseEntity<List<ProjectDTO>> getProjectsByEditorId(@PathVariable Long editorId) {
         List<ProjectDTO> projects = editorService.getProjectByEditorId(editorId);
         return new ResponseEntity<>(projects, HttpStatus.OK);
+    }
+
+    @GetMapping("{editorId}/upvote")
+    public  ResponseEntity<Long> getEditorUpvote(@PathVariable Long editorId)
+    {
+        Long upvoteCount = this.upvoteService.getEditorUpvoteCount(editorId);
+        return new ResponseEntity<>(upvoteCount,HttpStatus.OK);
     }
 
 }

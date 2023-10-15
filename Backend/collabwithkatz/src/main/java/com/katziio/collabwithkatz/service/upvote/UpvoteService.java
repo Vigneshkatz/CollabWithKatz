@@ -16,8 +16,9 @@ public class UpvoteService {
         Boolean upvoteValue = true;
         if(upvote !=null)
         {
-            upvoteValue =upvote.getIsVoted();
             upvote.setIsVoted(!upvote.getIsVoted());
+            upvoteValue =upvote.getIsVoted();
+
         }else {
             upvote = new Upvote();
             upvote.setCreatorId(creatorId);

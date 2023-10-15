@@ -26,9 +26,9 @@ public class Creator {
     private boolean isVerified;
     @Column(name = "confirmation_token")
     private String confirmationToken;
-    @OneToMany(targetEntity = Upvote.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
-    private List<Upvote> upvoteList;
+//    @OneToMany(targetEntity = Upvote.class,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
+//    private List<Upvote> upvoteList;
 
     @OneToMany(targetEntity = Review.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")

@@ -7,9 +7,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface UpvoteRepository extends JpaRepository<Upvote,Long> {
 
-    @Query("SELECT * FROM Upvote u WHERE u.creatorId= :creatorId AND u.editorId= : editorId")
-    Upvote findByCreatorIdEditorId(@Param("creatorId") Long creatorId, @Param("editorId") Long editorId);
+    @Query("SELECT u FROM Upvote u WHERE u.creatorId= :creatorId AND u.editorId= :editorId")
+    Upvote findByCreatorIdEditorId(@Param("editorId")Long editorId,@Param("creatorId")  Long creatorId);
 
-    @Query("SELECT count(*) FROM Upvote u WHERE u.editorId= : editorId")
+    @Query("SELECT count(u) FROM Upvote u WHERE u.editorId= :editorId AND u.isVoted = true")
     Long countUpvoteByEditorId(@Param("editorId") Long editorId);
 }
