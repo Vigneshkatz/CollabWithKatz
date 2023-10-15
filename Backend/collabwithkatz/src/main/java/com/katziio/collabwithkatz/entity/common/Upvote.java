@@ -15,4 +15,6 @@ public class Upvote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Boolean isVoted;
+    private Long creatorId;
+    private Long editorId;
 }

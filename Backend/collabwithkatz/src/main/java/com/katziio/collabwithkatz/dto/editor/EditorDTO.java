@@ -34,7 +34,7 @@ public class EditorDTO {
     private List<EditorSampleVideo> sampleVideoList;
     private List<EditorSocialMedia> socialMediaList;
     private List<Project> projectList;
-    private List<Upvote> upvoteList;
+//    private List<Upvote> upvoteList;
     private List<Review> reviewList;
 
 

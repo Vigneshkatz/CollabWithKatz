@@ -60,9 +60,9 @@ public class Editor {
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<Review> reviewList;
 
-    @OneToMany(targetEntity = Upvote.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
-    private List<Upvote> upvoteList;
+//    @OneToMany(targetEntity = Upvote.class,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
+//    private List<Upvote> upvoteList;
 
     public Editor(Editor editor) {
         Calendar myCal = Calendar.getInstance();

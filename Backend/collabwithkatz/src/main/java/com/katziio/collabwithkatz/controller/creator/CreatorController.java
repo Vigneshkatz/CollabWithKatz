@@ -2,9 +2,10 @@ package com.katziio.collabwithkatz.controller.creator;
 
 import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
-import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.common.Project;
+import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.service.creator.CreatorService;
+import com.katziio.collabwithkatz.service.upvote.UpvoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,10 @@ public class CreatorController {
 
     @Autowired
     private CreatorService creatorService;
+
+    @Autowired
+    private UpvoteService upvoteService;
+
 
     @PutMapping("/update/{id}")
     public ResponseEntity<CreatorDTO> updateCreator(@RequestBody Creator creator, @PathVariable Long id) {
@@ -63,8 +68,16 @@ public class CreatorController {
     }
 
     @PutMapping("/project/changeStatus/{status}")
-    public ResponseEntity<ProjectDTO> changeProjectStatus(@PathVariable String status,@RequestParam Project project) {
-        ProjectDTO projectUpdated = creatorService.changeProjectStatus(status,project);
+    public ResponseEntity<ProjectDTO> changeProjectStatus(@PathVariable String status, @RequestParam Project project) {
+        ProjectDTO projectUpdated = creatorService.changeProjectStatus(status, project);
         return new ResponseEntity<>(projectUpdated, HttpStatus.OK);
+    }
+
+
+    //    upvote
+    @PutMapping("/upvote/changeStatus/{creatorId}/{editorId}")
+    public ResponseEntity<Boolean> changeUpvoteStatus(@PathVariable Long editorId, @PathVariable Long creatorId) {
+        Boolean isStatusChanged = upvoteService.changeUpvoteStatus(editorId, creatorId);
+        return new ResponseEntity<>(isStatusChanged, HttpStatus.OK);
     }
 }

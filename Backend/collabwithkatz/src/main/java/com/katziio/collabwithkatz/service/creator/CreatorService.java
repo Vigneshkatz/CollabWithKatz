@@ -2,6 +2,7 @@ package com.katziio.collabwithkatz.service.creator;
 
 import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
+import com.katziio.collabwithkatz.entity.common.Upvote;
 import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
@@ -12,6 +13,7 @@ import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
 import com.katziio.collabwithkatz.repository.creator.CreatorRepository;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
 import com.katziio.collabwithkatz.repository.project.ProjectRepository;
+import com.katziio.collabwithkatz.repository.upvote.UpvoteRepository;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import com.katziio.collabwithkatz.service.email.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,6 @@ public class CreatorService {
 
     @Autowired
     private EmailSenderService emailSenderService;
-
     public CreatorDTO addCreator(Creator creator) {
         Creator creatorCheck = this.creatorRepository.findByEmailVerify(creator.getEmail());
         if (creatorCheck== null) {
@@ -159,4 +160,5 @@ public class CreatorService {
             throw new NoSuchUserException();
         }
     }
+
 }
