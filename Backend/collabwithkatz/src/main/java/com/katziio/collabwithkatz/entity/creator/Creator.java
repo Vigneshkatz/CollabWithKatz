@@ -30,8 +30,8 @@ public class Creator {
 //    @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
 //    private List<Upvote> upvoteList;
 
-    @OneToMany(targetEntity = Review.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
-    private List<Review> reviewList;
+//    @OneToMany(targetEntity = Review.class,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "creator_fk_id", referencedColumnName = "id")
+//    private List<Review> reviewList;
 
 }

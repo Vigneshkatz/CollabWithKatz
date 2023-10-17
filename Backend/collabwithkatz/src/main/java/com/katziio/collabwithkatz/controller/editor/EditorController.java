@@ -2,6 +2,7 @@ package com.katziio.collabwithkatz.controller.editor;
 
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
+import com.katziio.collabwithkatz.entity.common.Review;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import com.katziio.collabwithkatz.service.firebase.FireBaseService;
@@ -111,10 +112,29 @@ public class EditorController {
     }
 
     @GetMapping("{editorId}/upvote")
-    public  ResponseEntity<Long> getEditorUpvote(@PathVariable Long editorId)
+    public ResponseEntity<Long> getEditorUpvote(@PathVariable Long editorId)
     {
         Long upvoteCount = this.upvoteService.getEditorUpvoteCount(editorId);
         return new ResponseEntity<>(upvoteCount,HttpStatus.OK);
     }
 
+    @PostMapping("/review/add/{editorId}/{creatorId}")
+    public Review addReview(@PathVariable Long editorId,
+                            @PathVariable Long creatorId,
+                            @RequestParam String review)
+    {
+        return this.editorService.addReview(editorId,creatorId,review);
+    }
+
+    @GetMapping("/review/get/{editorId}")
+    public List<Review> getAllReviewsOFEditor(@PathVariable Long editorId)
+    {
+        return this.editorService.getEditorReviewList(editorId);
+    }
+
+    @DeleteMapping ("/review/delete/{editorId}/{creatorId}")
+    public Boolean deleteCreatorReview(@PathVariable Long creatorId,@PathVariable Long editorId)
+    {
+        return this.editorService.deleteReview(creatorId,editorId);
+    }
 }

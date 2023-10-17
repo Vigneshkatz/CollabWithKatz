@@ -53,6 +53,6 @@ public class EditorDTO {
         this.communicationLanguagesList= editor.getCommunicationLanguages();
         this.sampleVideoList=editor.getSampleVideoList();
         this.socialMediaList=editor.getSocialMediaList();
-        this.reviewList = editor.getReviewList();
+//        this.reviewList = editor.getReviewList();
     }
 }

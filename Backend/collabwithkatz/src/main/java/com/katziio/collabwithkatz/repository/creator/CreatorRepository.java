@@ -7,9 +7,11 @@ import com.katziio.collabwithkatz.entity.editor.Editor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface CreatorRepository extends JpaRepository<Creator,Long> {
     @Query("SELECT new com.katziio.collabwithkatz.dto.creator.CreatorDTO(c) FROM Creator c ORDER BY c.id DESC LIMIT 1")
     CreatorDTO findLatestCreator();

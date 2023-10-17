@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ChatRepository extends JpaRepository<Chat,Long> {
 
     @Query("SELECT new com.katziio.collabwithkatz.dto.common.ChatDTO(c) FROM Chat c WHERE c.creator.id = :creatorId and c.editor.id = :editorId")

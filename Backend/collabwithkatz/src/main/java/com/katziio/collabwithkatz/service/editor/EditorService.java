@@ -3,12 +3,15 @@ package com.katziio.collabwithkatz.service.editor;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.common.Project;
+import com.katziio.collabwithkatz.entity.common.Review;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
 import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
 import com.katziio.collabwithkatz.repository.project.ProjectRepository;
+import com.katziio.collabwithkatz.repository.review.ReviewRepository;
 import com.katziio.collabwithkatz.service.email.EmailSenderService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,9 @@ public class EditorService {
 
     @Autowired
     private EmailSenderService emailSenderService;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     public EditorDTO deleteEditor(Long editorId) {
         Optional<Editor> editor = editorRepository.findById(editorId);
@@ -203,6 +209,40 @@ public class EditorService {
             return editor;
         } else {
            throw new NoSuchUserException();
+        }
+    }
+
+    public Review addReview(Long editorId,Long creatorId,String reviewDescription)
+    {
+        Review dbReview = this.reviewRepository.findReviewByCreatorEditorId(creatorId,editorId);
+        if(!(dbReview == null))
+        {
+            dbReview.setReviewDescription(reviewDescription);
+            return this.reviewRepository.save(dbReview);
+        }else{
+            Review review = new Review();
+            review.setReviewDescription(reviewDescription);
+            review.setEditorId(editorId);
+            review.setCreatorId(creatorId);
+            return this.reviewRepository.save(review);
+        }
+    }
+
+    public List<Review> getEditorReviewList(Long editorId)
+    {
+        return this.reviewRepository.findAllReviewByEditorId(editorId);
+    }
+
+    @Transactional
+    public boolean deleteReview(Long creatorId,Long editorId)
+    {
+        Review dbReview = this.reviewRepository.findReviewByCreatorEditorId(creatorId,editorId);
+        if(dbReview == null)
+        {
+            return false;
+        }else {
+            this.reviewRepository.deleteReviewByCreatorEditorId(creatorId,editorId);
+            return true;
         }
     }
 }

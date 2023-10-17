@@ -5,9 +5,11 @@ import com.katziio.collabwithkatz.entity.editor.Editor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface EditorRepository extends JpaRepository<Editor,Long> {
     @Query("SELECT new com.katziio.collabwithkatz.dto.editor.EditorDTO(e) FROM Editor e WHERE e.name = :name")
     List<EditorDTO> findEditorByName(@Param("name") String name);
