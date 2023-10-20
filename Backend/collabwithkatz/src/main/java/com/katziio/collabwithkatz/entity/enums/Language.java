@@ -1,9 +1,6 @@
 package com.katziio.collabwithkatz.entity.enums;
 
 public enum Language {
-    package com.katziio.collabwithkatz.entity.enums;
-
-    public enum Language {
         ENGLISH,
         SPANISH,
         FRENCH,
