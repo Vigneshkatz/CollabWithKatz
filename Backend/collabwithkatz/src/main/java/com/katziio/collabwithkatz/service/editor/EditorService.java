@@ -376,4 +376,28 @@ public class EditorService {
             throw new NoSuchUserException("User Not found");
         }
     }
+
+    public List<EditorCertification> addCertification(Long editorId, List<EditorCertification> editorCertificationList) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            Editor editor = editorDb.get();
+            editor.getCertifications().addAll(editorCertificationList);
+            this.editorRepository.save(editor);
+            return editor.getCertifications();
+
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
+
+    public List<EditorCertification> getCertification(Long editorId) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            return editorDb.get().getCertifications();
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
 }

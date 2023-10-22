@@ -186,16 +186,28 @@ public class EditorController {
         return this.editorService.getPreference(editorId);
     }
 
-    @PostMapping("/{editorId}/preference/add")
+    @PostMapping("/{editorId}/language/add")
     public List<EditorCommunicationLanguage> addCommunication(@PathVariable Long editorId, @RequestBody List<EditorCommunicationLanguage> editorCommunicationLanguageList)
     {
         return this.editorService.addCommunication(editorId,editorCommunicationLanguageList);
     }
 
-    @GetMapping("/{editorId}/preference/get")
+    @GetMapping("/{editorId}/language/get")
     public List<EditorCommunicationLanguage> getCommunication(@PathVariable Long editorId)
     {
         return this.editorService.getCommunication(editorId);
+    }
+
+    @PostMapping("/{editorId}/certification/add")
+    public List<EditorCertification> addCertification(@PathVariable Long editorId, @RequestBody List<EditorCertification> editorCertificationList)
+    {
+        return this.editorService.addCertification(editorId,editorCertificationList);
+    }
+
+    @GetMapping("/{editorId}/certification/get")
+    public List<EditorCertification> getCertification(@PathVariable Long editorId)
+    {
+        return this.editorService.getCertification(editorId);
     }
 
 }
