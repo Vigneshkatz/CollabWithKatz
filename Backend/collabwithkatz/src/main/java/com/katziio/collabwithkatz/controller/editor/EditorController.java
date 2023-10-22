@@ -5,6 +5,7 @@ import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.common.Review;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.entity.editor.EditorSampleVideo;
+import com.katziio.collabwithkatz.entity.editor.EditorSkill;
 import com.katziio.collabwithkatz.entity.editor.EditorSocialMedia;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import com.katziio.collabwithkatz.service.firebase.FireBaseService;
@@ -162,6 +163,12 @@ public class EditorController {
     public List<EditorSocialMedia> getSocialMedia(@PathVariable Long editorId)
     {
         return this.editorService.getSocialMedia(editorId);
+    }
+
+    @PostMapping("/{editorId}/skill/add")
+    public List<EditorSkill> addEditorSkill(@PathVariable Long editorId, @RequestBody List<EditorSkill> editorSkillList)
+    {
+        return this.editorService.addSkill(editorId,editorSkillList);
     }
 
 }

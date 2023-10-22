@@ -6,6 +6,7 @@ import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.entity.common.Review;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.entity.editor.EditorSampleVideo;
+import com.katziio.collabwithkatz.entity.editor.EditorSkill;
 import com.katziio.collabwithkatz.entity.editor.EditorSocialMedia;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
 import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
@@ -94,6 +95,7 @@ public class EditorService {
             editor.setCertifications(null);
             editor.setCommunicationLanguages(null);
             editor.setSocialMediaList(null);
+            editor.setSkillList(null);
             EditorDTO editorDTO = new EditorDTO(editorRepository.save(editor));
 //            this.emailSenderService.initiateEmail(editor.getConfirmationToken(),editor.getEmail(),false);
             System.out.println("Editor successful Registration");
@@ -302,4 +304,30 @@ public class EditorService {
             throw new NoSuchUserException("User Not found");
         }
     }
+
+    public List<EditorSkill> addSkill(Long editorId, List<EditorSkill> editorSkillList) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            Editor editor = editorDb.get();
+            editor.getSkillList().addAll(editorSkillList);
+            this.editorRepository.save(editor);
+            return editor.getSkillList();
+
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
+
+    public List<EditorSkill> getSkills(Long editorId) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            return editorDb.get().getSkillList();
+
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
+
 }
