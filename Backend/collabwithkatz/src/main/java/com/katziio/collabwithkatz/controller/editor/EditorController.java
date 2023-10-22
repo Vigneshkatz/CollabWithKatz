@@ -4,9 +4,11 @@ import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.common.Review;
 import com.katziio.collabwithkatz.entity.editor.Editor;
+import com.katziio.collabwithkatz.entity.editor.EditorSampleVideo;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import com.katziio.collabwithkatz.service.firebase.FireBaseService;
 import com.katziio.collabwithkatz.service.upvote.UpvoteService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,8 +39,8 @@ public class EditorController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Editor>> getAllEditors(@RequestParam(defaultValue = "0") int page,
-                                                         @RequestParam(defaultValue = "10") int size) {
-        List<Editor> editorPage = editorService.getAllEditors(page,size);
+                                                      @RequestParam(defaultValue = "10") int size) {
+        List<Editor> editorPage = editorService.getAllEditors(page, size);
         return new ResponseEntity<>(editorPage, HttpStatus.OK);
     }
 
@@ -50,7 +52,7 @@ public class EditorController {
 
     @PutMapping("/update/{editorId}")
     public ResponseEntity<EditorDTO> updateEditor(@PathVariable Long editorId,
-                                                  @Valid @RequestBody Editor updateRequest){
+                                                  @Valid @RequestBody Editor updateRequest) {
         EditorDTO updatedEditor = editorService.updateEditor(updateRequest, editorId);
         return new ResponseEntity<>(updatedEditor, HttpStatus.OK);
     }
@@ -116,30 +118,36 @@ public class EditorController {
     }
 
     @GetMapping("{editorId}/upvote")
-    public ResponseEntity<Long> getEditorUpvote(@PathVariable Long editorId)
-    {
+    public ResponseEntity<Long> getEditorUpvote(@PathVariable Long editorId) {
         Long upvoteCount = this.upvoteService.getEditorUpvoteCount(editorId);
-        return new ResponseEntity<>(upvoteCount,HttpStatus.OK);
+        return new ResponseEntity<>(upvoteCount, HttpStatus.OK);
     }
 
     @PostMapping("/review/add/{editorId}/{creatorId}")
     public Review addReview(@PathVariable Long editorId,
                             @PathVariable Long creatorId,
-                            @RequestParam String review)
-    {
-        return this.editorService.addReview(editorId,creatorId,review);
+                            @RequestParam String review) {
+        return this.editorService.addReview(editorId, creatorId, review);
     }
 
     @GetMapping("/review/get/{editorId}")
-    public List<Review> getAllReviewsOFEditor(@PathVariable Long editorId,@RequestParam(defaultValue = "0") int page,
-                                              @RequestParam(defaultValue = "10") int size)
-    {
-        return this.editorService.getEditorReviewList(editorId,page,size);
+    public List<Review> getAllReviewsOFEditor(@PathVariable Long editorId, @RequestParam(defaultValue = "0") int page,
+                                              @RequestParam(defaultValue = "10") int size) {
+        return this.editorService.getEditorReviewList(editorId, page, size);
     }
 
-    @DeleteMapping ("/review/delete/{editorId}/{creatorId}")
-    public Boolean deleteCreatorReview(@PathVariable Long creatorId,@PathVariable Long editorId)
-    {
-        return this.editorService.deleteReview(creatorId,editorId);
+    @DeleteMapping("/review/delete/{editorId}/{creatorId}")
+    public Boolean deleteCreatorReview(@PathVariable Long creatorId, @PathVariable Long editorId) {
+        return this.editorService.deleteReview(creatorId, editorId);
+    }
+
+    @PostMapping("/{editorId}/myvideo/add")
+    public List<EditorSampleVideo> addMyVideo(@PathVariable Long editorId, @RequestBody List<EditorSampleVideo> editorSampleVideoList) {
+        return this.editorService.addMyVideo(editorId, editorSampleVideoList);
+    }
+
+    @GetMapping("/{editorId}/myvideo/get")
+    public List<EditorSampleVideo> getMyVideo(@PathVariable Long editorId) {
+        return this.editorService.getMyVideo(editorId);
     }
 }

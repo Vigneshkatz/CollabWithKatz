@@ -14,6 +14,6 @@ public class EditorSampleVideo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String videoName;
-    private String videoLink;
+    private String title;
+    private String link;
 }

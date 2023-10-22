@@ -5,6 +5,7 @@ import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.entity.common.Review;
 import com.katziio.collabwithkatz.entity.editor.Editor;
+import com.katziio.collabwithkatz.entity.editor.EditorSampleVideo;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
 import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
@@ -15,6 +16,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -88,6 +90,7 @@ public class EditorService {
         if (editorCheck == null) {
             editor.setConfirmationToken(UUID.randomUUID().toString());
             System.out.println(editor.getEmail());
+            editor.setSampleVideoList(null);
             EditorDTO editorDTO = new EditorDTO(editorRepository.save(editor));
 //            this.emailSenderService.initiateEmail(editor.getConfirmationToken(),editor.getEmail(),false);
             System.out.println("Editor successful Registration");
@@ -242,6 +245,33 @@ public class EditorService {
         } else {
             this.reviewRepository.deleteReviewByCreatorEditorId(creatorId, editorId);
             return true;
+        }
+    }
+
+    public List<EditorSampleVideo> addMyVideo(Long editorId, List<EditorSampleVideo> editorSampleVideoList) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            Editor editor = editorDb.get();
+            editor.getSampleVideoList().addAll(editorSampleVideoList);
+//            editor.setSampleVideoList(editorSampleVideoList);
+            this.editorRepository.save(editor);
+            return editorSampleVideoList;
+
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
+
+    public List<EditorSampleVideo> getMyVideo(Long editorId) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+
+            return editorDb.get().getSampleVideoList();
+
+        }else {
+            throw new NoSuchUserException("User Not found");
         }
     }
 }
