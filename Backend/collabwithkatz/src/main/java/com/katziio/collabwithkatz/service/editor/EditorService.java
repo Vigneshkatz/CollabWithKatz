@@ -91,6 +91,8 @@ public class EditorService {
             editor.setConfirmationToken(UUID.randomUUID().toString());
             System.out.println(editor.getEmail());
             editor.setSampleVideoList(null);
+            editor.setCertifications(null);
+            editor.setCommunicationLanguages(null);
             EditorDTO editorDTO = new EditorDTO(editorRepository.save(editor));
 //            this.emailSenderService.initiateEmail(editor.getConfirmationToken(),editor.getEmail(),false);
             System.out.println("Editor successful Registration");
