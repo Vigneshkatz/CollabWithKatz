@@ -186,4 +186,16 @@ public class EditorController {
         return this.editorService.getPreference(editorId);
     }
 
+    @PostMapping("/{editorId}/preference/add")
+    public List<EditorCommunicationLanguage> addCommunication(@PathVariable Long editorId, @RequestBody List<EditorCommunicationLanguage> editorCommunicationLanguageList)
+    {
+        return this.editorService.addCommunication(editorId,editorCommunicationLanguageList);
+    }
+
+    @GetMapping("/{editorId}/preference/get")
+    public List<EditorCommunicationLanguage> getCommunication(@PathVariable Long editorId)
+    {
+        return this.editorService.getCommunication(editorId);
+    }
+
 }

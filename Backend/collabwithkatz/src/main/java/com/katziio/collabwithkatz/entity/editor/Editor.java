@@ -47,7 +47,6 @@ public class Editor {
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorCommunicationLanguage> communicationLanguages;
 
-
     @OneToMany(targetEntity = EditorSampleVideo.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorSampleVideo> sampleVideoList;

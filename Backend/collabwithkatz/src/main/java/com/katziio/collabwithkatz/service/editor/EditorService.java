@@ -351,4 +351,29 @@ public class EditorService {
             throw new NoSuchUserException("User Not found");
         }
     }
+
+    public List<EditorCommunicationLanguage> addCommunication(Long editorId,
+                                                              List<EditorCommunicationLanguage> editorCommunicationLanguageList) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            Editor editor = editorDb.get();
+            editor.getCommunicationLanguages().addAll(editorCommunicationLanguageList);
+            this.editorRepository.save(editor);
+            return editor.getCommunicationLanguages();
+
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
+
+    public List<EditorCommunicationLanguage> getCommunication(Long editorId) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            return editorDb.get().getCommunicationLanguages();
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
 }
