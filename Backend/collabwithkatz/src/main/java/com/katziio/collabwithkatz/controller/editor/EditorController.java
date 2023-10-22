@@ -3,10 +3,7 @@ package com.katziio.collabwithkatz.controller.editor;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.common.Review;
-import com.katziio.collabwithkatz.entity.editor.Editor;
-import com.katziio.collabwithkatz.entity.editor.EditorSampleVideo;
-import com.katziio.collabwithkatz.entity.editor.EditorSkill;
-import com.katziio.collabwithkatz.entity.editor.EditorSocialMedia;
+import com.katziio.collabwithkatz.entity.editor.*;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import com.katziio.collabwithkatz.service.firebase.FireBaseService;
 import com.katziio.collabwithkatz.service.upvote.UpvoteService;
@@ -169,6 +166,24 @@ public class EditorController {
     public List<EditorSkill> addEditorSkill(@PathVariable Long editorId, @RequestBody List<EditorSkill> editorSkillList)
     {
         return this.editorService.addSkill(editorId,editorSkillList);
+    }
+
+    @GetMapping("/{editorId}/skill/get")
+    public List<EditorSkill> getSkills(@PathVariable Long editorId)
+    {
+        return this.editorService.getSkills(editorId);
+    }
+
+    @PostMapping("/{editorId}/preference/add")
+    public List<EditorPreference> addPreference(@PathVariable Long editorId, @RequestBody List<EditorPreference> preferencesList)
+    {
+        return this.editorService.addPreference(editorId,preferencesList);
+    }
+
+    @GetMapping("/{editorId}/preference/get")
+    public List<EditorPreference> getPreference(@PathVariable Long editorId)
+    {
+        return this.editorService.getPreference(editorId);
     }
 
 }

@@ -60,9 +60,9 @@ public class Editor {
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorSkill> skillList;
 
-//    @OneToMany(targetEntity = Upvote.class,cascade = CascadeType.ALL)
-//    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
-//    private List<Upvote> upvoteList;
+    @OneToMany(targetEntity = EditorPreference.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
+    private List<EditorPreference> preferencesList;
 
     public Editor(Editor editor) {
         Calendar myCal = Calendar.getInstance();

@@ -4,10 +4,7 @@ import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
 import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.entity.common.Review;
-import com.katziio.collabwithkatz.entity.editor.Editor;
-import com.katziio.collabwithkatz.entity.editor.EditorSampleVideo;
-import com.katziio.collabwithkatz.entity.editor.EditorSkill;
-import com.katziio.collabwithkatz.entity.editor.EditorSocialMedia;
+import com.katziio.collabwithkatz.entity.editor.*;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
 import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
@@ -261,7 +258,7 @@ public class EditorService {
             editor.getSampleVideoList().addAll(editorSampleVideoList);
 //            editor.setSampleVideoList(editorSampleVideoList);
             this.editorRepository.save(editor);
-            return editorSampleVideoList;
+            return editor.getSampleVideoList();
 
         }else {
             throw new NoSuchUserException("User Not found");
@@ -287,7 +284,7 @@ public class EditorService {
             Editor editor = editorDb.get();
             editor.getSocialMediaList().addAll(editorSocialMediaList);
             this.editorRepository.save(editor);
-            return editorSocialMediaList;
+            return editor.getSocialMediaList();
 
         }else {
             throw new NoSuchUserException("User Not found");
@@ -330,4 +327,28 @@ public class EditorService {
         }
     }
 
+    public List<EditorPreference> addPreference(Long editorId, List<EditorPreference> preferencesList) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            Editor editor = editorDb.get();
+            editor.getPreferencesList().addAll(preferencesList);
+            this.editorRepository.save(editor);
+            return editor.getPreferencesList();
+
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
+
+    public List<EditorPreference> getPreference(Long editorId) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            return editorDb.get().getPreferencesList();
+
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
 }
