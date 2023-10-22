@@ -6,6 +6,7 @@ import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.entity.common.Review;
 import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.entity.editor.EditorSampleVideo;
+import com.katziio.collabwithkatz.entity.editor.EditorSocialMedia;
 import com.katziio.collabwithkatz.exception.NoSuchUserException;
 import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
@@ -16,7 +17,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -93,6 +93,7 @@ public class EditorService {
             editor.setSampleVideoList(null);
             editor.setCertifications(null);
             editor.setCommunicationLanguages(null);
+            editor.setSocialMediaList(null);
             EditorDTO editorDTO = new EditorDTO(editorRepository.save(editor));
 //            this.emailSenderService.initiateEmail(editor.getConfirmationToken(),editor.getEmail(),false);
             System.out.println("Editor successful Registration");
@@ -271,6 +272,31 @@ public class EditorService {
         {
 
             return editorDb.get().getSampleVideoList();
+
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
+
+    public List<EditorSocialMedia> addSocialMedia(Long editorId, List<EditorSocialMedia> editorSocialMediaList) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            Editor editor = editorDb.get();
+            editor.getSocialMediaList().addAll(editorSocialMediaList);
+            this.editorRepository.save(editor);
+            return editorSocialMediaList;
+
+        }else {
+            throw new NoSuchUserException("User Not found");
+        }
+    }
+
+    public List<EditorSocialMedia> getSocialMedia(Long editorId) {
+        Optional<Editor> editorDb = this.editorRepository.findById(editorId);
+        if(editorDb.isPresent())
+        {
+            return editorDb.get().getSocialMediaList();
 
         }else {
             throw new NoSuchUserException("User Not found");
