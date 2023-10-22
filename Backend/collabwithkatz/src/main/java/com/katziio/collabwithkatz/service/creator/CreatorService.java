@@ -2,7 +2,6 @@ package com.katziio.collabwithkatz.service.creator;
 
 import com.katziio.collabwithkatz.dto.creator.CreatorDTO;
 import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
-import com.katziio.collabwithkatz.entity.common.Upvote;
 import com.katziio.collabwithkatz.entity.creator.Creator;
 import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.entity.editor.Editor;
@@ -13,10 +12,11 @@ import com.katziio.collabwithkatz.exception.UserAlreadyExistsException;
 import com.katziio.collabwithkatz.repository.creator.CreatorRepository;
 import com.katziio.collabwithkatz.repository.editor.EditorRepository;
 import com.katziio.collabwithkatz.repository.project.ProjectRepository;
-import com.katziio.collabwithkatz.repository.upvote.UpvoteRepository;
 import com.katziio.collabwithkatz.service.editor.EditorService;
 import com.katziio.collabwithkatz.service.email.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -101,8 +101,9 @@ public class CreatorService {
         return new ProjectDTO(project);
     }
 
-    public List<ProjectDTO> getProjectsByCreatorId(Long creatorId) {
-        List<Project> projectList = projectRepository.findByCreatorId(creatorId);
+    public List<ProjectDTO> getProjectsByCreatorId(Long creatorId, int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        List<Project> projectList = projectRepository.findByCreatorId(creatorId,pageable);
         List<ProjectDTO> projectDTOList = new ArrayList<>();
         for (Project project : projectList) {
             projectDTOList.add(new ProjectDTO(project));
@@ -110,8 +111,9 @@ public class CreatorService {
         return projectDTOList;
     }
 
-    public List<ProjectDTO>  getNotAssignedProjects() {
-        List<Project> projectList = projectRepository.findProjectsWithNoEditor();
+    public List<ProjectDTO> getNotAssignedProjects(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        List<Project> projectList = projectRepository.findProjectsWithNoEditor(pageable);
         List<ProjectDTO> projectDTOList = new ArrayList<>();
         for (Project project : projectList) {
             projectDTOList.add(new ProjectDTO(project));

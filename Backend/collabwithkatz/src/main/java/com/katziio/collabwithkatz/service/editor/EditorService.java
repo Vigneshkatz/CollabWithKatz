@@ -13,6 +13,8 @@ import com.katziio.collabwithkatz.repository.review.ReviewRepository;
 import com.katziio.collabwithkatz.service.email.EmailSenderService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -45,53 +47,44 @@ public class EditorService {
         Optional<Editor> editor = editorRepository.findById(editorId);
         if (editor.isPresent()) {
             Editor dbEditor = editor.get();
-            if(toUpdateEditor.getName()!=null)
-            {
+            if (toUpdateEditor.getName() != null) {
                 dbEditor.setName(toUpdateEditor.getName());
             }
-            if(toUpdateEditor.getAge()!=0)
-            {
+            if (toUpdateEditor.getAge() != 0) {
                 dbEditor.setAge(toUpdateEditor.getAge());
             }
-            if(toUpdateEditor.getExperienceInYears()!=0)
-            {
+            if (toUpdateEditor.getExperienceInYears() != 0) {
                 dbEditor.setExperienceInYears(toUpdateEditor.getExperienceInYears());
             }
-            if(!toUpdateEditor.getAbout().isEmpty())
-            {
+            if (!toUpdateEditor.getAbout().isEmpty()) {
                 dbEditor.setAbout(toUpdateEditor.getAbout());
             }
-            if(!toUpdateEditor.getCountry().isEmpty())
-            {
+            if (!toUpdateEditor.getCountry().isEmpty()) {
                 dbEditor.setCountry(toUpdateEditor.getCountry());
             }
-            if(!toUpdateEditor.getPhone().isEmpty())
-            {
+            if (!toUpdateEditor.getPhone().isEmpty()) {
                 dbEditor.setPhone(toUpdateEditor.getPhone());
             }
-            if(!toUpdateEditor.getPhone().isEmpty())
-            {
+            if (!toUpdateEditor.getPhone().isEmpty()) {
                 dbEditor.setPhone(toUpdateEditor.getPhone());
             }
-            if(!toUpdateEditor.getProfilePictureUrl().isEmpty())
-            {
+            if (!toUpdateEditor.getProfilePictureUrl().isEmpty()) {
                 dbEditor.setProfilePictureUrl(toUpdateEditor.getProfilePictureUrl());
             }
-            if(!toUpdateEditor.getProfilePictureUrl().isEmpty())
-            {
+            if (!toUpdateEditor.getProfilePictureUrl().isEmpty()) {
                 dbEditor.setProfilePictureUrl(toUpdateEditor.getProfilePictureUrl());
             }
             Date updatedDate = Calendar.getInstance().getTime();
             dbEditor.setProfileUpdatedAt(updatedDate);
             Editor editorToUpdate = new Editor(dbEditor);
             return new EditorDTO(editorRepository.save(editorToUpdate));
-        }else {
+        } else {
             throw new NoSuchUserException(editorId);
         }
     }
 
-    public EditorDTO saveEditor(Editor editor)  {
-       Editor editorCheck = this.editorRepository.findByEmail(editor.getEmail());
+    public EditorDTO saveEditor(Editor editor) {
+        Editor editorCheck = this.editorRepository.findByEmail(editor.getEmail());
         if (editorCheck == null) {
             editor.setConfirmationToken(UUID.randomUUID().toString());
             System.out.println(editor.getEmail());
@@ -100,7 +93,7 @@ public class EditorService {
             System.out.println("Editor successful Registration");
             return editorDTO;
         }
-       throw new UserAlreadyExistsException(editor.getEmail());
+        throw new UserAlreadyExistsException(editor.getEmail());
 
     }
 
@@ -112,6 +105,17 @@ public class EditorService {
                 editorDTOList.add(new EditorDTO(editor));
             }
             return editorDTOList;
+        }
+
+        return null;
+    }
+
+    public List<Editor> getAllEditors(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+//        List<EditorDTO> editorDTOList = new ArrayList<>();
+        List<Editor> editorList = editorRepository.findAllByPagination(pageable);
+        if (!editorList.isEmpty()) {
+            return editorList;
         }
 
         return null;
@@ -198,8 +202,7 @@ public class EditorService {
         return editorRepository.sortEditorBy(sortBy);
     }
 
-    public Editor verifyAccount(String confirmationToken)
-    {
+    public Editor verifyAccount(String confirmationToken) {
         Editor editor = this.editorRepository.findByConfirmationToken(confirmationToken);
         if (editor != null) {
             editor.setVerified(true);
@@ -208,18 +211,16 @@ public class EditorService {
             System.out.println("heibfdsvbisuhv");
             return editor;
         } else {
-           throw new NoSuchUserException();
+            throw new NoSuchUserException();
         }
     }
 
-    public Review addReview(Long editorId,Long creatorId,String reviewDescription)
-    {
-        Review dbReview = this.reviewRepository.findReviewByCreatorEditorId(creatorId,editorId);
-        if(!(dbReview == null))
-        {
+    public Review addReview(Long editorId, Long creatorId, String reviewDescription) {
+        Review dbReview = this.reviewRepository.findReviewByCreatorEditorId(creatorId, editorId);
+        if (!(dbReview == null)) {
             dbReview.setReviewDescription(reviewDescription);
             return this.reviewRepository.save(dbReview);
-        }else{
+        } else {
             Review review = new Review();
             review.setReviewDescription(reviewDescription);
             review.setEditorId(editorId);
@@ -228,20 +229,18 @@ public class EditorService {
         }
     }
 
-    public List<Review> getEditorReviewList(Long editorId)
-    {
-        return this.reviewRepository.findAllReviewByEditorId(editorId);
+    public List<Review> getEditorReviewList(Long editorId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return this.reviewRepository.findAllReviewByEditorId(editorId, pageable);
     }
 
     @Transactional
-    public boolean deleteReview(Long creatorId,Long editorId)
-    {
-        Review dbReview = this.reviewRepository.findReviewByCreatorEditorId(creatorId,editorId);
-        if(dbReview == null)
-        {
+    public boolean deleteReview(Long creatorId, Long editorId) {
+        Review dbReview = this.reviewRepository.findReviewByCreatorEditorId(creatorId, editorId);
+        if (dbReview == null) {
             return false;
-        }else {
-            this.reviewRepository.deleteReviewByCreatorEditorId(creatorId,editorId);
+        } else {
+            this.reviewRepository.deleteReviewByCreatorEditorId(creatorId, editorId);
             return true;
         }
     }

@@ -56,14 +56,16 @@ public class CreatorController {
     }
 
     @GetMapping("/{creatorId}/projects")
-    public ResponseEntity<List<ProjectDTO>> getProjectsByCreatorId(@PathVariable Long creatorId) {
-        List<ProjectDTO> projects = creatorService.getProjectsByCreatorId(creatorId);
+    public ResponseEntity<List<ProjectDTO>> getProjectsByCreatorId(@PathVariable Long creatorId,@RequestParam(defaultValue = "0") int page,
+                                                                   @RequestParam(defaultValue = "10") int size) {
+        List<ProjectDTO> projects = creatorService.getProjectsByCreatorId(creatorId,page,size);
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
     @GetMapping("/projects")
-    public ResponseEntity<List<ProjectDTO>> getNotAssignedProjects() {
-        List<ProjectDTO> projects = creatorService.getNotAssignedProjects();
+    public ResponseEntity<List<ProjectDTO>> getNotAssignedProjects(@RequestParam(defaultValue = "0") int page,
+                                                                   @RequestParam(defaultValue = "10") int size) {
+        List<ProjectDTO> projects = creatorService.getNotAssignedProjects(page,size);
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 

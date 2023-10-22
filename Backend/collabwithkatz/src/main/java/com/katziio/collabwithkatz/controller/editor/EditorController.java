@@ -9,12 +9,15 @@ import com.katziio.collabwithkatz.service.firebase.FireBaseService;
 import com.katziio.collabwithkatz.service.upvote.UpvoteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.print.Pageable;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -33,9 +36,10 @@ public class EditorController {
     private UpvoteService upvoteService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<EditorDTO>> getAllEditors() {
-        List<EditorDTO> editors = editorService.getAllEditors();
-        return new ResponseEntity<>(editors, HttpStatus.OK);
+    public ResponseEntity<List<Editor>> getAllEditors(@RequestParam(defaultValue = "0") int page,
+                                                         @RequestParam(defaultValue = "10") int size) {
+        List<Editor> editorPage = editorService.getAllEditors(page,size);
+        return new ResponseEntity<>(editorPage, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -127,9 +131,10 @@ public class EditorController {
     }
 
     @GetMapping("/review/get/{editorId}")
-    public List<Review> getAllReviewsOFEditor(@PathVariable Long editorId)
+    public List<Review> getAllReviewsOFEditor(@PathVariable Long editorId,@RequestParam(defaultValue = "0") int page,
+                                              @RequestParam(defaultValue = "10") int size)
     {
-        return this.editorService.getEditorReviewList(editorId);
+        return this.editorService.getEditorReviewList(editorId,page,size);
     }
 
     @DeleteMapping ("/review/delete/{editorId}/{creatorId}")
