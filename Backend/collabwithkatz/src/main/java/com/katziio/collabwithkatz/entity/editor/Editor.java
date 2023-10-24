@@ -1,7 +1,5 @@
 package com.katziio.collabwithkatz.entity.editor;
 
-import com.katziio.collabwithkatz.entity.common.Review;
-import com.katziio.collabwithkatz.entity.common.Upvote;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -41,11 +39,11 @@ public class Editor {
 
     @OneToMany(targetEntity = EditorCertification.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
-    private List<EditorCertification> certifications;
+    private List<EditorCertification> certificationList;
 
     @OneToMany(targetEntity = EditorCommunicationLanguage.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
-    private List<EditorCommunicationLanguage> communicationLanguages;
+    private List<EditorCommunicationLanguage> communicationLanguageList;
 
     @OneToMany(targetEntity = EditorSampleVideo.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
@@ -75,11 +73,11 @@ public class Editor {
         this.experienceInYears = editor.getExperienceInYears();
         this.phone=editor.getPhone();
         this.profilePictureUrl=editor.getProfilePictureUrl();
-        this.certifications= editor.getCertifications();
+        this.certificationList = editor.getCertificationList();
         this.portfolioLink=editor.getPortfolioLink();
         this.profileCreatedAt = editor.getProfileCreatedAt();
         this.profileUpdatedAt = myCal.getTime();
-        this.communicationLanguages= editor.getCommunicationLanguages();
+        this.communicationLanguageList = editor.getCommunicationLanguageList();
         this.sampleVideoList=editor.getSampleVideoList();
         this.socialMediaList=editor.getSocialMediaList();
         this.isVerified = editor.isVerified();

@@ -89,8 +89,8 @@ public class EditorService {
             editor.setConfirmationToken(UUID.randomUUID().toString());
             System.out.println(editor.getEmail());
             editor.setSampleVideoList(null);
-            editor.setCertifications(null);
-            editor.setCommunicationLanguages(null);
+            editor.setCertificationList(null);
+            editor.setCommunicationLanguageList(null);
             editor.setSocialMediaList(null);
             editor.setSkillList(null);
             EditorDTO editorDTO = new EditorDTO(editorRepository.save(editor));
@@ -358,9 +358,9 @@ public class EditorService {
         if(editorDb.isPresent())
         {
             Editor editor = editorDb.get();
-            editor.getCommunicationLanguages().addAll(editorCommunicationLanguageList);
+            editor.getCommunicationLanguageList().addAll(editorCommunicationLanguageList);
             this.editorRepository.save(editor);
-            return editor.getCommunicationLanguages();
+            return editor.getCommunicationLanguageList();
 
         }else {
             throw new NoSuchUserException("User Not found");
@@ -371,7 +371,7 @@ public class EditorService {
         Optional<Editor> editorDb = this.editorRepository.findById(editorId);
         if(editorDb.isPresent())
         {
-            return editorDb.get().getCommunicationLanguages();
+            return editorDb.get().getCommunicationLanguageList();
         }else {
             throw new NoSuchUserException("User Not found");
         }
@@ -382,9 +382,9 @@ public class EditorService {
         if(editorDb.isPresent())
         {
             Editor editor = editorDb.get();
-            editor.getCertifications().addAll(editorCertificationList);
+            editor.getCertificationList().addAll(editorCertificationList);
             this.editorRepository.save(editor);
-            return editor.getCertifications();
+            return editor.getCertificationList();
 
         }else {
             throw new NoSuchUserException("User Not found");
@@ -395,7 +395,7 @@ public class EditorService {
         Optional<Editor> editorDb = this.editorRepository.findById(editorId);
         if(editorDb.isPresent())
         {
-            return editorDb.get().getCertifications();
+            return editorDb.get().getCertificationList();
         }else {
             throw new NoSuchUserException("User Not found");
         }

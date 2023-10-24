@@ -2,7 +2,6 @@ package com.katziio.collabwithkatz.dto.editor;
 
 import com.katziio.collabwithkatz.entity.common.Project;
 import com.katziio.collabwithkatz.entity.common.Review;
-import com.katziio.collabwithkatz.entity.common.Upvote;
 import com.katziio.collabwithkatz.entity.editor.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,8 +48,8 @@ public class EditorDTO {
         this.experienceInYears = editor.getExperienceInYears();
         this.phone=editor.getPhone();
         this.profilePictureUrl=editor.getProfilePictureUrl();
-        this.certificationsList= editor.getCertifications();
-        this.communicationLanguagesList= editor.getCommunicationLanguages();
+        this.certificationsList= editor.getCertificationList();
+        this.communicationLanguagesList= editor.getCommunicationLanguageList();
         this.sampleVideoList=editor.getSampleVideoList();
         this.socialMediaList=editor.getSocialMediaList();
 //        this.reviewList = editor.getReviewList();
