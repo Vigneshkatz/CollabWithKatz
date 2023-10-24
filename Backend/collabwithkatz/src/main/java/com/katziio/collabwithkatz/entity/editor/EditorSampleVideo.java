@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "editor_sample_video")
 public class EditorSampleVideo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String videoName;
-    private String videoLink;
+    private String title;
+    private String link;
 }

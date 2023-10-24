@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "editor_communication_language")
 public class EditorCommunicationLanguage {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String language;
     private int languageProficiency;

@@ -1,9 +1,9 @@
 package com.katziio.collabwithkatz.entity.editor;
 
-import com.katziio.collabwithkatz.entity.creator.Project;
-import com.katziio.collabwithkatz.entity.creator.Review;
-import com.katziio.collabwithkatz.entity.creator.Upvote;
+import com.katziio.collabwithkatz.entity.common.Review;
+import com.katziio.collabwithkatz.entity.common.Upvote;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,10 +17,13 @@ import java.util.*;
 @Table(name = "editors")
 public class Editor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String name;
+    @Size(max = 500)
     private String about;
+    @Column(unique = true)
     private String email;
     private String password;
     private int age;
@@ -32,6 +35,9 @@ public class Editor {
     private String portfolioLink;
     private Date profileCreatedAt;
     private Date profileUpdatedAt;
+    private boolean isVerified;
+    @Column(name = "confirmation_token")
+    private String confirmationToken;
 
     @OneToMany(targetEntity = EditorCertification.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
@@ -41,10 +47,6 @@ public class Editor {
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorCommunicationLanguage> communicationLanguages;
 
-    @OneToMany(targetEntity = EditorProject.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
-    private List<Project> projectList;
-
     @OneToMany(targetEntity = EditorSampleVideo.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorSampleVideo> sampleVideoList;
@@ -53,13 +55,13 @@ public class Editor {
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
     private List<EditorSocialMedia> socialMediaList;
 
-    @OneToMany(targetEntity = Review.class,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = EditorSkill.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
-    private List<Review> reviewList;
+    private List<EditorSkill> skillList;
 
-    @OneToMany(targetEntity = Upvote.class,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = EditorPreference.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "editor_fk_id", referencedColumnName = "id")
-    private List<Upvote> upvoteList;
+    private List<EditorPreference> preferencesList;
 
     public Editor(Editor editor) {
         Calendar myCal = Calendar.getInstance();
@@ -78,8 +80,29 @@ public class Editor {
         this.profileCreatedAt = editor.getProfileCreatedAt();
         this.profileUpdatedAt = myCal.getTime();
         this.communicationLanguages= editor.getCommunicationLanguages();
-        this.projectList=editor.getProjectList();
         this.sampleVideoList=editor.getSampleVideoList();
         this.socialMediaList=editor.getSocialMediaList();
+        this.isVerified = editor.isVerified();
+        this.about = editor.getAbout();
+    }
+
+    @Override
+    public String toString() {
+        return "UserProfile{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", about='" + about + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                ", country='" + country + '\'' +
+                ", gender='" + gender + '\'' +
+                ", experienceInYears=" + experienceInYears +
+                ", profilePictureUrl='" + profilePictureUrl + '\'' +
+                ", phone='" + phone + '\'' +
+                ", portfolioLink='" + portfolioLink + '\'' +
+                ", profileCreatedAt=" + profileCreatedAt +
+                ", profileUpdatedAt=" + profileUpdatedAt +
+                '}';
     }
 }

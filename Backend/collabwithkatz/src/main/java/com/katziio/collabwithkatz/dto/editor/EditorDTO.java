@@ -1,8 +1,8 @@
 package com.katziio.collabwithkatz.dto.editor;
 
-import com.katziio.collabwithkatz.entity.creator.Project;
-import com.katziio.collabwithkatz.entity.creator.Review;
-import com.katziio.collabwithkatz.entity.creator.Upvote;
+import com.katziio.collabwithkatz.entity.common.Project;
+import com.katziio.collabwithkatz.entity.common.Review;
+import com.katziio.collabwithkatz.entity.common.Upvote;
 import com.katziio.collabwithkatz.entity.editor.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,7 +34,7 @@ public class EditorDTO {
     private List<EditorSampleVideo> sampleVideoList;
     private List<EditorSocialMedia> socialMediaList;
     private List<Project> projectList;
-    private List<Upvote> upvoteList;
+//    private List<Upvote> upvoteList;
     private List<Review> reviewList;
 
 
@@ -42,7 +42,6 @@ public class EditorDTO {
         this.id = editor.getId();
         this.name = editor.getName();
         this.about = editor.getAbout();
-        this.password=editor.getPassword();
         this.email = editor.getEmail();
         this.age=editor.getAge();
         this.country = editor.getCountry();
@@ -52,9 +51,8 @@ public class EditorDTO {
         this.profilePictureUrl=editor.getProfilePictureUrl();
         this.certificationsList= editor.getCertifications();
         this.communicationLanguagesList= editor.getCommunicationLanguages();
-        this.projectList=editor.getProjectList();
         this.sampleVideoList=editor.getSampleVideoList();
         this.socialMediaList=editor.getSocialMediaList();
-        this.reviewList = editor.getReviewList();
+//        this.reviewList = editor.getReviewList();
     }
 }

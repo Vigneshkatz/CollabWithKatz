@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.entity.creator;
+package com.katziio.collabwithkatz.entity.common;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "review")
 public class Review {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String reviewDescription;
-
+    private Long editorId;
+    private Long creatorId;
 }

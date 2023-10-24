@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.entity.creator;
+package com.katziio.collabwithkatz.entity.common;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "upvote")
 public class Upvote {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Boolean isVoted;
+    private Long creatorId;
+    private Long editorId;
 }
