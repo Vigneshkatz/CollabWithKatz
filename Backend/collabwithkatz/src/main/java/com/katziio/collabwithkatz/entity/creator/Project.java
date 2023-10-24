@@ -1,4 +1,4 @@
-package com.katziio.collabwithkatz.entity.editor;
+package com.katziio.collabwithkatz.entity.creator;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "editor_communication_language")
-public class EditorCommunicationLanguage {
+@Table(name = "project")
+public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String language;
-    private int languageProficiency;
+    private String projectName;
+    private String rawVideoURl;
+    private String editedVideoURL;
 }

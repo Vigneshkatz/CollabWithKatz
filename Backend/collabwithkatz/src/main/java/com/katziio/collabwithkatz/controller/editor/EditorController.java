@@ -1,213 +1,129 @@
 package com.katziio.collabwithkatz.controller.editor;
 
-import com.katziio.collabwithkatz.dto.creator.ProjectDTO;
 import com.katziio.collabwithkatz.dto.editor.EditorDTO;
-import com.katziio.collabwithkatz.entity.common.Review;
-import com.katziio.collabwithkatz.entity.editor.*;
+import com.katziio.collabwithkatz.dto.editor.EditorProjectDTO;
+import com.katziio.collabwithkatz.entity.editor.Editor;
 import com.katziio.collabwithkatz.service.editor.EditorService;
-import com.katziio.collabwithkatz.service.firebase.FireBaseService;
-import com.katziio.collabwithkatz.service.upvote.UpvoteService;
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.print.Pageable;
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/editors")
 @CrossOrigin("*")
 public class EditorController {
-
     @Autowired
     private EditorService editorService;
 
-    @Autowired
-    private UpvoteService upvoteService;
-
-    @GetMapping("/all")
-    public ResponseEntity<List<Editor>> getAllEditors(@RequestParam(defaultValue = "0") int page,
-                                                      @RequestParam(defaultValue = "10") int size) {
-        List<Editor> editorPage = editorService.getAllEditors(page, size);
-        return new ResponseEntity<>(editorPage, HttpStatus.OK);
+    //    get all user
+    @GetMapping("/allEditors")
+    public List<EditorDTO> getAllEditors() {
+        return this.editorService.getAllEditors();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<EditorDTO> getEditorById(@RequestParam Long id) {
-        EditorDTO editor = editorService.getEditorById(id);
-        return new ResponseEntity<>(editor, HttpStatus.OK);
+    //    get user by id
+    @GetMapping("/editorById")
+    public EditorDTO getEditorsById(@RequestParam Long id) {
+        return this.editorService.getEditorById(id);
     }
 
-    @PutMapping("/update/{editorId}")
-    public ResponseEntity<EditorDTO> updateEditor(@PathVariable Long editorId,
-                                                  @Valid @RequestBody Editor updateRequest) {
-        EditorDTO updatedEditor = editorService.updateEditor(updateRequest, editorId);
-        return new ResponseEntity<>(updatedEditor, HttpStatus.OK);
+    //    add editor
+    @PostMapping("/addEditor")
+    public EditorDTO saveEditor(@RequestBody Editor editor) {
+        return this.editorService.saveEditor(editor);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<EditorDTO> deleteEditor(@RequestParam Long editorId) {
-        EditorDTO deletedEditor = editorService.deleteEditor(editorId);
-        return new ResponseEntity<>(deletedEditor, HttpStatus.OK);
+    //    update editor
+    @PutMapping("/updateEditor")
+    public EditorDTO updateEditor(@RequestBody Editor editor, @RequestParam Long editorId) {
+        return this.editorService.updateEditor(editor, editorId);
     }
 
+    //    delete editor
+    @DeleteMapping("/deleteMapping")
+    public EditorDTO deleteEditor(@RequestParam Long editorId) {
+        return this.editorService.deleteEditor(editorId);
+    }
+
+    //    Search Editors by Name:
     @GetMapping("/searchByName")
-    public ResponseEntity<List<EditorDTO>> searchEditorsByName(@RequestParam String name) {
-        List<EditorDTO> editors = editorService.searchEditorByName(name);
-        return new ResponseEntity<>(editors, HttpStatus.OK);
+    public List<EditorDTO> searchEditorByName(@RequestParam String name) {
+        return this.editorService.searchEditorByName(name);
     }
 
+//    Filter Editors by Age Range:
     @GetMapping("/filterByAge")
-    public ResponseEntity<List<EditorDTO>> filterEditorsByAge(@RequestParam int minAge, @RequestParam int maxAge) {
-        List<EditorDTO> editors = editorService.filterEditorByAge(minAge, maxAge);
-        return new ResponseEntity<>(editors, HttpStatus.OK);
+    public List<EditorDTO> filterEditorByAge(@RequestParam int minAge,@RequestParam int maxAge) {
+        return this.editorService.filterEditorByAge(minAge,maxAge);
     }
 
+//    Filter Editors by Country
     @GetMapping("/filterByCountry")
-    public ResponseEntity<List<EditorDTO>> filterEditorsByCountry(@RequestParam String countryName) {
-        List<EditorDTO> editors = editorService.filterEditorByCountry(countryName);
-        return new ResponseEntity<>(editors, HttpStatus.OK);
+    public List<EditorDTO> filterEditorByCountry(@RequestParam String countryName) {
+        return this.editorService.filterEditorByCountry(countryName);
     }
-
-    @GetMapping("/sortBy/{sortBy}")
-    public ResponseEntity<List<EditorDTO>> sortEditorsByExperience(@PathVariable String sortBy) {
-        List<EditorDTO> editors = editorService.sortEditorsBy(sortBy);
-        return new ResponseEntity<>(editors, HttpStatus.OK);
+//    Sort Editors by Experience
+    @GetMapping("/sortByExperience")
+    public List<EditorDTO> sortEditorsByExperience() {
+        return this.editorService.sortEditorsByExperience();
     }
-
+//    Get Editor's Projects
+    @GetMapping("/{editorId}/projects")
+    public List<EditorProjectDTO> getProjectByEditorId(@PathVariable Long editorId) {
+        return this.editorService.getProjectByEditorId(editorId);
+    }
+//    Retrieve Editors by Gender
     @GetMapping("/filterByGender")
-    public ResponseEntity<List<EditorDTO>> getEditorsByGender(@RequestParam String gender) {
-        List<EditorDTO> editors = editorService.getEditorsByGender(gender);
-        return new ResponseEntity<>(editors, HttpStatus.OK);
+    public List<EditorDTO> getEditorsByGender(@RequestParam String gender) {
+        return this.editorService.getEditorsByGender(gender);
     }
-
+//    Count Total Editors:
     @GetMapping("/editorsCount")
-    public ResponseEntity<Long> countTotalEditors() {
-        Long count = editorService.countTotalEditors();
-        return new ResponseEntity<>(count, HttpStatus.OK);
+    public Long countTotalEditors() {
+        return this.editorService.countTotalEditors();
     }
-
+//    Retrieve Editors by Email
     @GetMapping("/byEmail")
-    public ResponseEntity<EditorDTO> getEditorByEmail(@RequestParam String email) {
-        EditorDTO editor = editorService.getEditorByEmail(email);
-        return new ResponseEntity<>(editor, HttpStatus.OK);
+    public EditorDTO getEditorByEmail(@RequestParam String email) {
+        return this.editorService.getEditorByEmail(email);
     }
-
+//    Retrieve Editors by Experience Range
     @GetMapping("/byExperienceRange")
-    public ResponseEntity<List<EditorDTO>> getEditorByExperienceRange(@RequestParam int minExperience, @RequestParam int maxExperience) {
-        List<EditorDTO> editors = editorService.getEditorByExperienceRange(minExperience, maxExperience);
-        return new ResponseEntity<>(editors, HttpStatus.OK);
+    public List<EditorDTO> getEditorByExperienceRange(@RequestParam int minExperience,@RequestParam int maxExperience) {
+        return this.editorService.getEditorByExperienceRange(minExperience,maxExperience);
     }
+    @GetMapping("/login")
+    public EditorDTO isValidUser(@RequestParam String email,@RequestParam String password) {
+        return this.editorService.isValidUser(email,password);
+    }
+//    Retrieve Editors Created After a Specific Date
 
-    @GetMapping("{editorId}/getProjects")
-    public ResponseEntity<List<ProjectDTO>> getProjectsByEditorId(@PathVariable Long editorId) {
-        List<ProjectDTO> projects = editorService.getProjectByEditorId(editorId);
-        return new ResponseEntity<>(projects, HttpStatus.OK);
-    }
+//    Retrieve Editors Updated After a Specific Date:
 
-    @GetMapping("{editorId}/upvote")
-    public ResponseEntity<Long> getEditorUpvote(@PathVariable Long editorId) {
-        Long upvoteCount = this.upvoteService.getEditorUpvoteCount(editorId);
-        return new ResponseEntity<>(upvoteCount, HttpStatus.OK);
-    }
+//    Retrieve Editors by Portfolio Link
 
-    @PostMapping("/review/add/{editorId}/{creatorId}")
-    public Review addReview(@PathVariable Long editorId,
-                            @PathVariable Long creatorId,
-                            @RequestParam String review) {
-        return this.editorService.addReview(editorId, creatorId, review);
-    }
+//    Retrieve Editors with Certifications
 
-    @GetMapping("/review/get/{editorId}")
-    public List<Review> getAllReviewsOFEditor(@PathVariable Long editorId, @RequestParam(defaultValue = "0") int page,
-                                              @RequestParam(defaultValue = "10") int size) {
-        return this.editorService.getEditorReviewList(editorId, page, size);
-    }
+//    Retrieve Editors Speaking a Specific Language
 
-    @DeleteMapping("/review/delete/{editorId}/{creatorId}")
-    public Boolean deleteCreatorReview(@PathVariable Long creatorId, @PathVariable Long editorId) {
-        return this.editorService.deleteReview(creatorId, editorId);
-    }
+//    Retrieve Editors by Age and Country
 
-    @PostMapping("/{editorId}/myvideo/add")
-    public List<EditorSampleVideo> addMyVideo(@PathVariable Long editorId, @RequestBody List<EditorSampleVideo> editorSampleVideoList) {
-        return this.editorService.addMyVideo(editorId, editorSampleVideoList);
-    }
+//    Retrieve Editors by Multiple Filters
 
-    @GetMapping("/{editorId}/myvideo/get")
-    public List<EditorSampleVideo> getMyVideo(@PathVariable Long editorId) {
-        return this.editorService.getMyVideo(editorId);
-    }
+//    Retrieve Editors with Most Experience
 
-    @PostMapping("/{editorId}/social/add")
-    public List<EditorSocialMedia> addSocialMedia(@PathVariable Long editorId,@RequestBody List<EditorSocialMedia> editorSocialMediaList)
-    {
-        return this.editorService.addSocialMedia(editorId,editorSocialMediaList);
-    }
+//    Retrieve Editors with Least Experience
 
-    @GetMapping("/{editorId}/social/get")
-    public List<EditorSocialMedia> getSocialMedia(@PathVariable Long editorId)
-    {
-        return this.editorService.getSocialMedia(editorId);
-    }
+//    Retrieve Editors Ordered by Creation Date
 
-    @PostMapping("/{editorId}/skill/add")
-    public List<EditorSkill> addEditorSkill(@PathVariable Long editorId, @RequestBody List<EditorSkill> editorSkillList)
-    {
-        return this.editorService.addSkill(editorId,editorSkillList);
-    }
+//    Add/Edit/Delete Editor's Certifications
 
-    @GetMapping("/{editorId}/skill/get")
-    public List<EditorSkill> getSkills(@PathVariable Long editorId)
-    {
-        return this.editorService.getSkills(editorId);
-    }
+//    Add/Edit/Delete Editor's Sample Videos:
 
-    @PostMapping("/{editorId}/preference/add")
-    public List<EditorPreference> addPreference(@PathVariable Long editorId, @RequestBody List<EditorPreference> preferencesList)
-    {
-        return this.editorService.addPreference(editorId,preferencesList);
-    }
+//    Add/Edit/Delete Editor's Social Media Links
 
-    @GetMapping("/{editorId}/preference/get")
-    public List<EditorPreference> getPreference(@PathVariable Long editorId)
-    {
-        return this.editorService.getPreference(editorId);
-    }
+//    Update Editor's Profile Picture URL
 
-    @PostMapping("/{editorId}/language/add")
-    public List<EditorCommunicationLanguage> addCommunication(@PathVariable Long editorId, @RequestBody List<EditorCommunicationLanguage> editorCommunicationLanguageList)
-    {
-        return this.editorService.addCommunication(editorId,editorCommunicationLanguageList);
-    }
-
-    @GetMapping("/{editorId}/language/get")
-    public List<EditorCommunicationLanguage> getCommunication(@PathVariable Long editorId)
-    {
-        return this.editorService.getCommunication(editorId);
-    }
-
-    @PostMapping("/{editorId}/certification/add")
-    public List<EditorCertification> addCertification(@PathVariable Long editorId, @RequestBody List<EditorCertification> editorCertificationList)
-    {
-        return this.editorService.addCertification(editorId,editorCertificationList);
-    }
-
-    @GetMapping("/{editorId}/certification/get")
-    public List<EditorCertification> getCertification(@PathVariable Long editorId)
-    {
-        return this.editorService.getCertification(editorId);
-    }
 
 }

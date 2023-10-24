@@ -7,18 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CollabWithKatz" />
         <module name="collabwithkatz" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="codewithkatz" target="17" />
+      <module name="codewithkatz" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="CollabWithKatz" options="-parameters" />
-      <module name="codewithkatz" options="" />
+      <module name="codewithkatz" options="-parameters" />
       <module name="collabwithkatz" options="-parameters" />
     </option>
   </component>

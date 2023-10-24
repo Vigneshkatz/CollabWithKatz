@@ -16,7 +16,7 @@ public class EditorSampleVideoDTO {
     public EditorSampleVideoDTO(EditorSampleVideo editorSampleVideo)
     {
         this.id=editorSampleVideo.getId();
-        this.videoLink=editorSampleVideo.getLink();
-        this.videoName=editorSampleVideo.getTitle();
+        this.videoLink=editorSampleVideo.getVideoLink();
+        this.videoName=editorSampleVideo.getVideoName();
     }
 }

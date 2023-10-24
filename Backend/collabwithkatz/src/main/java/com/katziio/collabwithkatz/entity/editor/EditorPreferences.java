@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "editor_preference")
-public class EditorPreference {
+@Table(name = "editor_preferences")
+public class EditorPreferences {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String projectPreferences;
 }
