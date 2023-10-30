@@ -42,10 +42,11 @@ public class ChatService {
 
     public Map<Long, String> getCreatorNames(Long editorId) {
         // Replace this with actual logic to get creator names based on the editor
-        Map<Long, String> creatorIdName = new HashMap<>();
-        creatorIdName.put(1L, "Vignesh");
-        creatorIdName.put(2L, "Katziio");
-        creatorIdName.put(3L, "Teebikaa");
-        return creatorIdName;
+//        Map<Long, String> creatorIdName = new HashMap<>();
+//        creatorIdName.put(1L, "Vignesh");
+//        creatorIdName.put(2L, "Katziio");
+//        creatorIdName.put(3L, "Teebikaa");
+        Map<Long,String> creatorList = this.creatorService.getAllCreatorName(editorId);
+        return creatorList;
     }
 }

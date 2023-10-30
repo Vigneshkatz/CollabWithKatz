@@ -19,10 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class CreatorService {
@@ -163,4 +160,13 @@ public class CreatorService {
         }
     }
 
+    public Map<Long, String> getAllCreatorName(Long editorId) {
+        List<Creator> creatorList = this.creatorRepository.findAll();
+        Map<Long,String> creatorNameList = new HashMap<>();
+        for(Creator creator : creatorList)
+        {
+            creatorNameList.put(creator.getId(),creator.getName());
+        }
+        return creatorNameList;
+    }
 }
